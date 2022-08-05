@@ -16,10 +16,8 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'airblade/vim-gitgutter'
 Plug 'preservim/nerdtree'
+
 call plug#end()
 
 colorscheme gruvbox-material
 let g:airline_theme='raven'
-
-" prettier formatting
-command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
