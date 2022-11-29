@@ -1,5 +1,5 @@
 vim.opt.nu = true
-vim.opt.mouse = a
+vim.opt.mouse = 'a'
 vim.opt.relativenumber = true
 vim.opt.tabstop = 8
 vim.opt.softtabstop = 4
