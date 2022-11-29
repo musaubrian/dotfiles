@@ -1,2 +1,9 @@
 # nvim-config
-> neovim plugins script
+> my dotfiles mosltly neovim
+
+### neovim
+
+```sh
+:PackerSync
+:CocInstall
+```
