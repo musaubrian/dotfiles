@@ -1,9 +1,8 @@
 # nvim-config
-> my dotfiles mosltly neovim
+> my dotfiles mostly neovim
 
 ### neovim
 
 ```sh
 :PackerSync
-:CocInstall
 ```
