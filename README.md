@@ -2,9 +2,12 @@
 > my dotfiles mostly neovim
 
 ### neovim
-> [!note]
+
+> **Note**
 > make sure you have the latest **stable** neovim
-> ```sh
+
+
+```sh
     curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
     chmod u+x nvim.appimage
     ./nvim.appimage
@@ -16,7 +19,7 @@
     sudo ln -s /squashfs-root/AppRun /usr/bin/nvim
 
     nvim 
->```
+```
 
 
 ```sh
