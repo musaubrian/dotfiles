@@ -9,13 +9,12 @@ return require('packer').startup(function(use)
 	use {
 		'nvim-lualine/lualine.nvim',
 		requires = { 'kyazdani42/nvim-web-devicons', opt = true }
-	}
-	-- use 'ms-jpq/coq_nvim'
+	}	
 	use 'hrsh7th/nvim-cmp'
 	use 'saadparwaiz1/cmp_luasnip'
 	use 'hrsh7th/cmp-path'
 	use 'hrsh7th/cmp-cmdline'
-	use { 'echasnovski/mini.nvim', branch = 'stable' }
+	--use { 'echasnovski/mini.nvim', branch = 'stable' }
 	use 'lukas-reineke/indent-blankline.nvim'
 	use 'petertriho/nvim-scrollbar'
 	use {
