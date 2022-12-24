@@ -9,12 +9,11 @@ return require('packer').startup(function(use)
 	use {
 		'nvim-lualine/lualine.nvim',
 		requires = { 'kyazdani42/nvim-web-devicons', opt = true }
-	}	
+	}
 	use 'hrsh7th/nvim-cmp'
 	use 'saadparwaiz1/cmp_luasnip'
 	use 'hrsh7th/cmp-path'
 	use 'hrsh7th/cmp-cmdline'
-	--use { 'echasnovski/mini.nvim', branch = 'stable' }
 	use 'lukas-reineke/indent-blankline.nvim'
 	use 'petertriho/nvim-scrollbar'
 	use {
@@ -32,11 +31,7 @@ return require('packer').startup(function(use)
 			"windwp/nvim-autopairs",
 			config = function() require("nvim-autopairs").setup {} end
 		}
-		--use {'neoclide/coc.nvim', branch ='release'}
-		-- use 'LoricAndre/OneTerm.nvim'
 		use 'nvim-tree/nvim-web-devicons'
-		-- use {'romgrk/barbar.nvim', wants = 'nvim-web-devicons'}
-		-- use "numToStr/FTerm.nvim"
 		use 'wakatime/vim-wakatime'
 		use {
 			'nvim-telescope/telescope.nvim', tag = '0.1.0',
