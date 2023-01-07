@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
 #cheat sheet from the command line
 
-langs=`echo "golang python typescript javascript" | tr ' ' '\n'`
+langs=`echo "golang python typescript javascript vim" | tr ' ' '\n'`
 
 selected=`printf "$langs" | fzf`
 echo "Selected $selected"
 
-read -p "Question: " query
+read -p "Question: " question
+query=`echo $question | tr ' ' '+'`
 
-tmux neww curl cht.sh/$selected/`echo $query | tr ' ' '+'` & while [[ : ]]; do sleep 3; done
+tmux neww bash -c "echo \"curl cht.sh/$selected/$query/\" & curl cht.sh/$selected/$query & while [ : ]; do sleep 1; done"
