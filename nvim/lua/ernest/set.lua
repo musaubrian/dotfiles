@@ -28,7 +28,7 @@ vim.opt.incsearch = true
 vim.opt.termguicolors = true
 
 --lines visible below cursor is never less than
-vim.opt.scrolloff = 7
+vim.opt.scrolloff = 8
 
 vim.opt.colorcolumn = "80"
 
