@@ -1,6 +1,8 @@
 # nvim-config
 > my dotfiles mostly neovim
 
+### **cc [@prime](https://github.com/thePrimeagen/init.lua)**
+
 ### neovim
 
 > **Note**
