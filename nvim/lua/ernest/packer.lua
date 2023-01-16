@@ -20,14 +20,8 @@ return require('packer').startup(function(use)
         'declancm/cinnamon.nvim',
         config = function() require('cinnamon').setup()
         end}
-        use {
-            'nvim-treesitter/nvim-treesitter',
-            run = function()
-                local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
-                ts_update()
-            end,
-        }
-        use {
+    use ('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
+    use {
             "windwp/nvim-autopairs",
             config = function() require("nvim-autopairs").setup {} end
         }
