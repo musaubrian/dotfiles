@@ -4,7 +4,7 @@
 downloads="/home/ernest/Downloads/"
 image_ext=("jpg" "jpeg" "png" "gif" "svg")
 video_ext=("mp4" "avi" "mkv" "wmv")
-document_ext=("pdf" "doc" "docx" "txt")
+document_ext=("pdf" "doc" "docx" "txt" "PDF" "csv" "CSV" "pptx")
 
 cd $downloads || exit
 
@@ -14,13 +14,16 @@ for file in ~/Downloads/*; do
     ext="${file##*.}"
     # Check if it's an image file
     if [[ " ${image_ext[@]} " =~ " ${ext} " ]]; then
-        mv -v "$file" ~/Pictures
+        mv "$file" ~/Pictures
+        echo "moved [$file] -> [~/Pictures/]"
         # Check if it's a video file
     elif [[ " ${video_ext[@]} " =~ " ${ext} " ]]; then
-        mv -v "$file" ~/Videos
+        mv "$file" ~/Videos
+        echo "moved [$file] -> [~/Videos/]"
         # Check if it's a document file
     elif [[ " ${document_ext[@]} " =~ " ${ext} " ]]; then
-        mv -v "$file" ~/Documents 
+        mv "$file" ~/Documents 
+        echo "moved [$file] -> [~/Documents/]"
     else
         echo "Nothing to move"
     fi
