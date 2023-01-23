@@ -15,16 +15,16 @@ for file in ~/Downloads/*; do
     # Check if it's an image file
     if [[ " ${image_ext[@]} " =~ " ${ext} " ]]; then
         mv "$file" ~/Pictures
-        echo "moved [$file] -> [~/Pictures/]"
+        printf "moved [$file] -> [~/Pictures/]\n\n"
         # Check if it's a video file
     elif [[ " ${video_ext[@]} " =~ " ${ext} " ]]; then
         mv "$file" ~/Videos
-        echo "moved [$file] -> [~/Videos/]"
+        printf "moved [$file] -> [~/Videos/]\n\n"
         # Check if it's a document file
     elif [[ " ${document_ext[@]} " =~ " ${ext} " ]]; then
         mv "$file" ~/Documents 
-        echo "moved [$file] -> [~/Documents/]"
+        print "moved [$file] -> [~/Documents/]\n\n"
     else
-        echo "Nothing to move"
+        printf "Nothing to move\n"
     fi
 done 
