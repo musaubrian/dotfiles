@@ -9,6 +9,7 @@ vim.keymap.set('n', "K", vim.lsp.buf.hover)
 vim.keymap.set('n', "<leader>r", vim.lsp.buf.references)
 -- format python files
 vim.keymap.set('n', "<leader>f", "<cmd>!black -v %<CR>", {silent = true})
+vim.keymap.set('n', "<leader>gp", "<cmd>!git push<CR>")
 
 --move highlighted blocks
 vim.keymap.set('v', "J", ":m '>+1<CR>gv=gv")

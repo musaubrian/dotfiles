@@ -5,23 +5,21 @@ return require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
     use 'tpope/vim-fugitive'
     use 'lewis6991/gitsigns.nvim'
-    use 'folke/tokyonight.nvim'
+    use { "catppuccin/nvim", as = "catppuccin" }
+    use 'rose-pine/neovim'
     use {
         'nvim-lualine/lualine.nvim',
         requires = { 'kyazdani42/nvim-web-devicons', opt = true }
     }
-    use 'hrsh7th/nvim-cmp'
     use 'saadparwaiz1/cmp_luasnip'
-    use 'hrsh7th/cmp-path'
-    use 'hrsh7th/cmp-cmdline' 
     use 'lukas-reineke/indent-blankline.nvim'
     use 'petertriho/nvim-scrollbar'
     use {
         'declancm/cinnamon.nvim',
         config = function() require('cinnamon').setup()
         end}
-    use ('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
-    use {
+        use ('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
+        use {
             "windwp/nvim-autopairs",
             config = function() require("nvim-autopairs").setup {} end
         }

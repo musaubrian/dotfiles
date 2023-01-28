@@ -23,7 +23,7 @@ for file in ~/Downloads/*; do
         # Check if it's a document file
     elif [[ " ${document_ext[@]} " =~ " ${ext} " ]]; then
         mv "$file" ~/Documents 
-        print "moved [$file] -> [~/Documents/]\n\n"
+        printf "moved [$file] -> [~/Documents/]\n\n"
     else
         printf "Nothing to move\n"
     fi
