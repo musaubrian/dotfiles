@@ -22,8 +22,8 @@
 
     nvim 
 ```
-
-
 ```sh
 :PackerSync
 ```
+
+Install [RipGrep](https://github.com/BurntSushi/ripgrep)
