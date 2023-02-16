@@ -4,7 +4,9 @@
 downloads="/home/ernest/Downloads/"
 image_ext=("jpg" "jpeg" "png" "gif" "svg")
 video_ext=("mp4" "avi" "mkv" "wmv")
-document_ext=("pdf" "doc" "docx" "txt" "PDF" "csv" "CSV" "pptx")
+document_ext=("pdf" "doc" "docx" "txt" "PDF" "csv" "CSV" "pptx" "xlsx")
+zips=("zip" "tar" "gzip")
+images=("iso")
 
 cd $downloads || exit
 
@@ -24,7 +26,11 @@ for file in ~/Downloads/*; do
     elif [[ " ${document_ext[@]} " =~ " ${ext} " ]]; then
         mv "$file" ~/Documents 
         printf "moved [$file] -> [~/Documents/]\n\n"
-    else
-        printf "Nothing to move\n"
+    elif [[ " ${zips[@]}" =~ " ${ext} " ]]; then
+        mv "$file" ~/Downloads/zip/
+        printf "moved $file -> [~/Downloads/zip/]"
+    elif [[ " ${images[@]} " =~ " ${ext} " ]]; then
+        mv "$file" ~/Downloads/images/
+        printf "moved $file -> [~/Downloads/images/]"
     fi
 done 
