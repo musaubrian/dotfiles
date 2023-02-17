@@ -1,11 +1,10 @@
 #!/usr/bin/env bash
 # moves files to different dirs
 
-downloads="/home/ernest/Downloads/"
 image_ext=("jpg" "jpeg" "png" "gif" "svg")
 video_ext=("mp4" "avi" "mkv" "wmv")
 document_ext=("pdf" "doc" "docx" "txt" "PDF" "csv" "CSV" "pptx" "xlsx")
-zips=("zip" "tar" "gzip")
+zips=("zip" "tar" "gzip" "gz")
 images=("iso")
 
 cd $downloads || exit

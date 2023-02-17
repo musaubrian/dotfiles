@@ -1,5 +1,5 @@
 vim.cmd [[packadd packer.nvim]]
-	
+
 return require('packer').startup(function(use)
     -- Packer can manage itself
     use 'wbthomason/packer.nvim'
@@ -14,6 +14,25 @@ return require('packer').startup(function(use)
     use 'saadparwaiz1/cmp_luasnip'
     use 'lukas-reineke/indent-blankline.nvim'
     use 'petertriho/nvim-scrollbar'
+    -- Lua
+    use "folke/trouble.nvim"
+    -- Lua
+    use {
+        "folke/zen-mode.nvim",
+        config = function()
+            require("zen-mode").setup {
+                -- your configuration comes here
+                -- or leave it empty to use the default settings
+                -- refer to the configuration section below
+            }
+        end
+    }
+    use {
+        'numToStr/Comment.nvim',
+        config = function()
+            require('Comment').setup()
+        end
+    }
     use {
         'declancm/cinnamon.nvim',
         config = function() require('cinnamon').setup()

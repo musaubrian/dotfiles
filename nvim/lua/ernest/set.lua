@@ -30,6 +30,6 @@ vim.opt.termguicolors = true
 --lines visible below cursor is never less than
 vim.opt.scrolloff = 8
 
-vim.opt.colorcolumn = "80"
+vim.opt.colorcolumn = "78"
 
 vim.opt.updatetime = 50

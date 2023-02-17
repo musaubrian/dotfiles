@@ -14,3 +14,6 @@ vim.keymap.set('n', "<leader>gp", "<cmd>!git push<CR>")
 --move highlighted blocks
 vim.keymap.set('v', "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set('v', "K", ":m '<-2<CR>gv=gv")
+
+--Zenmode
+vim.keymap.set('n', "<leader>z", "<cmd>ZenMode<CR>", {silent = true})
