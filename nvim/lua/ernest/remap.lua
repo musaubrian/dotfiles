@@ -9,6 +9,10 @@ vim.keymap.set('n', "K", vim.lsp.buf.hover)
 vim.keymap.set('n', "<leader>r", vim.lsp.buf.references)
 -- format python files
 vim.keymap.set('n', "<leader>f", "<cmd>!black -v %<CR>", {silent = true})
+
+-- format go files
+vim.keymap.set('n', "<leader>fg", "<cmd>!go fmt ./...<CR>", {silent = true})
+
 vim.keymap.set('n', "<leader>gp", "<cmd>!git push<CR>")
 
 --move highlighted blocks
