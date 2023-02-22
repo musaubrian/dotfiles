@@ -11,10 +11,11 @@ telescope.setup {
         },
     },
 }
+-- recently opened files
+vim.keymap.set('n', '<leader><space>', builtin.oldfiles, {})
 
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
 vim.keymap.set('n', '<C-g>' , builtin.git_files, {})
-vim.keymap.set('n', '<leader>sw', function()
-	builtin.grep_string({ search = vim.fn.input("Search for > ")})
-end)
+-- searches for where the word under cursor has been *used
+vim.keymap.set('n', '<leader>sw', builtin.grep_string, {})
 vim.keymap.set('n', '<leader>lg', builtin.live_grep, {})
