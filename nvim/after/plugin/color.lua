@@ -1,8 +1,8 @@
 require("catppuccin").setup({
-    flavour = "mocha", -- latte, frappe, macchiato, mocha
-    background = { -- :h background
+    flavour = "macchiato", -- latte, frappe, macchiato, mocha
+--[[     background = { -- :h background
         dark = "macchiato",
-    },
+    }, ]]
     transparent_background = true,
     show_end_of_buffer = false, -- show the '~' characters after the end of buffers
     term_colors = true, 
@@ -28,7 +28,7 @@ require("catppuccin").setup({
 
 function Mytheme()
 
-    color = "catppuccin"
+    local color = "catppuccin"
     vim.cmd.colorscheme(color)
 
     vim.api.nvim_set_hl(0, "Normal", { bg = "none" })

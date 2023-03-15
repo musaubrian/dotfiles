@@ -8,11 +8,12 @@ vim.keymap.set('n', "K", vim.lsp.buf.hover)
 -- find where the item on cursor is referenced
 vim.keymap.set('n', "<leader>r", vim.lsp.buf.references)
 -- format python files
-vim.keymap.set('n', "<leader>f", "<cmd>!black -v %<CR>", {silent = true})
+vim.keymap.set('n', "<leader>fp", "<cmd>!black -v -v %<CR>", {})
 
 -- format go files
 vim.keymap.set('n', "<leader>fg", "<cmd>!go fmt ./...<CR>", {silent = true})
-
+-- format js files
+vim.keymap.set('n', "<leader>fj", "<cmd>!semistandard --fix<CR>", {silent = true})
 vim.keymap.set('n', "<leader>gp", "<cmd>!git push<CR>")
 
 --move highlighted blocks
