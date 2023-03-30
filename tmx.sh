@@ -16,7 +16,6 @@ cd ~/Desktop/$1
 
 # Launch tmux session
 tmux new-session -d -s "$SESSION_NAME"
-tmux send-keys "fish" C-m
 tmux send-keys "clear" C-m
 tmux attach-session -t "$SESSION_NAME"
 

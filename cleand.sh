@@ -27,9 +27,9 @@ for file in ~/Downloads/*; do
         printf "moved [$file] -> [~/Documents/]\n\n"
     elif [[ " ${zips[@]}" =~ " ${ext} " ]]; then
         mv "$file" ~/Downloads/zip/
-        printf "moved $file -> [~/Downloads/zip/]"
+        printf "moved $file -> [~/Downloads/zip/]\n\n"
     elif [[ " ${images[@]} " =~ " ${ext} " ]]; then
         mv "$file" ~/Downloads/images/
-        printf "moved $file -> [~/Downloads/images/]"
+        printf "moved $file -> [~/Downloads/images/]\n"
     fi
 done 
