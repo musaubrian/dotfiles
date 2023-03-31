@@ -1,12 +1,18 @@
 #!/usr/bin/env bash
 
-mkdir ~/scripts/
 cp ./tmux.conf ~/.tmux.conf -v
-cp *.sh ~/scripts/ -v
-cp ./alacritty/ ~/.config/
+cp -r ./scripts/ ~/scripts/ -v
+cp -r ./alacritty/ ~/.config/ -v
+cp ./starship.toml ~/.config/ -v
+
 
 git clone --depth 1 https://github.com/wbthomason/packer.nvim\
  ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+
+# Install starship prompt
+curl -sS https://starship.rs/install.sh | sh
+# setup bash to use starship
+echo 'eval "$(starship init bash)"' > ~/.bashrc
 
 # Install Neovim
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
