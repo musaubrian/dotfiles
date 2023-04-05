@@ -18,6 +18,8 @@ vim.keymap.set('n', "<leader>fj", "<cmd>!semistandard --fix<CR>", {silent = true
 vim.keymap.set('n', "<leader>pt", "<cmd>!prettier -w --single-quote %<CR>", {})
 vim.keymap.set('n', "<leader>gp", "<cmd>!git push<CR>")
 
+--Vertical split
+vim.keymap.set("n", "<leader>s", "<cmd>vs<CR>", {})
 --move highlighted blocks
 vim.keymap.set('v', "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set('v', "K", ":m '<-2<CR>gv=gv")
