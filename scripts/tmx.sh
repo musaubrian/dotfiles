@@ -1,5 +1,4 @@
-!/usr/bin/env bash
-
+#!/usr/bin/env bash
 OPTIONS=$1
 PERSONAL=~/personal/
 WORK=~/work
