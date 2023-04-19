@@ -1,16 +1,29 @@
-#!/usr/bin/env bash
+!/usr/bin/env bash
 
-CLOSE=$1
-BASE_PATH=~/Desktop/
+OPTIONS=$1
+PERSONAL=~/personal/
+WORK=~/work
 
-if [ "$CLOSE" == "dd" ]; then
+if [ "$OPTIONS" == "dd" ]; then
     tmux detach-client
-else
-    SESSION_NAME=`ls ~/Desktop/ | fzf`
-    cd $BASE_PATH$SESSION_NAME
-    #Launch tmux session
-    tmux new-session -d -s "$SESSION_NAME"
-    tmux send-keys "clear" C-m
-fi
 
-tmux attach-session -t "$SESSION_NAME"
+elif [ "$OPTIONS" == "p" ]; then
+    SESSION_NAME=`ls $PERSONAL | fzf`
+    cd $PERSONAL$SESSION_NAME
+    tmux new-session -d -s "$SESSION_NAME"
+    tmux attach-session -t "$SESSION_NAME"
+elif [ "$OPTIONS" == "w" ]; then
+    SESSION_NAME=`ls $WORK | fzf`
+    cd $WORK$SESSION_NAME
+    tmux new-session -d -s "$SESSION_NAME"
+    tmux attach-session -t "$SESSION_NAME"
+elif [ "$OPTIONS" == "a" ]; then
+    ATTACH_TO=`tmux ls | fzf`
+    # list active sessions in bg; get value before the colon pipe to fzf
+    ATTACH_TO=`tmux ls| cut -d':' -f1 | fzf`
+    if [ "$ATTACH_TO" == ""]; then
+        tmux attach-session -t $ATTACH_TO
+    else
+        echo "NO session to attach to"
+    fi
+fi
