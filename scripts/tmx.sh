@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 OPTIONS=$1
 PERSONAL=~/personal/
 WORK=~/work
@@ -17,12 +18,15 @@ elif [ "$OPTIONS" == "w" ]; then
     tmux new-session -d -s "$SESSION_NAME"
     tmux attach-session -t "$SESSION_NAME"
 elif [ "$OPTIONS" == "a" ]; then
-    ATTACH_TO=`tmux ls | fzf`
     # list active sessions in bg; get value before the colon pipe to fzf
     ATTACH_TO=`tmux ls| cut -d':' -f1 | fzf`
     if [ "$ATTACH_TO" == ""]; then
-        tmux attach-session -t $ATTACH_TO
+        tmux attach-session -t "$ATTACH_TO"
     else
         echo "NO session to attach to"
     fi
+
+else
+    echo "Usage:
+    tmx [p|w|a]"
 fi
