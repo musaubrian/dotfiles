@@ -19,8 +19,8 @@ elif [ "$OPTIONS" == "w" ]; then
     tmux attach-session -t "$SESSION_NAME"
 elif [ "$OPTIONS" == "a" ]; then
     # list active sessions in bg; get value before the colon pipe to fzf
-    ATTACH_TO=`tmux ls| cut -d':' -f1 | fzf`
-    if [ "$ATTACH_TO" == ""]; then
+    ATTACH_TO=`tmux ls | cut -d':' -f1 | fzf`
+    if [ "$ATTACH_TO" == "" ]; then
         tmux attach-session -t "$ATTACH_TO"
     else
         echo "NO session to attach to"
