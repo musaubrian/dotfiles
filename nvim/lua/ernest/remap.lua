@@ -15,7 +15,7 @@ vim.keymap.set('n', "<leader>fg", "<cmd>!gofumpt ./..<CR>", {silent = true})
 -- format js files
 vim.keymap.set('n', "<leader>fj", "<cmd>!semistandard --fix<CR>", {silent = true})
 -- Prettier mostly for TS files
-vim.keymap.set('n', "<leader>pt", "<cmd>!prettier -w --single-quote %<CR>", {})
+vim.keymap.set('n', "<leader>pt", "<cmd>!prettier -w %<CR>", {})
 vim.keymap.set('n', "<leader>gp", "<cmd>!git push<CR>")
 
 --Vertical split
