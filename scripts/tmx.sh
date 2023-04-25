@@ -2,7 +2,7 @@
 
 OPTIONS=$1
 PERSONAL=~/personal/
-WORK=~/work
+WORK=~/work/
 
 if [ "$OPTIONS" == "dd" ]; then
     tmux detach-client
@@ -20,7 +20,7 @@ elif [ "$OPTIONS" == "w" ]; then
 elif [ "$OPTIONS" == "a" ]; then
     # list active sessions in bg; get value before the colon pipe to fzf
     ATTACH_TO=`tmux ls | cut -d':' -f1 | fzf`
-    if [ "$ATTACH_TO" == "" ]; then
+    if [ "$ATTACH_TO" != "" ]; then
         tmux attach-session -t "$ATTACH_TO"
     else
         echo "NO session to attach to"

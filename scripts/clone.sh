@@ -13,7 +13,7 @@ elif [ "$PERSONAL_OR_WORK" == "p" ]; then
     echo "Switched to personal"
     echo "$GIT_URL"
     cd ~/personal/ && `git clone $GIT_URL`
-elif [ "$PERSONAL_OR_WORK" == "w"]; then
+elif [ "$PERSONAL_OR_WORK" == "w" ]; then
     echo "Switched to work"
-    cd ~/work// && `git clone $GIT_URL`
+    cd ~/work/ && `git clone $GIT_URL`
 fi
