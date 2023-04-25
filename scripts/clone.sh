@@ -10,10 +10,10 @@ if [ "$PERSONAL_OR_WORK" == "" ]; then
     echo "usage:
             clone [p/w] username/repo"
 elif [ "$PERSONAL_OR_WORK" == "p" ]; then
-    echo "Swithced to personal"
+    echo "Switched to personal"
     echo "$GIT_URL"
     cd ~/personal/ && `git clone $GIT_URL`
 elif [ "$PERSONAL_OR_WORK" == "w"]; then
-    echo "Swithced to work"
+    echo "Switched to work"
     cd ~/work// && `git clone $GIT_URL`
 fi
