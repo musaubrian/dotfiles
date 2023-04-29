@@ -5,20 +5,6 @@ require("catppuccin").setup({
     term_colors = true, 
     no_italic = false, -- Force no italic
     no_bold = false, -- Force no bold
-    styles = {
-        comments = { "italic" },
-        conditionals = { "italic" },
-        loops = {},
-        functions = {},
-        keywords = {"bold"},
-        strings = {},
-        variables = {},
-        numbers = {},
-        booleans = {},
-        properties = {},
-        types = {},
-        operators = {},
-    },
     color_overrides = {},
     custom_highlights = {},
 })
