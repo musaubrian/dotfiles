@@ -11,6 +11,7 @@ $directory\
         $git_status\
         $sudo\
         $line_break\
+        $python\
         $character"""
 
 # Inserts a blank line between shell prompts
@@ -25,3 +26,7 @@ success_symbol = '[➜](bold green)' # The 'success_symbol' segment is being set
 ahead = '⇡${count}'
 diverged = '⇕⇡${ahead_count}⇣${behind_count}'
 behind = '⇣${count}'
+
+[python]
+# format = '(|($virtualenv)|($style))'
+format = '\[venv [(\($virtualenv\))]($style)\]'
