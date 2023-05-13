@@ -1,0 +1,7 @@
+[user]
+	name = musaubrian
+	email = musaubrian15@gmail.com
+[init]
+	defaultBranch = main
+[core]
+    editor = nvim

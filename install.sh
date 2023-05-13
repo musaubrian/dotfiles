@@ -5,6 +5,7 @@ cp -r ./scripts/ ~/scripts/ -v
 cp -r ./alacritty/ ~/.config/ -v
 cp ./starship.toml ~/.config/ -v
 cp -r nvim ~/.config/
+cp ./.gitconfig ~/ -v
 
 git clone --depth 1 https://github.com/wbthomason/packer.nvim\
  ~/.local/share/nvim/site/pack/packer/start/packer.nvim
