@@ -23,4 +23,4 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
 
 # Setup keys
-ansible-playbook ./start/playbook.yaml --ask-password
+ansible-playbook ./start/playbook.yaml --ask-vault-password
