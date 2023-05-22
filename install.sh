@@ -22,5 +22,14 @@ echo 'eval "$(starship init bash)"' >> ~/.bashrc
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
 
-# Setup keys
-ansible-playbook ./start/playbook.yaml --ask-vault-password
+# setup keys
+ansible-vault decrypt ./start/db/* ./start/keys/*
+
+cp ./start/db/* ~/.db/
+cp -r ./start/keys/* ~/.ssh/
+
+# Re-enrypt everything
+ansible-vault decrypt ./start/db/* ./start/keys/*
+
+
+# This could possibly be better, but it works just fine
