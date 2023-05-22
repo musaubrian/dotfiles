@@ -1,16 +1,15 @@
 #!/usr/bin/env bash
-#
 
 PERSONAL_OR_WORK="$1"
 GIT_HUB_OR_LAB="$2"
 URL="$3"
 CLONE_AS="$4"
 USAGE_INSTRUCTION="Usage:
-    clone [p/w] [lab/hub] username/repo clone_as"
+clone [p/w] [l(gitlab)/h(github)] username/repo clone_as"
 
-if [ "$GIT_HUB_OR_LAB" == "lab" ]; then
+if [ "$GIT_HUB_OR_LAB" == "l" ]  || [ "$GIT_HUB_OR_LAB" == "lab" ]; then
     GIT_URL="git@gitlab.com:$URL $CLONE_AS"
-elif [ "$GIT_HUB_OR_LAB" == "hub" ]; then
+elif [ "$GIT_HUB_OR_LAB" == "h" ]  || [ "$GIT_HUB_OR_LAB" == "hub" ]; then
     GIT_URL="git@github.com:$URL $CLONE_AS"
 else
     echo "$USAGE_INSTRUCTION"

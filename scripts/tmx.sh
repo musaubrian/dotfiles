@@ -25,7 +25,6 @@ elif [ "$OPTIONS" == "a" ]; then
     else
         echo "NO session to attach to"
     fi
-
 else
     echo "Usage:
     tmx [p|w|a]"
