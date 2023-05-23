@@ -7,6 +7,9 @@ cp ./starship.toml ~/.config/ -v
 cp -r nvim ~/.config/
 cp ./.gitconfig ~/ -v
 
+# For tinygo
+mkdir ~/.db
+
 git clone --depth 1 https://github.com/wbthomason/packer.nvim\
     ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 
@@ -24,13 +27,14 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 
 # This could possibly be better, but it works just fine
 # setup keys
-ansible-vault decrypt ./start/db/* ./start/keys/*
+ansible-vault decrypt ./start/db/* ./start/keys/* ./start/wakatime/*
 
 cp ./start/db/* ~/.db/ -v
+cp ./start/wakatime/wakatime.cfg ~/.wakatime.cfg -v
 cp -r ./start/keys/* ~/.ssh/ -v
 
 # Re-enrypt everything
-ansible-vault encrypt ./start/db/* ./start/keys/*
+ansible-vault encrypt ./start/db/* ./start/keys/* ./start/wakatime/*
 
 
 
@@ -45,3 +49,5 @@ chmod u+x nvim.appimage
 # Optional: exposing nvim globally.
 sudo mv squashfs-root /
 sudo ln -s /squashfs-root/AppRun /usr/bin/nvim
+
+exec bash
