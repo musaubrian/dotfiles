@@ -45,7 +45,6 @@ return require('packer').startup(function(use)
     use 'tpope/vim-fugitive'
     use 'lewis6991/gitsigns.nvim'
     use { "catppuccin/nvim", as = "catppuccin" }
-    --    use 'kyazdani42/nvim-web-devicons'
     use 'nvim-lualine/lualine.nvim'
 
     use "folke/trouble.nvim"
@@ -60,7 +59,7 @@ return require('packer').startup(function(use)
         config = function() require("nvim-autopairs").setup {} end
     }
     use {
-        'nvim-telescope/telescope.nvim', tag = '0.1.0',
+        'nvim-telescope/telescope.nvim', tag = '0.1.1',
         -- or                            , branch = '0.1.x',
         requires = { {'nvim-lua/plenary.nvim'} }
     }
