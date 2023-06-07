@@ -1,13 +1,15 @@
 require("catppuccin").setup({
-    flavour = "macchiato", -- latte, frappe, macchiato, mocha
+    -- flavour = "macchiato", -- latte, frappe, macchiato, mocha
+    flavour = "frappe", -- latte, frappe, macchiato, mocha
     transparent_background = true,
     show_end_of_buffer = false, -- show the '~' characters after the end of buffers
-    term_colors = true, 
+    term_colors = true,
     no_italic = false, -- Force no italic
     no_bold = false, -- Force no bold
     color_overrides = {},
     custom_highlights = {},
 })
+
 
 function Mytheme()
 

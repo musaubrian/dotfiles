@@ -42,7 +42,6 @@ ansible-vault encrypt ./start/db/* ./start/keys/* ./start/wakatime/*
 # install neovim
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
 chmod u+x nvim.appimage
-./nvim.appimage
 
 ./nvim.appimage --appimage-extract
 ./squashfs-root/AppRun --version
@@ -51,3 +50,5 @@ sudo mv squashfs-root /
 sudo ln -s /squashfs-root/AppRun /usr/bin/nvim
 
 exec bash
+# source packer so that I can just run :PackerSync
+# nvim +:so ~/.config/nvim/lua/ernest/packer.lua
