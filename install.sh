@@ -14,7 +14,7 @@ git clone --depth 1 https://github.com/wbthomason/packer.nvim\
     ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 
 # install ansible
-python3 -m pip install --user ansible
+sudo apt install ansible
 
 # Install starship prompt
 curl -sS https://starship.rs/install.sh | sh
