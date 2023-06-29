@@ -9,6 +9,8 @@ cp ./.gitconfig ~/ -v
 
 # For tinygo
 mkdir ~/.db
+# If for some reason there is no .ssh directory
+mkdir -p ~/.ssh
 
 git clone --depth 1 https://github.com/wbthomason/packer.nvim\
     ~/.local/share/nvim/site/pack/packer/start/packer.nvim
@@ -35,9 +37,6 @@ cp -r ./start/keys/* ~/.ssh/ -v
 
 # Re-enrypt everything
 ansible-vault encrypt ./start/db/* ./start/keys/* ./start/wakatime/*
-
-
-
 
 # install neovim
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage

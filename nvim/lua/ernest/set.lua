@@ -5,9 +5,9 @@ vim.opt.relativenumber = true
 
 vim.opt.mouse = 'a'
 
-vim.opt.tabstop = 4 
+vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
-vim.opt.expandtab = true 
+vim.opt.expandtab = true
 vim.opt.shiftwidth = 4
 
 vim.smartindent = true
@@ -33,3 +33,6 @@ vim.opt.scrolloff = 8
 vim.opt.colorcolumn = "78"
 
 vim.opt.updatetime = 50
+
+vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
+
