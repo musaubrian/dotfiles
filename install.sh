@@ -12,9 +12,6 @@ mkdir ~/.db
 # If for some reason there is no .ssh directory
 mkdir -p ~/.ssh
 
-git clone --depth 1 https://github.com/wbthomason/packer.nvim\
-    ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-
 # install ansible
 sudo apt install ansible
 
