@@ -13,8 +13,6 @@ https://github.com/nvim-lua/kickstart.nvim
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
--- make cursor a block at all times
-vim.opt.guicursor = ""
 
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 --make file executable
@@ -53,8 +51,6 @@ require('lazy').setup({
 
   -- scratch buffers
   'musaubrian/scratch.nvim',
-  --harpoon
-  'theprimeagen/harpoon',
 
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
@@ -95,12 +91,11 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim',          opts = {} },
+  { 'folke/which-key.nvim',  opts = {} },
   -- trouble
   {
     'folke/trouble.nvim',
     opts = {
-
       icons = false,
       fold_open = "v",      -- icon used for open folds
       fold_closed = ">",    -- icon used for closed folds
@@ -140,6 +135,11 @@ require('lazy').setup({
       end,
     },
   },
+  {
+
+    'mbbill/undotree',
+    vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)
+  },
 
   {
     'catppuccin/nvim',
@@ -156,7 +156,7 @@ require('lazy').setup({
       vim.cmd.colorscheme(color)
 
       vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-      vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+      -- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
     end,
   },
 
@@ -187,7 +187,22 @@ require('lazy').setup({
   },
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim',         opts = {} },
+  { 'numToStr/Comment.nvim', opts = {} },
+
+  {
+    "iamcco/markdown-preview.nvim",
+    run = function() vim.fn["mkdp#util#install"]() end,
+  },
+
+  {
+    --harpoon
+    'theprimeagen/harpoon',
+    vim.keymap.set('n', 'leader>ma', require('harpoon.mark').add_file, {}),
+    vim.keymap.set('n', '<leader>mn', require('harpoon.ui').nav_next, {}),
+    vim.keymap.set('n', '<leader>mn', require('harpoon.ui').nav_prev, {}),
+    vim.keymap.set('n', '<leader>mm', require('harpoon.ui').toggle_quick_menu, {}),
+    vim.keymap.set('n', '<leader>cm', require('harpoon.mark').clear_all, {}),
+  },
 
   -- Fuzzy Finder (files, lsp, etc)
   { 'nvim-telescope/telescope.nvim', branch = '0.1.x', dependencies = { 'nvim-lua/plenary.nvim' } },
@@ -214,13 +229,7 @@ require('lazy').setup({
     build = ':TSUpdate',
   },
 
-  -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
-  --       These are some example plugins that I've included in the kickstart repository.
-  --       Uncomment any of the lines below to enable them.
-  -- require 'kickstart.plugins.autoformat',
-  -- require 'kickstart.plugins.debug',
-
-  -- NOTE: The import below automatically adds your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
+  -- NOTE: The import below automatically adds your own plugins, configuration, etc from `lua/custom/*.lua`
   --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
   --    up-to-date with whatever is in the kickstart repo.
   --
@@ -232,15 +241,17 @@ require('lazy').setup({
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
 
+-- make cursor a block at all times
+vim.opt.guicursor = ""
 -- Set highlight on search
-vim.o.hlsearch = false
 --move highlighted blocks
 vim.keymap.set('v', "J", ":m '>+1<CR>gv=gv")
+vim.o.hlsearch = false
 vim.keymap.set('v', "K", ":m '<-2<CR>gv=gv")
 vim.keymap.set('n', '<leader>gs', vim.cmd.Git)
 
+-- vim.opt.fillchars = { eob = "~" }
 
--- Optional settings
 vim.opt.relativenumber = true
 vim.opt.cursorline = true
 vim.opt.wrap = false
@@ -251,10 +262,19 @@ vim.opt.incsearch = true
 vim.opt.termguicolors = true
 --lines visible below cursor is never less than
 vim.opt.scrolloff = 8
-vim.opt.colorcolumn = "78"
+vim.opt.colorcolumn = "79"
 vim.opt.updatetime = 50
 -- Make line numbers default
 vim.wo.number = true
+
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.expandtab = true
+vim.opt.shiftwidth = 4
+
+vim.smartindent = true
+--disable swapfiles
+vim.opt.swapfile = false
 -- Enable mouse mode
 vim.o.mouse = 'a'
 -- Sync clipboard between OS and Neovim.
@@ -262,7 +282,7 @@ vim.o.mouse = 'a'
 --  See `:help 'clipboard'`
 vim.o.clipboard = 'unnamedplus'
 -- Enable break indent
-vim.o.breakindent = true
+-- vim.o.breakindent = true
 -- Save undo history
 vim.o.undofile = true
 -- Case-insensitive searching UNLESS \C or capital in search
@@ -339,7 +359,7 @@ vim.keymap.set('n', '<leader>d', require('telescope.builtin').diagnostics, { des
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim' },
+  ensure_installed = { 'go', 'lua', 'python', 'tsx', 'typescript', 'vimdoc', 'vim' },
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = false,
@@ -406,6 +426,9 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous dia
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
 vim.keymap.set('n', '<leader>gl', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+vim.diagnostic.config({
+  virtual_text = true
+})
 
 -- [[ Configure LSP ]]
 --  This function gets run when an LSP connects to a particular buffer.
@@ -544,12 +567,6 @@ cmp.setup {
   },
 }
 
---[[ Configure harpoon ]]
-vim.keymap.set('n', 'leader>ma', require('harpoon.mark').add_file, {})
-vim.keymap.set('n', '<leader>mn', require('harpoon.ui').nav_next, {})
-vim.keymap.set('n', '<leader>mn', require('harpoon.ui').nav_prev, {})
-vim.keymap.set('n', '<leader>mm', require('harpoon.ui').toggle_quick_menu, {})
-vim.keymap.set('n', '<leader>cm', require('harpoon.mark').clear_all, {})
 
 --[[ Configure Trouble]]
 vim.keymap.set('n', '<leader>t', require('trouble').toggle, {})
