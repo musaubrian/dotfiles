@@ -17,6 +17,8 @@ vim.g.maplocalleader = ' '
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 --make file executable
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
+vim.keymap.set('n', '<leader>fg', "<cmd>!gofmt -w ./.. <CR>", {})
+vim.keymap.set('n', '<leader>pt', "<cmd>!prettier -w % <CR>", {})
 
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
@@ -44,7 +46,7 @@ require('lazy').setup({
 
   -- Git related plugins
   'tpope/vim-fugitive',
-  'tpope/vim-rhubarb',
+  -- 'tpope/vim-rhubarb',
 
   -- wakatime
   'wakatime/vim-wakatime',
@@ -64,10 +66,6 @@ require('lazy').setup({
       -- Automatically install LSPs to stdpath for neovim
       { 'williamboman/mason.nvim', config = true },
       'williamboman/mason-lspconfig.nvim',
-
-      -- Useful status updates for LSP
-      -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      -- { 'j-hui/fidget.nvim',       tag = 'legacy', opts = {} },
 
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
@@ -90,8 +88,6 @@ require('lazy').setup({
     },
   },
 
-  -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim',  opts = {} },
   -- trouble
   {
     'folke/trouble.nvim',
@@ -107,7 +103,9 @@ require('lazy').setup({
         hint = "hint",
         information = "info"
       },
-      use_diagnostic_signs = false -- enabling this will use the signs defined in your lsp client
+      use_diagnostic_signs = false, -- enabling this will use the signs defined in your lsp client
+
+      vim.keymap.set('n', '<leader>t', require('trouble').toggle, {}),
     }
   },
   -- auto-pairs
@@ -120,13 +118,6 @@ require('lazy').setup({
     'lewis6991/gitsigns.nvim',
     opts = {
       -- See `:help gitsigns.txt`
-      signs = {
-        add = { text = '+' },
-        change = { text = '~' },
-        delete = { text = '_' },
-        topdelete = { text = '‾' },
-        changedelete = { text = '~' },
-      },
       on_attach = function(bufnr)
         vim.keymap.set('n', '<leader>gp', require('gitsigns').prev_hunk,
           { buffer = bufnr, desc = '[G]o to [P]revious Hunk' })
@@ -187,12 +178,7 @@ require('lazy').setup({
   },
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', opts = {} },
-
-  {
-    "iamcco/markdown-preview.nvim",
-    run = function() vim.fn["mkdp#util#install"]() end,
-  },
+  { 'numToStr/Comment.nvim',         opts = {} },
 
   {
     --harpoon
@@ -447,11 +433,11 @@ local on_attach = function(_, bufnr)
     vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
   end
 
-  nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
-  nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+  nmap('<leader>rn', vim.lsp.buf.rename)
+  nmap('<leader>m', vim.lsp.buf.code_action)
 
-  nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
-  nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+  nmap('gd', vim.lsp.buf.definition)
+  nmap('gr', require('telescope.builtin').lsp_references)
   nmap('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
   nmap('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
   nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
@@ -535,8 +521,8 @@ cmp.setup {
   mapping = cmp.mapping.preset.insert {
     ['<C-n>'] = cmp.mapping.select_next_item(),
     ['<C-p>'] = cmp.mapping.select_prev_item(),
-    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-d>'] = cmp.mapping.scroll_docs(-3),
+    ['<C-f>'] = cmp.mapping.scroll_docs(3),
     ['<C-Space>'] = cmp.mapping.complete {},
     ['<CR>'] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Replace,
@@ -568,7 +554,5 @@ cmp.setup {
 }
 
 
---[[ Configure Trouble]]
-vim.keymap.set('n', '<leader>t', require('trouble').toggle, {})
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
