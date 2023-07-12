@@ -4,7 +4,7 @@
        /  ' \/ // (_-</ _ `/ // / _ \/ __/ / _ `/ _ \
       /_/_/_/\_,_/___/\_,_/\_,_/_.__/_/ /_/\_,_/_//_/
 
-Config taken from kikstart.nvim
+Config taken from kickstart.nvim
 https://github.com/nvim-lua/kickstart.nvim
 
 ]]
@@ -53,6 +53,7 @@ require('lazy').setup({
 
   -- scratch buffers
   'musaubrian/scratch.nvim',
+  'norcalli/nvim-colorizer.lua',
 
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
@@ -143,7 +144,7 @@ require('lazy').setup({
       no_bold = false,           -- Force no bold
     }),
     config = function()
-      local color = "catppuccin"
+      local color = "catppuccin-frappe"
       vim.cmd.colorscheme(color)
 
       vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
@@ -183,9 +184,9 @@ require('lazy').setup({
   {
     --harpoon
     'theprimeagen/harpoon',
-    vim.keymap.set('n', 'leader>ma', require('harpoon.mark').add_file, {}),
+    vim.keymap.set('n', '<leader>ma', require('harpoon.mark').add_file, {}),
     vim.keymap.set('n', '<leader>mn', require('harpoon.ui').nav_next, {}),
-    vim.keymap.set('n', '<leader>mn', require('harpoon.ui').nav_prev, {}),
+    vim.keymap.set('n', '<leader>mp', require('harpoon.ui').nav_prev, {}),
     vim.keymap.set('n', '<leader>mm', require('harpoon.ui').toggle_quick_menu, {}),
     vim.keymap.set('n', '<leader>cm', require('harpoon.mark').clear_all, {}),
   },
@@ -271,8 +272,7 @@ vim.o.clipboard = 'unnamedplus'
 -- vim.o.breakindent = true
 -- Save undo history
 vim.o.undofile = true
--- Case-insensitive searching UNLESS \C or capital in search
-vim.o.ignorecase = true
+vim.o.ignorecase = false --Messed with the visual block find and replace
 vim.o.smartcase = true
 -- Keep signcolumn on by default
 vim.wo.signcolumn = 'yes'

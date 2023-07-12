@@ -8,7 +8,7 @@ cp -r nvim ~/.config/
 cp ./.gitconfig ~/ -v
 
 # For tinygo
-mkdir ~/.db
+mkdir -p ~/.db
 # If for some reason there is no .ssh directory
 mkdir -p ~/.ssh
 
