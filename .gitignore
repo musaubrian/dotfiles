@@ -1,2 +1,3 @@
 nvim.appimage
 nvim/lazy-lock.json
+nvim_packer/nvim/plugin
