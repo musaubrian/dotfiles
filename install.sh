@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
 
-cp ./tmux.conf ~/.tmux.conf -v
-cp -r ./scripts/ ~/scripts/ -v
-cp -r ./alacritty/ ~/.config/ -v
-cp ./starship.toml ~/.config/ -v
-cp -r nvim ~/.config/
-cp ./.gitconfig ~/ -v
+cp -v ./tmux.conf ~/.tmux.conf 
+cp -v -r ./scripts/ ~/scripts/ 
+cp -v -r ./alacritty/ ~/.config/ 
+cp -v ./starship.toml ~/.config/ 
+cp -v -r nvim ~/.config/
+cp -v ./.gitconfig ~/
+cp -v ./.aliases ~/
 
 # For tinygo
 mkdir -p ~/.db
@@ -14,6 +15,10 @@ mkdir -p ~/.ssh
 
 # install ansible
 sudo apt install ansible
+# load aliases in .bashrc
+echo 'if [ -f ~/.aliases ]; then
+    . ~/.aliases
+fi'>> ~/.bashrc
 
 # Install starship prompt
 curl -sS https://starship.rs/install.sh | sh
