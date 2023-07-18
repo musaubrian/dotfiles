@@ -16,7 +16,7 @@ for file in ~/.var/app/org.telegram.desktop/data/TelegramDesktop/tdata/temp_data
     if [[ " ${video_ext[@]} " =~ " ${ext} " ]]; then
         mv "$file" ~/Downloads/
     elif [[ " ${document_ext[@]} " =~ " ${ext} " ]]; then
-        mv "$file" ~/Documents/stuff 
+        mv "$file" ~/Documents/mang 
     elif [[ " ${music_ext[@]} " =~ " ${ext} " ]]; then
         mv "$file" ~/Downloads/
     fi

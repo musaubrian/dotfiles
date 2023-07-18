@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 
 OPTIONS=$1
+SESSION_SWITCHING_TO=$2
 PERSONAL=~/personal/
 WORK=~/work/
 
-if [ "$OPTIONS" == "dd" ]; then
+if [ "$OPTIONS" == "d" ]; then
     tmux detach-client
 
 elif [ "$OPTIONS" == "p" ]; then
@@ -25,7 +26,16 @@ elif [ "$OPTIONS" == "a" ]; then
     else
         echo "NO session to attach to"
     fi
+elif [ "$OPTIONS" == "s" ]; then
+    #directly switch sessions
+    if [ "$SESSION_SWITCHING_TO" != "" ]; then
+        tmux switch-client -t "$SESSION_SWITCHING_TO"
+    else
+        echo "Usage:
+        tmx [p|w|a|d]"
+    fi
+
 else
     echo "Usage:
-    tmx [p|w|a]"
+    tmx [p|w|a|d]"
 fi
