@@ -4,21 +4,22 @@ cp -v ./tmux.conf ~/.tmux.conf
 cp -v -r ./scripts/ ~/scripts/ 
 cp -v -r ./alacritty/ ~/.config/ 
 cp -v ./starship.toml ~/.config/ 
-cp -v -r nvim ~/.config/
 cp -v ./.gitconfig ~/
 cp -v ./.aliases ~/
 
 read -p "Packer(1) or Lazy(2)? " opt
 
 if [[ $opt == 1 ]]; then
-    cp -vr nvim_packer ~/.config/
+    cd nvim_packer
+    ./install_packer.sh
+    exit
 elif [[ $opt == 2 ]]; then
     cp -vr nvim ~/.config
+    exit
 else
     echo "Pick either 1 or 2"
     exit
 fi
-
 # For tinygo
 mkdir -p ~/.db
 # If for some reason there is no .ssh directory
