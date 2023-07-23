@@ -1,7 +1,9 @@
 [user]
-	name = musaubrian
-	email = musaubrian15@gmail.com
+	name=musaubrian
+	email=musaubrian15@gmail.com
 [init]
-	defaultBranch = main
+	defaultBranch=main
 [core]
-    editor = nvim
+	editor=nvim
+[alias]
+	shove=push --force-with-lease

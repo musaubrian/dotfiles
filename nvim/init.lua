@@ -58,6 +58,12 @@ require('lazy').setup({
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
 
+  {
+    "iamcco/markdown-preview.nvim",
+    config = function()
+      vim.fn["mkdp#util#install"]()
+    end,
+  },
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
   {
@@ -88,9 +94,16 @@ require('lazy').setup({
       'rafamadriz/friendly-snippets',
     },
   },
-
-  -- trouble
   {
+    "sourcegraph/sg.nvim",
+
+    dependencies = { "nvim-lua/plenary.nvim" },
+
+    vim.keymap.set("n", "<leader>cc", vim.cmd.CodyChat),
+    vim.keymap.set("n", "<leader>ct", vim.cmd.CodyToggle)
+  },
+
+  { -- trouble
     'folke/trouble.nvim',
     opts = {
       icons = false,
@@ -122,8 +135,10 @@ require('lazy').setup({
       on_attach = function(bufnr)
         vim.keymap.set('n', '<leader>gp', require('gitsigns').prev_hunk,
           { buffer = bufnr, desc = '[G]o to [P]revious Hunk' })
-        vim.keymap.set('n', '<leader>gn', require('gitsigns').next_hunk, { buffer = bufnr, desc = '[G]o to [N]ext Hunk' })
-        vim.keymap.set('n', '<leader>ph', require('gitsigns').preview_hunk, { buffer = bufnr, desc = '[P]review [H]unk' })
+        vim.keymap.set('n', '<leader>gn', require('gitsigns').next_hunk,
+          { buffer = bufnr, desc = '[G]o to [N]ext Hunk' })
+        vim.keymap.set('n', '<leader>ph', require('gitsigns').preview_hunk,
+          { buffer = bufnr, desc = '[P]review [H]unk' })
       end,
     },
   },
@@ -173,7 +188,7 @@ require('lazy').setup({
     -- See `:help indent_blankline.txt`
     opts = {
       space_char_blankline = " ",
-      char = '┊',
+      -- char = '┊',
       show_trailing_blankline_indent = false,
     },
   },
@@ -190,6 +205,7 @@ require('lazy').setup({
     vim.keymap.set('n', '<leader>mm', require('harpoon.ui').toggle_quick_menu, {}),
     vim.keymap.set('n', '<leader>cm', require('harpoon.mark').clear_all, {}),
   },
+
 
   -- Fuzzy Finder (files, lsp, etc)
   { 'nvim-telescope/telescope.nvim', branch = '0.1.x', dependencies = { 'nvim-lua/plenary.nvim' } },
