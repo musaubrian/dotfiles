@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #cheat sheet from the command line
 
-langs=`echo "lua golang python typescript javascript vim sql" | tr ' ' '\n'`
+langs=`echo "lua golang python typescript javascript bash sql" | tr ' ' '\n'`
 
 selected=`printf "$langs" | fzf`
 echo "Selected $selected"
