@@ -7,6 +7,10 @@ cp -v ./starship.toml ~/.config/
 cp -v ./.gitconfig ~/
 cp -v ./.aliases ~/
 
+#VS Code
+mkdir -p ~/.config/Code/User
+cp -v ./settings.json ~/.config/Code/User
+
 read -p "Packer(1) or Lazy(2)? " opt
 
 if [[ $opt == 1 ]]; then
