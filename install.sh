@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
 
-cp -v ./tmux.conf ~/.tmux.conf 
-cp -v -r ./scripts/ ~/scripts/ 
-cp -v -r ./alacritty/ ~/.config/ 
-cp -v ./starship.toml ~/.config/ 
+cp -v ./tmux.conf ~/.tmux.conf
+cp -v -r ./scripts/ ~/scripts/
+cp -v -r ./alacritty/ ~/.config/
+cp -v ./starship.toml ~/.config/
 cp -v ./.gitconfig ~/
 cp -v ./.aliases ~/
+cp -v ./.zshrc ~/
 
 #VS Code
 mkdir -p ~/.config/Code/User
@@ -41,6 +42,13 @@ curl -sS https://starship.rs/install.sh | sh
 # setup bash to use starship
 echo 'eval "$(starship init bash)"' >> ~/.bashrc
 
+# oh-my-zsh and zsh
+sudo apt install zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+# fish-like suggestions
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+
+
 # Install Fuzzy Finder (fzf)
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
@@ -66,6 +74,6 @@ chmod u+x nvim.appimage
 sudo mv squashfs-root /
 sudo ln -s /squashfs-root/AppRun /usr/bin/nvim
 
-exec bash
+source ~/.zshrc
 # source packer so that I can just run :PackerSync
 # nvim +:so ~/.config/nvim/lua/ernest/packer.lua

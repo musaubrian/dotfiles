@@ -19,6 +19,7 @@ vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 vim.keymap.set('n', '<leader>fg', "<cmd>!gofmt -w ./.. <CR>", {})
 vim.keymap.set('n', '<leader>pt', "<cmd>!prettier -w % <CR>", {})
+vim.keymap.set("n", "<leader>ee", "oif err != nil {<CR>}<Esc>Oreturn err")
 
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
@@ -50,6 +51,8 @@ require('lazy').setup({
 
   -- wakatime
   'wakatime/vim-wakatime',
+  -- gitsigns
+  'lewis6991/gitsigns.nvim',
 
   -- scratch buffers
   'musaubrian/scratch.nvim',
@@ -94,14 +97,14 @@ require('lazy').setup({
       'rafamadriz/friendly-snippets',
     },
   },
-  {
+  --[[ {
     "sourcegraph/sg.nvim",
 
     dependencies = { "nvim-lua/plenary.nvim" },
 
     vim.keymap.set("n", "<leader>cc", vim.cmd.CodyChat),
     vim.keymap.set("n", "<leader>ct", vim.cmd.CodyToggle)
-  },
+  }, ]]
 
   { -- trouble
     'folke/trouble.nvim',
@@ -129,20 +132,6 @@ require('lazy').setup({
   },
   -- Adds git releated signs to the gutter, as well as utilities for managing changes
   {
-    'lewis6991/gitsigns.nvim',
-    opts = {
-      -- See `:help gitsigns.txt`
-      on_attach = function(bufnr)
-        vim.keymap.set('n', '<leader>gp', require('gitsigns').prev_hunk,
-          { buffer = bufnr, desc = '[G]o to [P]revious Hunk' })
-        vim.keymap.set('n', '<leader>gn', require('gitsigns').next_hunk,
-          { buffer = bufnr, desc = '[G]o to [N]ext Hunk' })
-        vim.keymap.set('n', '<leader>ph', require('gitsigns').preview_hunk,
-          { buffer = bufnr, desc = '[P]review [H]unk' })
-      end,
-    },
-  },
-  {
 
     'mbbill/undotree',
     vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)
@@ -155,8 +144,7 @@ require('lazy').setup({
       transparent_background = true,
       show_end_of_buffer = true, -- show the '~' characters after the end of buffers
       term_colors = true,
-      no_italic = false,         -- Force no italic
-      no_bold = false,           -- Force no bold
+      no_bold = true,
     }),
     config = function()
       local color = "catppuccin-frappe"
@@ -304,12 +292,6 @@ vim.o.completeopt = 'menuone,noselect'
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
 
--- [[ Basic Keymaps ]]
-
--- Keymaps for better default experience
--- See `:help vim.keymap.set()`
--- vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
-
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
@@ -450,7 +432,7 @@ local on_attach = function(_, bufnr)
   end
 
   nmap('<leader>rn', vim.lsp.buf.rename)
-  nmap('<leader>m', vim.lsp.buf.code_action)
+  nmap('<leader>ca', vim.lsp.buf.code_action)
 
   nmap('gd', vim.lsp.buf.definition)
   nmap('gr', require('telescope.builtin').lsp_references)
