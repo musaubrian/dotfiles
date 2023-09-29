@@ -71,5 +71,5 @@ return require('packer').startup(function(use)
     use 'lukas-reineke/indent-blankline.nvim'
     use 'musaubrian/scratch.nvim'
     use 'theprimeagen/harpoon'
-    use { 'sourcegraph/sg.nvim', run = 'nvim -l build/init.lua' }
+    -- use { 'sourcegraph/sg.nvim', run = 'nvim -l build/init.lua' }
 end)

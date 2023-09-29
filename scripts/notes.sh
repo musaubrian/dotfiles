@@ -13,11 +13,11 @@ if tmux has-session -t $session 2>/dev/null; then
 else
     tmux new-session -d -s $session
 
-    if [[ "$links" == "$1"* ]]; then
+    if [[ "$#" == 0 ]]; then
+        tmux send-keys -t $session "nvim ." C-m
+    elif [[ "$links" == *"$1"* ]]; then
         LAST_LINE=`wc -l links.md | cut -d' ' -f1`
         tmux send-keys -t $session "nvim links.md +$LAST_LINE" C-m
-    else
-        tmux send-keys -t $session "nvim ." C-m
     fi
     if [ -n "$TMUX" ]; then
         tmux switch-client -t $session

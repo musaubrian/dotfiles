@@ -7,6 +7,7 @@ cp -v ./starship.toml ~/.config/
 cp -v ./.gitconfig ~/
 cp -v ./.aliases ~/
 cp -v ./.zshrc ~/
+cp -v ./.profile ~/
 
 #VS Code
 mkdir -p ~/.config/Code/User
@@ -15,15 +16,22 @@ cp -v ./settings.json ~/.config/Code/User
 read -p "Packer(1) or Lazy(2)? " opt
 
 if [[ $opt == 1 ]]; then
-    cd nvim_packer
+    #Check if nvim exist first
+    if [ -d "~/.config/nvim" ]; then
+        mv ~/.config/nvim ~/config/nvim_bkp
+    fi
+    cd ./neovim/nvim_packer || exit
     ./install_packer.sh
     exit
 elif [[ $opt == 2 ]]; then
-    cp -vr nvim ~/.config
+    #Check if nvim exist first
+    if [ -d "~/.config/nvim" ]; then
+        mv ~/.config/nvim ~/config/nvim_bkp
+    fi
+    cp -vr ./neovim/nvim_lazy/nvim ~/.config/nvim
     exit
 else
     echo "Pick either 1 or 2"
-    exit
 fi
 # For tinygo
 mkdir -p ~/.db
@@ -54,16 +62,20 @@ chsh -s $(which zsh)
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
 
-# This could possibly be better, but it works just fine
-# setup keys
-ansible-vault decrypt ./start/db/* ./start/keys/* ./start/wakatime/*
+#decrypt ssh keys first
+ansible-vault decrypt ./keys/*
 
-cp ./start/db/* ~/.db/ -v
-cp ./start/wakatime/wakatime.cfg ~/.wakatime.cfg -v
 cp -r ./start/keys/* ~/.ssh/ -v
+source ~/.zshrc
+
+git clone git@github.com:musaubrian/stash
+
+ansible-vault decrypt ./stash/db/* ./stash/wakatime/*
+cp ./stash/db/* ~/.db/ -v
+cp ./stash/wakatime/wakatime.cfg ~/.wakatime.cfg -v
 
 # Re-enrypt everything
-ansible-vault encrypt ./start/db/* ./start/keys/* ./start/wakatime/*
+ansible-vault encrypt ./stash/db/* ./keys/* ./stash/wakatime/*
 
 # install neovim
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
@@ -76,5 +88,3 @@ sudo mv squashfs-root /
 sudo ln -s /squashfs-root/AppRun /usr/bin/nvim
 
 source ~/.zshrc
-# source packer so that I can just run :PackerSync
-# nvim +:so ~/.config/nvim/lua/ernest/packer.lua

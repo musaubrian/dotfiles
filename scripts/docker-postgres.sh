@@ -6,5 +6,5 @@ if [ "$1" == "" ]; then
         echo ""
     fi
 else
-    docker run --name $1 -e POSTGRES_PASSWORD=$2 -p 5432:5432 -d postgres
+    docker run --name $1 -e POSTGRES_PASSWORD=$2 -p 4321:5432 -d postgres
 fi
