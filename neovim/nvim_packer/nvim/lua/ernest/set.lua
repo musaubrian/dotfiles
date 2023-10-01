@@ -33,6 +33,19 @@ vim.opt.scrolloff = 8
 vim.opt.colorcolumn = "78"
 
 vim.opt.updatetime = 50
+vim.o.clipboard = "unnamedplus"
+vim.wo.signcolumn = "yes"
+vim.o.completeopt = 'menuone,noselect'
 
 vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
+-- [[ Highlight on yank ]]
+-- See `:help vim.highlight.on_yank()`
+local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
+vim.api.nvim_create_autocmd('TextYankPost', {
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+  group = highlight_group,
+  pattern = '*',
+})
 

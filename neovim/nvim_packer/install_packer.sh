@@ -6,5 +6,5 @@ git clone --depth 1 https://github.com/wbthomason/packer.nvim\
 
 # Backup old config if available 
 mv ~/.config/nvim ~/.config/nvim_bkp
-cp -rv ./nvim ~/.config/
 
+cp -rv ./nvim ~/.config/

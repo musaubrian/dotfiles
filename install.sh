@@ -1,17 +1,18 @@
 #!/usr/bin/env bash
 
-cp -v ./tmux.conf ~/.tmux.conf
 cp -v -r ./scripts/ ~/scripts/
 cp -v -r ./alacritty/ ~/.config/
-cp -v ./starship.toml ~/.config/
-cp -v ./.gitconfig ~/
-cp -v ./.aliases ~/
-cp -v ./.zshrc ~/
-cp -v ./.profile ~/
+cp -v ./home/starship.toml ~/.config/
+ln -sv ./home/tmux.conf ~/.tmux.conf
+ln -sv ./home/gitconfig ~/.gtconfig
+ln -sv ./home/aliases ~/.aliases
+ln -sv ./home/zshrc ~/.zshrc
+ln -sv ./home/profile ~/.profile
+
 
 #VS Code
 mkdir -p ~/.config/Code/User
-cp -v ./settings.json ~/.config/Code/User
+cp -v ./home/settings.json ~/.config/Code/User
 
 read -p "Packer(1) or Lazy(2)? " opt
 
@@ -29,11 +30,11 @@ elif [[ $opt == 2 ]]; then
         mv ~/.config/nvim ~/config/nvim_bkp
     fi
     cp -vr ./neovim/nvim_lazy/nvim ~/.config/nvim
-    exit
 else
     echo "Pick either 1 or 2"
 fi
 # For tinygo
+exit
 mkdir -p ~/.db
 # If for some reason there is no .ssh directory
 mkdir -p ~/.ssh

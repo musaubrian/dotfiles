@@ -1,8 +1,9 @@
 vim.opt.list = true
-vim.opt.listchars:append "space: "
 
 require("ibl").setup {
-    space_char_blankline = " ",
-    show_current_context = true,
-    show_current_context_start = true,
+      space_char_blankline = " ",
+      show_trailing_blankline_indent = false,
+     --indent = { char = "┊" },
+     indent = {char = "▏"},
+     whitespace = { highlight = { "Whitespace", "NonText" } },
 }

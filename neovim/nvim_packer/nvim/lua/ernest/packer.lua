@@ -7,13 +7,12 @@ return require('packer').startup(function(use)
     use 'nvim-treesitter/nvim-treesitter-context'
     use 'wakatime/vim-wakatime'
     use 'neovim/nvim-lspconfig'
-
     use 'williamboman/mason.nvim'
     use 'williamboman/mason-lspconfig.nvim'
 
     use {
         'VonHeikemen/lsp-zero.nvim',
-        branch = 'v1.x',
+        branch = 'v3.x',
         requires = {
             -- LSP Support
             { 'neovim/nvim-lspconfig' },             -- Required
@@ -34,10 +33,14 @@ return require('packer').startup(function(use)
         }
     }
     use 'tpope/vim-fugitive'
-    use 'lewis6991/gitsigns.nvim'
+    use 'tpope/vim-sleuth'
+    use { 'lewis6991/gitsigns.nvim',
+        config = function()
+            require('gitsigns').setup()
+        end }
     use { "catppuccin/nvim", as = "catppuccin" }
     use 'nvim-lualine/lualine.nvim'
-    use 'tjdevries/colorbuddy.nvim'
+    --use 'tjdevries/colorbuddy.nvim'
 
     use "folke/trouble.nvim"
     use {
@@ -55,9 +58,10 @@ return require('packer').startup(function(use)
     use {
         "windwp/nvim-autopairs",
         config = function() require("nvim-autopairs").setup {} end
+
     }
     use {
-        'nvim-telescope/telescope.nvim', tag = '0.1.1',
+        'nvim-telescope/telescope.nvim', tag = '0.1.x',
         -- or                            , branch = '0.1.x',
         requires = { { 'nvim-lua/plenary.nvim' } }
     }
