@@ -17,9 +17,8 @@ vim.g.maplocalleader = ' '
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 --make file executable
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
-vim.keymap.set('n', '<leader>fg', "<cmd>!gofmt -w ./.. <CR>", {})
 vim.keymap.set('n', '<leader>pt', "<cmd>!prettier -w % <CR>", {})
-vim.keymap.set("n", "<leader>ee", "oif err != nil {<CR>}<Esc>Oreturn err")
+vim.keymap.set("n", "<leader>ee", "oif err != nil {<CR>}<Esc>Oreturn ")
 
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
@@ -173,11 +172,8 @@ require('lazy').setup({
     "lukas-reineke/indent-blankline.nvim",
     main = "ibl",
     opts = {
-      space_char_blankline = " ",
-      show_trailing_blankline_indent = false,
-      --indent = { char = "┊" },
-     indent = {char = "▏"},
-     whitespace = { highlight = { "Whitespace", "NonText" } },
+      indent = { char = "▏" },
+      whitespace = { highlight = { "Whitespace", "NonText" } },
     }
   },
 
@@ -225,8 +221,8 @@ require('lazy').setup({
   --    up-to-date with whatever is in the kickstart repo.
   --
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
-  { import = 'custom' },
-}, {})
+  { import = "custom" },
+})
 
 -- [[ Setting options ]]
 -- See `:help vim.o`

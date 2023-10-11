@@ -30,14 +30,13 @@ vim.opt.termguicolors = true
 --lines visible below cursor is never less than
 vim.opt.scrolloff = 8
 
-vim.opt.colorcolumn = "78"
+vim.opt.colorcolumn = "79"
 
 vim.opt.updatetime = 50
 vim.o.clipboard = "unnamedplus"
 vim.wo.signcolumn = "yes"
 vim.o.completeopt = 'menuone,noselect'
 
-vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })

@@ -5,7 +5,7 @@ require("catppuccin").setup({
     show_end_of_buffer = true, -- show the '~' characters after the end of buffers
     term_colors = true,
     no_italic = false, -- Force no italic
-    no_bold = false, -- Force no bold
+    no_bold = true, -- Force no bold
     color_overrides = {},
 })
 
