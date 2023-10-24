@@ -3,11 +3,10 @@
 cp -v -r ./scripts/ ~/scripts/
 cp -v -r ./alacritty/ ~/.config/
 cp -v ./home/starship.toml ~/.config/
-ln -sv ./home/tmux.conf ~/.tmux.conf
-ln -sv ./home/gitconfig ~/.gtconfig
-ln -sv ./home/aliases ~/.aliases
-ln -sv ./home/zshrc ~/.zshrc
-ln -sv ./home/profile ~/.profile
+cp -v ./home/tmux.conf ~/.tmux.conf
+cp -v ./home/gitconfig ~/.gtconfig
+cp -v ./home/aliases ~/.aliases
+cp -v ./home/profile ~/.profile
 
 
 #VS Code
@@ -23,7 +22,6 @@ if [[ $opt == 1 ]]; then
     fi
     cd ./neovim/nvim_packer || exit
     ./install_packer.sh
-    exit
 elif [[ $opt == 2 ]]; then
     #Check if nvim exist first
     if [ -d "~/.config/nvim" ]; then
@@ -33,8 +31,8 @@ elif [[ $opt == 2 ]]; then
 else
     echo "Pick either 1 or 2"
 fi
+
 # For tinygo
-exit
 mkdir -p ~/.db
 # If for some reason there is no .ssh directory
 mkdir -p ~/.ssh
@@ -56,7 +54,8 @@ sudo apt install zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 # fish-like suggestions
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-chsh -s $(which zsh)
+# oh-my-zsh overrides the original .zshrc so copy it after setting it up
+cp -v ./home/zshrc ~/.zshrc
 
 
 # Install Fuzzy Finder (fzf)
@@ -69,8 +68,7 @@ sudo apt-get install ripgrep
 #decrypt ssh keys first
 ansible-vault decrypt ./keys/*
 
-cp -r ./start/keys/* ~/.ssh/ -v
-source ~/.zshrc
+cp -r ./keys/* ~/.ssh/ -v
 
 git clone git@github.com:musaubrian/stash
 
@@ -82,7 +80,7 @@ cp ./stash/wakatime/wakatime.cfg ~/.wakatime.cfg -v
 ansible-vault encrypt ./stash/db/* ./keys/* ./stash/wakatime/*
 
 # install neovim
-curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
+curl -sLO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
 chmod u+x nvim.appimage
 
 ./nvim.appimage --appimage-extract
@@ -91,4 +89,5 @@ chmod u+x nvim.appimage
 sudo mv squashfs-root /
 sudo ln -s /squashfs-root/AppRun /usr/bin/nvim
 
+chsh -s $(which zsh)
 source ~/.zshrc
