@@ -23,6 +23,19 @@ for file in ~/.var/app/org.telegram.desktop/data/TelegramDesktop/tdata/temp_data
 
 done
 
+for file in ~/Downloads/Telegram\ Desktop/*;do
+
+    ext="${file##*.}"
+    if [[ " ${video_ext[@]} " =~ " ${ext} " ]]; then
+        mv "$file" ~/Downloads/
+    elif [[ " ${document_ext[@]} " =~ " ${ext} " ]]; then
+        mv "$file" ~/Documents/mang 
+    elif [[ " ${music_ext[@]} " =~ " ${ext} " ]]; then
+        mv "$file" ~/Downloads/
+    fi
+
+done
+
 # Loop through all files in the Downloads directory
 for file in ~/Downloads/*; do
     # Get the file extension
