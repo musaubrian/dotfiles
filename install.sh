@@ -7,6 +7,7 @@ cp -v ./home/tmux.conf ~/.tmux.conf
 cp -v ./home/gitconfig ~/.gtconfig
 cp -v ./home/aliases ~/.aliases
 cp -v ./home/profile ~/.profile
+cp -v ./home/spotify_adblock.desktop ~/.local/share/applications
 
 
 #VS Code
