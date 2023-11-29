@@ -144,7 +144,7 @@ require('lazy').setup({
       flavour = "frappe",        -- latte, frappe, macchiato, mocha
       transparent_background = true,
       show_end_of_buffer = true, -- show the '~' characters after the end of buffers
-      term_colors = true,
+      term_colors = false,
       no_bold = true,
     }),
     config = function()
@@ -239,7 +239,6 @@ vim.o.hlsearch = false
 vim.keymap.set('v', "K", ":m '<-2<CR>gv=gv")
 vim.keymap.set('n', '<leader>gs', vim.cmd.Git)
 
--- vim.opt.fillchars = { eob = "~" }
 
 vim.opt.relativenumber = true
 vim.opt.cursorline = true
