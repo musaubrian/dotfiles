@@ -58,7 +58,6 @@ return require('packer').startup(function(use)
     use {
         "windwp/nvim-autopairs",
         config = function() require("nvim-autopairs").setup {} end
-
     }
     use {
         'nvim-telescope/telescope.nvim', tag = '0.1.x',
@@ -71,6 +70,43 @@ return require('packer').startup(function(use)
         run = function() vim.fn["mkdp#util#install"]() end,
     })
 
+    use {
+        "zbirenbaum/copilot.lua",
+        cmd = "Copilot",
+        event = "InsertEnter",
+        config = function()
+            local opts = {
+                panel = { enabled = false, },
+                suggestion = {
+                    enabled = true,
+                    auto_trigger = true,
+                    debounce = 250,
+                    keymap = {
+                        accept = "<M-CR>",
+                        accept_word = false,
+                        accept_line = false,
+                        next = "<M-n>",
+                        prev = "<M-p>",
+                        dismiss = "<C-]>",
+                    },
+                },
+                filetypes = {
+                    yaml = false,
+                    markdown = false,
+                    help = false,
+                    gitcommit = false,
+                    gitrebase = false,
+                    hgcommit = false,
+                    svn = false,
+                    cvs = false,
+                    ["."] = false,
+                },
+                copilot_node_command = 'node', -- Node.js version must be > 18.x
+                server_opts_overrides = {},
+            }
+            require("copilot").setup(opts)
+        end,
+    }
     use "mbbill/undotree"
     use 'lukas-reineke/indent-blankline.nvim'
     use 'musaubrian/scratch.nvim'
