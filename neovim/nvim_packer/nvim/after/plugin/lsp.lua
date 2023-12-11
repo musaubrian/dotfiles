@@ -1,8 +1,8 @@
 require("mason.settings").set({})
 
 local lsp_zero = require('lsp-zero')
-local capapilities = vim.lsp.protocol.make_client_capabilities()
-capapilities = require("cmp_nvim_lsp").default_capabilities(capapilities)
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 local format_is_enabled = true
 
 --- Check if a loaded lsp client matches a specific client
@@ -10,7 +10,7 @@ local format_is_enabled = true
 --- @param val string
 --- @return boolean
 local function is_lspclient(tab, val)
-  for index, value in ipairs(tab) do
+  for _, value in ipairs(tab) do
     if value == val then
       return true
     end
@@ -21,11 +21,11 @@ end
 
 lsp_zero.on_attach(function(client, bufnr)
   local opts = { buffer = bufnr, remap = false }
-  vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
   vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
   vim.keymap.set("n", "<C-K>", vim.lsp.buf.signature_help, opts)
   vim.keymap.set("n", "<leader>gl", function() vim.diagnostic.open_float() end, opts)
   vim.keymap.set("n", "<leader>ca", function() vim.lsp.buf.code_action() end, opts)
+  vim.keymap.set("n", "gd", require("telescope.builtin").lsp_definitions)
   vim.keymap.set("n", "<leader>gr", require("telescope.builtin").lsp_references)
   vim.keymap.set("n", "<leader>rn", function() vim.lsp.buf.rename() end, opts)
   vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
@@ -40,11 +40,13 @@ lsp_zero.on_attach(function(client, bufnr)
   end
   -- tsserver freaks out when formatting
   local is_tsserver = is_lspclient(clients, "tsserver")
-  if is_tsserver then
+  local is_tailwind = is_lspclient(clients, "tailwindcss") --tailwind attaches alot decided to ignore it altogether
+  local is_copilot_only = is_lspclient(clients, "copilot") --don't format if its only copilot
+  if is_tsserver or client.name == "" or is_tailwind or is_copilot_only then
     format_is_enabled = false
   end
 
-  if format_is_enabled and not is_tsserver then
+  if format_is_enabled then
     vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]]
   else
     return

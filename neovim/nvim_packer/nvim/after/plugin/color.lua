@@ -4,9 +4,26 @@ require("catppuccin").setup({
     transparent_background = true,
     show_end_of_buffer = true, -- show the '~' characters after the end of buffers
     term_colors = true,
-    no_italic = true,          -- Force no italic
-    no_bold = true,            -- Force no bold
+    no_italic = false,         -- Force no italic
+    no_bold = false,           -- Force no bold
     color_overrides = {},
+    styles = {
+        conditionals = { "bold" },
+        comments = { "italic" },
+    },
+    integrations = {
+        native_lsp = {
+            enabled = true,
+            virtual_text = {
+                hints = { "italic" },
+                errors = { "italic" },
+                warnings = { "italic" },
+                information = { "italic" },
+            },
+        },
+    },
+
+
 })
 
 function Mytheme()

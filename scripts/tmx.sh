@@ -4,6 +4,18 @@ OPTIONS=$1
 PERSONAL=~/personal/
 WORK=~/work/
 
+# Create new sessions then switch to them if already in a tmux session
+# else attach to it
+switch_or_attach(){
+    if [ -n "$TMUX" ]; then
+        tmux switch-client -t $1
+    else
+        tmux attach-session -t $1
+    fi
+}
+
+
+
 if [ "$OPTIONS" == "d" ]; then
     tmux detach-client
 
@@ -14,10 +26,10 @@ elif [ "$OPTIONS" == "p" ]; then
     if [[ $SESSION_NAME == *"."* ]]; then
         SESH=$(echo "$SESSION_NAME" | tr '.' '_')
         tmux new-session -d -s "$SESH"
-        tmux attach-session -t "$SESH"
+        switch_or_attach "$SESH"
     else
         tmux new-session -d -s "$SESSION_NAME"
-        tmux attach-session -t "$SESSION_NAME"
+        switch_or_attach "$SESSION_NAME"
     fi
 
 elif [ "$OPTIONS" == "w" ]; then
@@ -28,10 +40,10 @@ elif [ "$OPTIONS" == "w" ]; then
         SESH=$(echo "$SESSION_NAME" | tr '.' '_')
         echo "$SESH"
         tmux new-session -d -s "$SESH"
-        tmux attach-session -t "$SESH"
+        switch_or_attach "$SESH"
     else
         tmux new-session -d -s "$SESSION_NAME"
-        tmux attach-session -t "$SESSION_NAME"
+        switch_or_attach "$SESSION_NAME"
     fi
 
 elif [ "$OPTIONS" == "a" ]; then
@@ -40,7 +52,7 @@ elif [ "$OPTIONS" == "a" ]; then
     if [ "$ATTACH_TO" != "" ]; then
         tmux attach-session -t "$ATTACH_TO"
     else
-        echo "NO session to attach to"
+        echo "NO SESSION TO ATTACH TO"
     fi
 else
     echo "Usage:
