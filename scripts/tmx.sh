@@ -29,6 +29,7 @@ elif [ "$OPTIONS" == "p" ]; then
 
     if [[ $SESSION_NAME == *"."* ]]; then
         SESH=$(echo "$SESSION_NAME" | tr '.' '_')
+        echo "$SESH"
         tmux new-session -d -s "$SESH"
         switch_or_attach "$SESH"
     else

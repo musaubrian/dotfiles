@@ -10,6 +10,7 @@ return require('packer').startup(function(use)
     use 'williamboman/mason.nvim'
     use 'williamboman/mason-lspconfig.nvim'
     use 'junegunn/vim-easy-align'
+    -- use 'mattn/efm-langserver'
 
     use {
         'VonHeikemen/lsp-zero.nvim',
@@ -41,7 +42,6 @@ return require('packer').startup(function(use)
         end }
     use { "catppuccin/nvim", as = "catppuccin" }
     use 'nvim-lualine/lualine.nvim'
-    --use 'tjdevries/colorbuddy.nvim'
 
     use "folke/trouble.nvim"
     use {
@@ -108,9 +108,29 @@ return require('packer').startup(function(use)
             require("copilot").setup(opts)
         end,
     }
+    use {
+        'musaubrian/scratch.nvim',
+        requires = {
+            { 'rcarriga/nvim-notify',
+                -- If you already use nvim-notify You can remove this
+                config = function()
+                    require('notify').setup({
+                        --You can remove this if you wish to use default icons
+                        icons = {
+                            DEBUG = 'DEBUG',
+                            ERROR = 'ERROR',
+                            INFO = 'INFO',
+                            TRACE = 'TRACE',
+                            WARN = 'WARN'
+                        },
+                        stages = 'static',
+                        timeout = 2000,
+                    })
+                end
+            }
+        }
+    }
     use "mbbill/undotree"
     use 'lukas-reineke/indent-blankline.nvim'
-    use 'musaubrian/scratch.nvim'
     use 'theprimeagen/harpoon'
-    -- use { 'sourcegraph/sg.nvim', run = 'nvim -l build/init.lua' }
 end)
