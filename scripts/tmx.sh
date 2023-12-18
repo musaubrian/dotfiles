@@ -23,6 +23,10 @@ elif [ "$OPTIONS" == "p" ]; then
     SESSION_NAME=`ls $PERSONAL | fzf`
     cd $PERSONAL$SESSION_NAME
 
+    if [[ -z "$SESSION_NAME" ]]; then
+        SESSION_NAME="personal"
+    fi
+
     if [[ $SESSION_NAME == *"."* ]]; then
         SESH=$(echo "$SESSION_NAME" | tr '.' '_')
         tmux new-session -d -s "$SESH"
@@ -35,6 +39,10 @@ elif [ "$OPTIONS" == "p" ]; then
 elif [ "$OPTIONS" == "w" ]; then
     SESSION_NAME=`ls $WORK | fzf`
     cd $WORK$SESSION_NAME
+
+    if [[ -z "$SESSION_NAME" ]]; then
+        SESSION_NAME="work"
+    fi
 
     if [[ $SESSION_NAME == *"."* ]]; then
         SESH=$(echo "$SESSION_NAME" | tr '.' '_')

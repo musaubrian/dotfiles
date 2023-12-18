@@ -13,7 +13,6 @@ elif [ "$GIT_HUB_OR_LAB" == "h" ]  || [ "$GIT_HUB_OR_LAB" == "hub" ]; then
     GIT_URL="git@github.com:$URL $CLONE_AS"
 else
     echo "$USAGE_INSTRUCTION"
-
 fi
 
 
