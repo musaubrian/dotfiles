@@ -19,7 +19,7 @@ vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 --make file executable
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 vim.keymap.set('n', '<leader>pt', "<cmd>!prettier -w % <CR>", {})
-vim.keymap.set("n", "<leader>ee", "oif err != nil {<CR>}<Esc>Oreturn ")
+vim.keymap.set("n", "<leader>ee", "oif err != nil {<CR>}<Esc>O ")
 vim.keymap.set("n", "<leader>fp", ":!black %<CR>", {})
 
 -- Install package manager
@@ -49,6 +49,7 @@ require('lazy').setup({
   -- Git related plugins
   'tpope/vim-fugitive',
   -- 'tpope/vim-rhubarb',
+  'musaubrian/scratch.nvim',
 
   -- wakatime
   'wakatime/vim-wakatime',
@@ -56,12 +57,57 @@ require('lazy').setup({
   'lewis6991/gitsigns.nvim',
   'junegunn/vim-easy-align',
 
-  -- scratch buffers
-  'musaubrian/scratch.nvim',
   'norcalli/nvim-colorizer.lua',
 
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
+
+  {
+
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    event = "InsertEnter",
+    config = function()
+      local opts = {
+        panel = { enabled = false, },
+        suggestion = {
+          enabled = true,
+          auto_trigger = true,
+          debounce = 300,      --delay while neovim starts up
+          keymap = {
+            accept = "<M-CR>", --alt enter to accept
+            accept_word = false,
+            accept_line = false,
+            next = "<M-n>",
+            prev = "<M-p>",
+            dismiss = "<C-]>",
+          },
+        },
+        filetypes = {
+          yaml = false,
+          markdown = false,
+          help = false,
+          gitcommit = false,
+          gitrebase = false,
+          hgcommit = false,
+          svn = false,
+          cvs = false,
+          ["."] = false,
+        },
+        copilot_node_command = 'node', -- Node.js version must be > 18.x
+        server_opts_overrides = {},
+
+      }
+      require("copilot").setup(opts)
+    end,
+  },
+  {
+    'musaubrian/jade.nvim',
+    dependencies = "tjdevries/colorbuddy.nvim",
+    config = function()
+      require("jade")
+    end
+  },
 
   {
     "iamcco/markdown-preview.nvim",
@@ -99,14 +145,6 @@ require('lazy').setup({
       'rafamadriz/friendly-snippets',
     },
   },
-  --[[ {
-    "sourcegraph/sg.nvim",
-
-    dependencies = { "nvim-lua/plenary.nvim" },
-
-    vim.keymap.set("n", "<leader>cc", vim.cmd.CodyChat),
-    vim.keymap.set("n", "<leader>ct", vim.cmd.CodyToggle)
-  }, ]]
 
   { -- trouble
     'folke/trouble.nvim',
@@ -139,23 +177,6 @@ require('lazy').setup({
     vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)
   },
 
-  {
-    'catppuccin/nvim',
-    require('catppuccin').setup({
-      flavour = "frappe",        -- latte, frappe, macchiato, mocha
-      transparent_background = true,
-      show_end_of_buffer = true, -- show the '~' characters after the end of buffers
-      term_colors = false,
-      no_bold = true,
-    }),
-    config = function()
-      local color = "catppuccin-frappe"
-      vim.cmd.colorscheme(color)
-
-      vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-      -- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-    end,
-  },
 
   {
     -- Set lualine as statusline
@@ -164,7 +185,7 @@ require('lazy').setup({
     opts = {
       options = {
         icons_enabled = false,
-        theme = 'catppuccin-frappe',
+        theme = 'auto',
         component_separators = '|',
         section_separators = '',
       },
@@ -186,13 +207,13 @@ require('lazy').setup({
   {
     --harpoon
     'theprimeagen/harpoon',
+
     vim.keymap.set('n', '<leader>ma', require('harpoon.mark').add_file, {}),
     vim.keymap.set('n', '<leader>mn', require('harpoon.ui').nav_next, {}),
     vim.keymap.set('n', '<leader>mp', require('harpoon.ui').nav_prev, {}),
-    vim.keymap.set('n', '<leader>mm', require('harpoon.ui').toggle_quick_menu, {}),
     vim.keymap.set('n', '<leader>cm', require('harpoon.mark').clear_all, {}),
+    vim.keymap.set('n', '<leader>mm', require("harpoon.ui").toggle_quick_menu, {})
   },
-
 
   -- Fuzzy Finder (files, lsp, etc)
   { 'nvim-telescope/telescope.nvim', branch = '0.1.x', dependencies = { 'nvim-lua/plenary.nvim' } },
@@ -218,6 +239,7 @@ require('lazy').setup({
     },
     build = ':TSUpdate',
   },
+  -- { dir = "~/personal/jade.nvim" },
 
   -- NOTE: The import below automatically adds your own plugins, configuration, etc from `lua/custom/*.lua`
   --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
@@ -235,11 +257,11 @@ require('lazy').setup({
 vim.opt.guicursor = ""
 -- Set highlight on search
 --move highlighted blocks
-vim.o.hlsearch = false
 vim.keymap.set('v', "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set('v', "K", ":m '<-2<CR>gv=gv")
-vim.keymap.set('n', '<leader>gs', vim.cmd.Git)
 
+vim.keymap.set('n', '<leader>gs', vim.cmd.Git)
+vim.o.hlsearch = false
 
 vim.opt.relativenumber = true
 vim.opt.cursorline = true
@@ -251,7 +273,6 @@ vim.opt.incsearch = true
 --lines visible below cursor is never less than
 vim.opt.scrolloff = 8
 vim.opt.colorcolumn = "79"
-vim.opt.updatetime = 50
 -- Make line numbers default
 vim.wo.number = true
 
@@ -261,8 +282,6 @@ vim.opt.expandtab = true
 vim.opt.shiftwidth = 4
 
 vim.smartindent = true
---disable swapfiles
-vim.opt.swapfile = false
 -- Enable mouse mode
 vim.o.mouse = 'a'
 -- Sync clipboard between OS and Neovim.
@@ -434,14 +453,6 @@ local on_attach = function(_, bufnr)
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
   nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
-  -- Lesser used LSP functionality
-  nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-  nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
-  nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
-  nmap('<leader>wl', function()
-    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  end, '[W]orkspace [L]ist Folders')
-
   -- Create a command `:Format` local to the LSP buffer
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
     vim.lsp.buf.format()
@@ -454,11 +465,12 @@ end
 --  Add any additional override configuration in the following tables. They will be passed to
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
+  gopls = {},
+  tsserver = {},
+  templ = {},
   -- clangd = {},
-  -- gopls = {},
   -- pyright = {},
   -- rust_analyzer = {},
-  -- tsserver = {},
 
   lua_ls = {
     Lua = {
@@ -491,6 +503,18 @@ mason_lspconfig.setup_handlers {
     }
   end,
 }
+
+require("lspconfig").tailwindcss.setup({
+  filetypes = {
+    'templ'
+    -- include any other filetypes where you need tailwindcss
+  },
+  init_options = {
+    userLanguages = {
+      templ = "html"
+    }
+  }
+})
 
 -- [[ Configure nvim-cmp ]]
 -- See `:help cmp`
@@ -540,6 +564,11 @@ cmp.setup {
   },
 }
 
+vim.filetype.add({
+  extension = {
+    templ = "templ",
+  },
+})
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

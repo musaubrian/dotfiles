@@ -61,7 +61,7 @@ elif [ "$OPTIONS" == "a" ]; then
     if [ "$ATTACH_TO" != "" ]; then
         tmux attach-session -t "$ATTACH_TO"
     else
-        echo "NO SESSION TO ATTACH TO"
+        echo "[ERROR]: NO SESSION TO ATTACH TO"
     fi
 else
     echo "Usage:
