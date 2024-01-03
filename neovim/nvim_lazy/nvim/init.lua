@@ -50,11 +50,12 @@ require('lazy').setup({
   'tpope/vim-fugitive',
   -- 'tpope/vim-rhubarb',
   'musaubrian/scratch.nvim',
+  'tjdevries/colorbuddy.nvim',
 
   -- wakatime
   'wakatime/vim-wakatime',
   -- gitsigns
-  'lewis6991/gitsigns.nvim',
+  -- 'lewis6991/gitsigns.nvim',
   'junegunn/vim-easy-align',
 
   'norcalli/nvim-colorizer.lua',
@@ -103,6 +104,7 @@ require('lazy').setup({
   },
   {
     'musaubrian/jade.nvim',
+    lazy = false,
     dependencies = "tjdevries/colorbuddy.nvim",
     config = function()
       require("jade")
@@ -201,7 +203,6 @@ require('lazy').setup({
     }
   },
 
-  -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim',         opts = {} },
 
   {
@@ -299,15 +300,12 @@ vim.wo.signcolumn = 'yes'
 
 -- Decrease update time
 vim.o.updatetime = 50
--- vim.o.timeout = true
--- vim.o.timeoutlen = 300
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
 
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
-
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
@@ -351,10 +349,10 @@ vim.keymap.set('n', '<leader>d', require('telescope.builtin').diagnostics, { des
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'go', 'lua', 'python', 'typescript' },
+  ensure_installed = { 'go', 'lua', 'python' },
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
-  auto_install = false,
+  auto_install = true,
 
   highlight = { enable = true },
   indent = { enable = true },
@@ -524,6 +522,11 @@ require('luasnip.loaders.from_vscode').lazy_load()
 luasnip.config.setup {}
 
 cmp.setup {
+  -- I liked the bordered version better
+  window = {
+    completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered(),
+  },
   snippet = {
     expand = function(args)
       luasnip.lsp_expand(args.body)
