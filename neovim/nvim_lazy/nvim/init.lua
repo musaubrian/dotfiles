@@ -17,8 +17,8 @@ vim.g.maplocalleader = ' '
 
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 --make file executable
-vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
-vim.keymap.set('n', '<leader>pt', "<cmd>!prettier -w % <CR>", {})
+-- vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
+-- vim.keymap.set('n', '<leader>pt', "<cmd>!prettier -w % <CR>", {})
 vim.keymap.set("n", "<leader>ee", "oif err != nil {<CR>}<Esc>O ")
 vim.keymap.set("n", "<leader>fp", ":!black %<CR>", {})
 
@@ -49,67 +49,20 @@ require('lazy').setup({
   -- Git related plugins
   'tpope/vim-fugitive',
   -- 'tpope/vim-rhubarb',
-  'musaubrian/scratch.nvim',
+  -- gitsigns
+  'lewis6991/gitsigns.nvim',
+
   'tjdevries/colorbuddy.nvim',
 
   -- wakatime
   'wakatime/vim-wakatime',
-  -- gitsigns
-  -- 'lewis6991/gitsigns.nvim',
   'junegunn/vim-easy-align',
+  'tjdevries/templ.nvim',
 
   'norcalli/nvim-colorizer.lua',
 
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
-
-  {
-
-    "zbirenbaum/copilot.lua",
-    cmd = "Copilot",
-    event = "InsertEnter",
-    config = function()
-      local opts = {
-        panel = { enabled = false, },
-        suggestion = {
-          enabled = true,
-          auto_trigger = true,
-          debounce = 300,      --delay while neovim starts up
-          keymap = {
-            accept = "<M-CR>", --alt enter to accept
-            accept_word = false,
-            accept_line = false,
-            next = "<M-n>",
-            prev = "<M-p>",
-            dismiss = "<C-]>",
-          },
-        },
-        filetypes = {
-          yaml = false,
-          markdown = false,
-          help = false,
-          gitcommit = false,
-          gitrebase = false,
-          hgcommit = false,
-          svn = false,
-          cvs = false,
-          ["."] = false,
-        },
-        copilot_node_command = 'node', -- Node.js version must be > 18.x
-        server_opts_overrides = {},
-
-      }
-      require("copilot").setup(opts)
-    end,
-  },
-  {
-    'musaubrian/jade.nvim',
-    lazy = false,
-    dependencies = "tjdevries/colorbuddy.nvim",
-    config = function()
-      require("jade")
-    end
-  },
 
   {
     "iamcco/markdown-preview.nvim",
@@ -165,6 +118,13 @@ require('lazy').setup({
       use_diagnostic_signs = false, -- enabling this will use the signs defined in your lsp client
 
       vim.keymap.set('n', '<leader>t', require('trouble').toggle, {}),
+      vim.keymap.set('n', '<leader>n', function()
+        require('trouble').next({ jump = true, skip_groups = true })
+      end, {}),
+      vim.keymap.set('n', '<leader>p', function()
+          require('trouble').previous({ jump = true, skip_groups = true })
+        end,
+        {})
     }
   },
   -- auto-pairs
@@ -179,21 +139,6 @@ require('lazy').setup({
     vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)
   },
 
-
-  {
-    -- Set lualine as statusline
-    'nvim-lualine/lualine.nvim',
-    -- See `:help lualine.txt`
-    opts = {
-      options = {
-        icons_enabled = false,
-        theme = 'auto',
-        component_separators = '|',
-        section_separators = '',
-      },
-    },
-  },
-
   {
     "lukas-reineke/indent-blankline.nvim",
     main = "ibl",
@@ -204,17 +149,6 @@ require('lazy').setup({
   },
 
   { 'numToStr/Comment.nvim',         opts = {} },
-
-  {
-    --harpoon
-    'theprimeagen/harpoon',
-
-    vim.keymap.set('n', '<leader>ma', require('harpoon.mark').add_file, {}),
-    vim.keymap.set('n', '<leader>mn', require('harpoon.ui').nav_next, {}),
-    vim.keymap.set('n', '<leader>mp', require('harpoon.ui').nav_prev, {}),
-    vim.keymap.set('n', '<leader>cm', require('harpoon.mark').clear_all, {}),
-    vim.keymap.set('n', '<leader>mm', require("harpoon.ui").toggle_quick_menu, {})
-  },
 
   -- Fuzzy Finder (files, lsp, etc)
   { 'nvim-telescope/telescope.nvim', branch = '0.1.x', dependencies = { 'nvim-lua/plenary.nvim' } },
@@ -240,7 +174,6 @@ require('lazy').setup({
     },
     build = ':TSUpdate',
   },
-  -- { dir = "~/personal/jade.nvim" },
 
   -- NOTE: The import below automatically adds your own plugins, configuration, etc from `lua/custom/*.lua`
   --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
@@ -271,7 +204,7 @@ vim.opt.wrap = false
 vim.opt.swapfile = false
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.incsearch = true
---lines visible below cursor is never less than
+--lines visible below cursor is never less than 8
 vim.opt.scrolloff = 8
 vim.opt.colorcolumn = "79"
 -- Make line numbers default
@@ -335,24 +268,30 @@ require('telescope').setup {
 pcall(require('telescope').load_extension, 'fzf')
 
 -- See `:help telescope.builtin`
-vim.keymap.set('n', '<leader><space>', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
-vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
-vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
-vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
-vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
-vim.keymap.set('n', '<leader>sp', require('telescope.builtin').spell_suggest,
+local builtin = require("telescope.builtin")
+
+vim.keymap.set('n', '<leader><space>', builtin.oldfiles, { desc = '[?] Find recently opened files' })
+vim.keymap.set('n', '<leader>gf', builtin.git_files, { desc = 'Search [G]it [F]iles' })
+vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = '[S]earch [F]iles' })
+vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
+vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
+vim.keymap.set('n', '<leader>sp', builtin.spell_suggest,
   { desc = 'Check spellings for word on cursor' })
-vim.keymap.set('n', '<leader>lg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
-vim.keymap.set('n', '<leader>d', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
+vim.keymap.set('n', '<leader>lg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
+vim.keymap.set('n', '<leader>wk', builtin.keymaps, { desc = 'List all available keybinds [W]hich [K]ey' })
+vim.keymap.set('n', '<leader>d', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
+  sync_install = false,
+  ignore_install = {},
+  modules = {},
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'go', 'lua', 'python' },
+  ensure_installed = { 'go', 'lua', 'python', 'vimdoc', 'javascript' },
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
-  auto_install = true,
+  auto_install = false,
 
   highlight = { enable = true },
   indent = { enable = true },
@@ -415,7 +354,6 @@ require('nvim-treesitter.configs').setup {
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
 vim.keymap.set('n', '<leader>gl', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 vim.diagnostic.config({
   virtual_text = true
 })
@@ -449,7 +387,7 @@ local on_attach = function(_, bufnr)
 
   -- See `:help K` for why this keymap
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-  nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+  nmap('<C-h>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
   -- Create a command `:Format` local to the LSP buffer
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
@@ -523,10 +461,10 @@ luasnip.config.setup {}
 
 cmp.setup {
   -- I liked the bordered version better
-  window = {
+  --[[ window = {
     completion = cmp.config.window.bordered(),
     documentation = cmp.config.window.bordered(),
-  },
+  }, ]]
   snippet = {
     expand = function(args)
       luasnip.lsp_expand(args.body)

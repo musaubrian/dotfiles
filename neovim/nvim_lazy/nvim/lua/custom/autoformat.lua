@@ -47,11 +47,9 @@ return {
         -- Tsserver usually works poorly. Sorry you work with bad languages
         -- You can remove this line if you know what you're doing :)
         if client.name == 'tsserver' then
-          return
-        end
-        -- templ formats the html weirdly
-        if client.name == 'templ' then
-          return
+          vim.cmd [[ "!prettier -w % <CR>" ]] -- Use prettier to format js/ts
+
+          -- return
         end
 
         -- Create an autocmd that will run *before* we save the buffer.
