@@ -127,11 +127,11 @@ require('lazy').setup({
         {})
     }
   },
-  -- auto-pairs
+  --[[ -- auto-pairs
   {
     "windwp/nvim-autopairs",
     config = function() require("nvim-autopairs").setup {} end,
-  },
+  }, ]]
   -- Adds git releated signs to the gutter, as well as utilities for managing changes
   {
 

@@ -26,7 +26,6 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
-. "$HOME/.cargo/env"
 export GOPATH=$HOME/go
 export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 export VISUAL=nvim
@@ -38,7 +37,7 @@ export PATH="$HOME/snap/flutter/common/flutter/bin:$PATH"
 
 # Turso
 #export PATH="$HOME/.turso:$PATH"
-
+source "$HOME/.cargo/env"
 # pnpm
 export PNPM_HOME="$HOME/.local/share/pnpm"
 case ":$PATH:" in

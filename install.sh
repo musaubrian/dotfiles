@@ -1,13 +1,14 @@
 #!/usr/bin/env bash
 
-cp -v -r ./scripts/ ~/scripts/
-cp -v -r ./alacritty/ ~/.config/
+cp -vr ./scripts/ ~/scripts/
+cp -vr ./alacritty/ ~/.config/
 cp -v ./home/starship.toml ~/.config/
 cp -v ./home/tmux.conf ~/.tmux.conf
 cp -v ./home/gitconfig ~/.gtconfig
 cp -v ./home/aliases ~/.aliases
 cp -v ./home/profile ~/.profile
 cp -v ./home/spotify_adblock.desktop ~/.local/share/applications
+cp -rv ./fonts/* ~/.local/share/fonts
 
 
 #VS Code
@@ -91,7 +92,7 @@ sudo mv squashfs-root /
 sudo ln -s /squashfs-root/AppRun /usr/bin/nvim
 
 # download Iosevka font
-curl -s https://github.com/be5invis/Iosevka/releases/download/v27.3.5/ttf-iosevka-term-27.3.5.zip
+# curl -s https://github.com/be5invis/Iosevka/releases/download/v27.3.5/ttf-iosevka-term-27.3.5.zip
 
 chsh -s $(which zsh)
 source ~/.zshrc

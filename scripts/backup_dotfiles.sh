@@ -19,7 +19,8 @@ cp ~/.zshrc $HOME_DIR/zshrc
 cp ~/.profile $HOME_DIR/profile
 cp ~/.aliases $HOME_DIR/aliases
 
-cp -r ~/.config/alacritty $ROOT_DIR
+cp -rv ~/.config/alacritty $ROOT_DIR
+cp -rv ~/.local/share/fonts $ROOT_DIR
 
 rm -r $ROOT_DIR/scripts
 cp -r ~/scripts $ROOT_DIR

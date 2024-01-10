@@ -12,8 +12,6 @@ return {
     local subscribe = require "el.subscribe"
 
 
-
-
     local git_branch = subscribe.buf_autocmd("el_git_branch", "BufEnter", function(window, buffer)
       local branch = extensions.git_branch(window, buffer)
       if branch then
@@ -53,6 +51,8 @@ return {
               "]",
             },
           },
+          { " " },
+          { builtin.filetype },
         }
 
         local add_item = function(result, item)
