@@ -47,7 +47,7 @@ return {
         -- Tsserver usually works poorly. Sorry you work with bad languages
         -- You can remove this line if you know what you're doing :)
         if client.name == 'tsserver' then
-          vim.cmd [[ "!prettier -w % <CR>" ]] -- Use prettier to format js/ts
+          vim.cmd [[ "!prettierd -w % <CR>" ]] -- Use prettier to format js/ts
 
           -- return
         end

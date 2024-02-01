@@ -4,11 +4,11 @@ cp -vr ./scripts/ ~/scripts/
 cp -vr ./alacritty/ ~/.config/
 cp -v ./home/starship.toml ~/.config/
 cp -v ./home/tmux.conf ~/.tmux.conf
-cp -v ./home/gitconfig ~/.gtconfig
+cp -v ./home/gitconfig ~/.gitconfig
 cp -v ./home/aliases ~/.aliases
 cp -v ./home/profile ~/.profile
 cp -v ./home/spotify_adblock.desktop ~/.local/share/applications
-cp -rv ./fonts/* ~/.local/share/fonts
+cp -rv ./fonts/* ~/.fonts
 
 
 #VS Code
@@ -24,6 +24,7 @@ if [[ $opt == 1 ]]; then
     fi
     cd ./neovim/nvim_packer || exit
     ./install_packer.sh
+    cd -
 elif [[ $opt == 2 ]]; then
     #Check if nvim exist first
     if [ -d "~/.config/nvim" ]; then
@@ -39,8 +40,9 @@ mkdir -p ~/.db
 # If for some reason there is no .ssh directory
 mkdir -p ~/.ssh
 
-# install ansible
-sudo apt install ansible
+# install packages, just to be safe
+sudo apt install curl wget tmux ansible alacritty zsh ripgrep -y
+
 # load aliases in .bashrc
 echo 'if [ -f ~/.aliases ]; then
     . ~/.aliases
@@ -51,8 +53,6 @@ curl -sS https://starship.rs/install.sh | sh
 # setup bash to use starship
 echo 'eval "$(starship init bash)"' >> ~/.bashrc
 
-# oh-my-zsh and zsh
-sudo apt install zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 # fish-like suggestions
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
@@ -64,13 +64,11 @@ cp -v ./home/zshrc ~/.zshrc
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
 
-# install ripgrep
-sudo apt-get install ripgrep
 
 #decrypt ssh keys first
 ansible-vault decrypt ./keys/*
 
-cp -r ./keys/* ~/.ssh/ -v
+cp -rv ./keys/* ~/.ssh/
 
 git clone git@github.com:musaubrian/stash
 
@@ -84,15 +82,11 @@ ansible-vault encrypt ./stash/db/* ./keys/* ./stash/wakatime/*
 # install neovim
 curl -sLO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
 chmod u+x nvim.appimage
-
 ./nvim.appimage --appimage-extract
 ./squashfs-root/AppRun --version
 # Optional: exposing nvim globally.
 sudo mv squashfs-root /
 sudo ln -s /squashfs-root/AppRun /usr/bin/nvim
-
-# download Iosevka font
-# curl -s https://github.com/be5invis/Iosevka/releases/download/v27.3.5/ttf-iosevka-term-27.3.5.zip
 
 chsh -s $(which zsh)
 source ~/.zshrc

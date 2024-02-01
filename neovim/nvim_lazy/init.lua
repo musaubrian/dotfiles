@@ -17,7 +17,7 @@ vim.g.maplocalleader = ' '
 
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 --make file executable
--- vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
+vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 -- vim.keymap.set('n', '<leader>pt', "<cmd>!prettier -w % <CR>", {})
 vim.keymap.set("n", "<leader>ee", "oif err != nil {<CR>}<Esc>O ")
 vim.keymap.set("n", "<leader>fp", ":!black %<CR>", {})
@@ -63,6 +63,16 @@ require('lazy').setup({
 
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
+
+  {
+    "musaubrian/jade.nvim",
+    priority = 1000,
+    lazy = false,
+    dependencies = "tjdevries/colorbuddy.nvim",
+    config = function()
+      require("jade")
+    end
+  },
 
   {
     "iamcco/markdown-preview.nvim",
@@ -243,12 +253,20 @@ vim.o.termguicolors = true
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
+local meGroup = vim.api.nvim_create_augroup('MeGroup', {})
 vim.api.nvim_create_autocmd('TextYankPost', {
   callback = function()
     vim.highlight.on_yank()
   end,
   group = highlight_group,
   pattern = '*',
+})
+
+--[[Remove whitespaces at line ends]]
+vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
+  group = meGroup,
+  pattern = "*",
+  command = [[%s/\s\+$//e]],
 })
 
 -- [[ Configure Telescope ]]
@@ -460,11 +478,6 @@ require('luasnip.loaders.from_vscode').lazy_load()
 luasnip.config.setup {}
 
 cmp.setup {
-  -- I liked the bordered version better
-  --[[ window = {
-    completion = cmp.config.window.bordered(),
-    documentation = cmp.config.window.bordered(),
-  }, ]]
   snippet = {
     expand = function(args)
       luasnip.lsp_expand(args.body)
