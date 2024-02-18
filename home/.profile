@@ -31,8 +31,8 @@ export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 export VISUAL=nvim
 export EDITOR="$VISUAL"
 # bun
-#export BUN_INSTALL="$HOME/.bun"
-#export PATH=$BUN_INSTALL/bin:$PATH
+export BUN_INSTALL="$HOME/.bun"
+export PATH=$BUN_INSTALL/bin:$PATH
 
 # Turso
 #export PATH="$HOME/.turso:$PATH"

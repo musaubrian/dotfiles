@@ -18,7 +18,6 @@ vim.g.maplocalleader = ' '
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 --make file executable
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
--- vim.keymap.set('n', '<leader>pt', "<cmd>!prettier -w % <CR>", {})
 vim.keymap.set("n", "<leader>ee", "oif err != nil {<CR>}<Esc>O ")
 vim.keymap.set("n", "<leader>fp", ":!black %<CR>", {})
 
@@ -48,17 +47,14 @@ require('lazy').setup({
 
   -- Git related plugins
   'tpope/vim-fugitive',
-  -- 'tpope/vim-rhubarb',
   -- gitsigns
   'lewis6991/gitsigns.nvim',
-
   'tjdevries/colorbuddy.nvim',
-
   -- wakatime
   'wakatime/vim-wakatime',
   'junegunn/vim-easy-align',
   'tjdevries/templ.nvim',
-
+  'musaubrian/scratch.nvim',
   'norcalli/nvim-colorizer.lua',
 
   -- Detect tabstop and shiftwidth automatically
@@ -127,22 +123,16 @@ require('lazy').setup({
       },
       use_diagnostic_signs = false, -- enabling this will use the signs defined in your lsp client
 
-      vim.keymap.set('n', '<leader>t', require('trouble').toggle, {}),
-      vim.keymap.set('n', '<leader>n', function()
+      vim.keymap.set('n', '<leader>tt', require('trouble').toggle, {}),
+      vim.keymap.set('n', '<leader>tn', function()
         require('trouble').next({ jump = true, skip_groups = true })
       end, {}),
-      vim.keymap.set('n', '<leader>p', function()
+      vim.keymap.set('n', '<leader>tp', function()
           require('trouble').previous({ jump = true, skip_groups = true })
         end,
         {})
     }
   },
-  --[[ -- auto-pairs
-  {
-    "windwp/nvim-autopairs",
-    config = function() require("nvim-autopairs").setup {} end,
-  }, ]]
-  -- Adds git releated signs to the gutter, as well as utilities for managing changes
   {
 
     'mbbill/undotree',
@@ -523,6 +513,32 @@ vim.filetype.add({
     templ = "templ",
   },
 })
+
+-- Make term more usable
+vim.api.nvim_create_autocmd({ "TermOpen" }, {
+  pattern = "*",
+  callback = function()
+    vim.cmd.setlocal("norelativenumber")
+    vim.cmd.setlocal("nonumber")
+    vim.cmd.setlocal("norelativenumber")
+    vim.cmd.setlocal("signcolumn=no")
+    vim.cmd.setlocal("nocursorline")
+    vim.cmd("startinsert")
+    vim.cmd("nnoremap <buffer> <C-c> i<C-c>") -- Use Ctrl-c
+    vim.cmd("nnoremap <buffer> <C-d> iexit")  -- Use Ctrl-d to exit term
+  end
+})
+
+-- Open terminal in split view at the bottom
+vim.api.nvim_create_user_command("Term", function()
+  vim.cmd.setlocal("splitbelow")
+  vim.cmd("split |term")
+end, { desc = "Open terminal in split mode at the bottom" })
+
+vim.api.nvim_create_user_command("FTerm", function()
+  vim.cmd("term")
+end, { desc = "Open terminal in full screen mode" })
+
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

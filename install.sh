@@ -1,39 +1,8 @@
 #!/usr/bin/env bash
 
-cp -vr ./scripts/ ~/scripts/
-cp -vr ./alacritty/ ~/.config/
-cp -v ./home/starship.toml ~/.config/
-cp -v ./home/tmux.conf ~/.tmux.conf
-cp -v ./home/gitconfig ~/.gitconfig
-cp -v ./home/aliases ~/.aliases
-cp -v ./home/profile ~/.profile
-cp -v ./home/spotify_adblock.desktop ~/.local/share/applications
-cp -rv ./fonts/* ~/.fonts
+#cp -v ./home/spotify_adblock.desktop ~/.local/share/applications
 
-
-#VS Code
-mkdir -p ~/.config/Code/User
-cp -v ./home/settings.json ~/.config/Code/User
-
-read -p "Packer(1) or Lazy(2)? " opt
-
-if [[ $opt == 1 ]]; then
-    #Check if nvim exist first
-    if [ -d "~/.config/nvim" ]; then
-        mv ~/.config/nvim ~/config/nvim_bkp
-    fi
-    cd ./neovim/nvim_packer || exit
-    ./install_packer.sh
-    cd -
-elif [[ $opt == 2 ]]; then
-    #Check if nvim exist first
-    if [ -d "~/.config/nvim" ]; then
-        mv ~/.config/nvim ~/config/nvim_bkp
-    fi
-    cp -vr ./neovim/nvim_lazy/nvim ~/.config/nvim
-else
-    echo "Pick either 1 or 2"
-fi
+cp -rv ./home ~/.home
 
 # For tinygo
 mkdir -p ~/.db
@@ -41,24 +10,17 @@ mkdir -p ~/.db
 mkdir -p ~/.ssh
 
 # install packages, just to be safe
-sudo apt install curl wget tmux ansible alacritty zsh ripgrep -y
+sudo apt install curl wget tmux ansible alacritty zsh ripgrep python3-launchpadlib python3-venv stow -y
 
 # load aliases in .bashrc
 echo 'if [ -f ~/.aliases ]; then
-    . ~/.aliases
+   . ~/.aliases
 fi'>> ~/.bashrc
 
 # Install starship prompt
 curl -sS https://starship.rs/install.sh | sh
 # setup bash to use starship
 echo 'eval "$(starship init bash)"' >> ~/.bashrc
-
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-# fish-like suggestions
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-# oh-my-zsh overrides the original .zshrc so copy it after setting it up
-cp -v ./home/zshrc ~/.zshrc
-
 
 # Install Fuzzy Finder (fzf)
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
@@ -88,5 +50,6 @@ chmod u+x nvim.appimage
 sudo mv squashfs-root /
 sudo ln -s /squashfs-root/AppRun /usr/bin/nvim
 
-chsh -s $(which zsh)
-source ~/.zshrc
+# setup dotfiles
+cd ~/.home || exit
+stow .
