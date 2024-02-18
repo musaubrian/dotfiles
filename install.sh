@@ -50,6 +50,11 @@ chmod u+x nvim.appimage
 sudo mv squashfs-root /
 sudo ln -s /squashfs-root/AppRun /usr/bin/nvim
 
+# make fzf use ripgrep
+if type rg &> /dev/null; then
+    export FZF_DEFAULT_COMMAND='rg --files --hidden'
+fi
+
 # setup dotfiles
 cd ~/.home || exit
 stow .
