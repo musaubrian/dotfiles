@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-#cp -v ./home/spotify_adblock.desktop ~/.local/share/applications
-
 cp -rv ./home ~/.home
 
 # For tinygo

@@ -7,3 +7,5 @@
 	editor=nvim
 [alias]
 	shove=push --force-with-lease
+[push]
+	autoSetupRemote = true

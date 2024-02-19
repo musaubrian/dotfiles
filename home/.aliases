@@ -21,3 +21,16 @@ alias lower="~/scripts/lower.sh"
 alias np="pnpm"
 alias cc="clear"
 alias hotspot="~/scripts/hotspot.sh"
+alias ...=../..
+alias _='sudo '
+alias cc=clear
+alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox}'
+alias l='ls -lah'
+alias la='ls -lAh'
+alias ll='ls -lh'
+alias ls='ls --color=tty'
+alias lsa='ls -lah'
+alias md='mkdir -p'
+alias nx='pnpm dlx'
+alias reload='source ~/.profile && clear'
+alias f="~/scripts/fzf.sh"

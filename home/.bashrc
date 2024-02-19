@@ -117,8 +117,3 @@ fi
 eval "$(starship init bash)"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-if [ -f ~/.aliases ]; then
-    . ~/.aliases
-fi
-eval "$(starship init bash)"
-. "$HOME/.cargo/env"

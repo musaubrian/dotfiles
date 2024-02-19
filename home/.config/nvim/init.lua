@@ -19,7 +19,8 @@ vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 --make file executable
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 vim.keymap.set("n", "<leader>ee", "oif err != nil {<CR>}<Esc>O ")
-vim.keymap.set("n", "<leader>fp", ":!black %<CR>", {})
+vim.keymap.set("n", "<leader>tt", "<cmd>Term<CR>", {})
+vim.keymap.set("n", "<leader>ft", "<cmd>FTerm<CR>", {})
 
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
@@ -123,7 +124,7 @@ require('lazy').setup({
       },
       use_diagnostic_signs = false, -- enabling this will use the signs defined in your lsp client
 
-      vim.keymap.set('n', '<leader>tt', require('trouble').toggle, {}),
+      vim.keymap.set('n', '<leader>t', require('trouble').toggle, {}),
       vim.keymap.set('n', '<leader>tn', function()
         require('trouble').next({ jump = true, skip_groups = true })
       end, {}),
@@ -194,9 +195,9 @@ vim.opt.guicursor = ""
 vim.keymap.set('v', "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set('v', "K", ":m '<-2<CR>gv=gv")
 
+vim.cmd.set("splitright") --splits always goto the right
 vim.keymap.set('n', '<leader>gs', vim.cmd.Git)
 vim.o.hlsearch = false
-
 vim.opt.relativenumber = true
 vim.opt.cursorline = true
 vim.opt.wrap = false
