@@ -48,7 +48,7 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 
 
 # Added by Toolbox App
-export PATH="$PATH:/home/me/.local/share/JetBrains/Toolbox/scripts"
+export PATH="$PATH:/home/musaubrian/.local/share/JetBrains/Toolbox/scripts"
 export XDG_DATA_DIRS="$XDG_DATA_DIRS:/var/lib/snapd/desktop/"
 
 . "$HOME/.cargo/env"

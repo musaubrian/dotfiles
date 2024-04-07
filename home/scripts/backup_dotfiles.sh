@@ -23,12 +23,11 @@ cp ~/.gitconfig $HOME_DIR
 cp ~/.tmux.conf $HOME_DIR
 cp -rv ~/.fonts $HOME_DIR
 cp -rv ~/.local/bin "$HOME_DIR/.local/"
-eco "COPIED .P/A/B/G/T TO $HOME_DIR"
 
 cp -rv ~/.config/alacritty $CONFIG_DIR
 cp -rv ~/.config/nvim $CONFIG_DIR
 cp -rv ~/.config/nvim_packer $CONFIG_DIR
-cp -rv ~/.config/Code $CONFIG_DIR
+cp -rv ~/.config/Code/User/settings.json $CONFIG_DIR/Code/User/settings.json
 cp -v ~/.config/starship.toml $CONFIG_DIR
 
 cp -rv ~/scripts $HOME_DIR

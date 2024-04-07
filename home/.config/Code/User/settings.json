@@ -1,9 +1,8 @@
 {
-  "workbench.iconTheme": "material-icon-theme",
   "workbench.colorTheme": "Catppuccin Frappé",
   "editor.fontFamily": "'Iosevka Term'",
   "editor.fontLigatures": false,
-  "editor.fontSize": 17,
+  "editor.fontSize": 16.5,
   "extensions.experimental.affinity": {
     "asvetliakov.vscode-neovim": 1
   },
@@ -15,15 +14,9 @@
   "catppuccin.accentColor": "blue",
   "catppuccin.colorOverrides": {
     "frappe": {
-      "base": "#282a36"
+      "base": "#1f2028"
     }
   },
   "catppuccin.bracketMode": "neovim",
   "catppuccin.italicKeywords": false,
-  "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
 }

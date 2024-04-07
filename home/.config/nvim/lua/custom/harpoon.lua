@@ -2,6 +2,7 @@ return {
   "ThePrimeagen/harpoon",
   branch = "harpoon2",
   dependencies = { "nvim-lua/plenary.nvim" },
+  event = "VeryLazy",
 
   config = function()
     local harpoon = require("harpoon")
@@ -16,10 +17,13 @@ return {
     vim.keymap.set('n', '<leader>mn', function() harpoon:list():prev() end, {})
     vim.keymap.set('n', '<leader>mp', function() harpoon:list():next() end, {})
 
-    vim.keymap.set('n', '<leader>m1', function() harpoon:list():select(1) end, {})
-    vim.keymap.set('n', '<leader>m2', function() harpoon:list():select(2) end, {})
-    vim.keymap.set('n', '<leader>m3', function() harpoon:list():select(3) end, {})
-    vim.keymap.set('n', '<leader>m4', function() harpoon:list():select(4) end, {})
+    for i = 1, 4 do
+      vim.keymap.set("n", string.format("<leader>m%s", i),
+        function()
+          harpoon:list():select(i)
+        end,
+        {})
+    end
   end
 
 }
