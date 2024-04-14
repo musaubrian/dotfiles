@@ -19,10 +19,12 @@ echo "COPIED TO $STASH_DIR"
 cp ~/.profile $HOME_DIR
 cp ~/.aliases $HOME_DIR
 cp ~/.bashrc $HOME_DIR
+cp ~/.bash_completions $HOME_DIR
 cp ~/.gitconfig $HOME_DIR
 cp ~/.tmux.conf $HOME_DIR
 cp -rv ~/.fonts $HOME_DIR
 cp -rv ~/.local/bin "$HOME_DIR/.local/"
+echo "COPIED .P/A/B/G/T TO $HOME_DIR"
 
 cp -rv ~/.config/alacritty $CONFIG_DIR
 cp -rv ~/.config/nvim $CONFIG_DIR

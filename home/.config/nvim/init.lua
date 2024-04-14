@@ -210,6 +210,12 @@ require('lazy').setup({
 
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
+
+  {
+    'numToStr/Comment.nvim',
+    event = "VeryLazy",
+    opts = {}
+  },
   {
     'j-hui/fidget.nvim',
     event = "VeryLazy",
@@ -306,22 +312,6 @@ require('lazy').setup({
 
     'mbbill/undotree',
     vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)
-  },
-
-  --[[ {
-    "lukas-reineke/indent-blankline.nvim",
-    event = "VeryLazy",
-    main = "ibl",
-    opts = {
-      indent = { char = "▏" },
-      whitespace = { highlight = { "Whitespace", "NonText" } },
-    }
-  }, ]]
-
-  {
-    'numToStr/Comment.nvim',
-    event = "VeryLazy",
-    opts = {}
   },
 
   {
@@ -738,8 +728,8 @@ vim.filetype.add({
 
 local client = vim.lsp.start_client {
   name = "envlsp",
-  -- cmd = { "/home/musaubrian/personal/lsp/env_lsp" },
-  cmd = { "/home/musaubrian/go/bin/env_lsp" },
+  cmd = { "/home/musaubrian/personal/lsp/env_lsp" },
+  -- cmd = { "/home/musaubrian/go/bin/env_lsp" },
 }
 
 if not client then

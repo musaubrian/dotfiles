@@ -21,7 +21,6 @@ alias lower="~/scripts/lower.sh"
 alias np="pnpm"
 alias ...=../..
 alias _='sudo '
-alias cc=clear
 alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox}'
 alias l='ls -lah'
 alias la='ls -lAh'
