@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# moves files to different dirs
 
 image_ext=("jpg" "jpeg" "png" "gif" "svg")
 music_ext=("mp3" "m4a" "flac")
@@ -16,7 +15,7 @@ for file in ~/.var/app/org.telegram.desktop/data/TelegramDesktop/tdata/temp_data
     if [[ " ${video_ext[@]} " =~ " ${ext} " ]]; then
         mv "$file" ~/Downloads/
     elif [[ " ${document_ext[@]} " =~ " ${ext} " ]]; then
-        mv "$file" ~/Documents/mang 
+        mv "$file" ~/Documents/mang
     elif [[ " ${music_ext[@]} " =~ " ${ext} " ]]; then
         mv "$file" ~/Downloads/
     fi
@@ -29,7 +28,7 @@ for file in ~/Downloads/Telegram\ Desktop/*;do
     if [[ " ${video_ext[@]} " =~ " ${ext} " ]]; then
         mv "$file" ~/Downloads/
     elif [[ " ${document_ext[@]} " =~ " ${ext} " ]]; then
-        mv "$file" ~/Documents/mang 
+        mv "$file" ~/Documents/mang
     elif [[ " ${music_ext[@]} " =~ " ${ext} " ]]; then
         mv "$file" ~/Downloads/
     fi
@@ -50,7 +49,7 @@ for file in ~/Downloads/*; do
         printf "moved [$file] -> [~/Videos/]\n\n"
         # Check if it's a document file
     elif [[ " ${document_ext[@]} " =~ " ${ext} " ]]; then
-        mv "$file" ~/Documents 
+        mv "$file" ~/Documents
         printf "moved [$file] -> [~/Documents/]\n\n"
     elif [[ " ${zips[@]}" =~ " ${ext} " ]]; then
         mv "$file" ~/Downloads/zip/
@@ -62,4 +61,4 @@ for file in ~/Downloads/*; do
         mv "$file" ~/Music/
         printf "moved $file -> [~/Music/]\n"
     fi
-done 
+done

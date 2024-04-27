@@ -4,7 +4,7 @@ OPTIONS=$1
 PERSONAL=~/personal/
 WORK=~/work/
 
-# Create new sessions then switch to them if already in a tmux session
+# switch to session if already in a tmux session
 # else attach to it
 switch_or_attach(){
     if [ -n "$TMUX" ]; then
