@@ -1,22 +1,74 @@
 {
-  "workbench.colorTheme": "Catppuccin Frappé",
+  "editor.minimap.enabled": false,
+  "breadcrumbs.enabled": false,
+  "editor.lineNumbers": "relative",
+  "vim.leader": "<Space>",
+  "vim.hlsearch": true,
+  "workbench.activityBar.location": "top",
+  "editor.autoClosingBrackets": "never",
+  "editor.tokenColorCustomizations": {
+    "keywords": "#ff0000da" //mute the red abit
+  },
+  "editor.wordBasedSuggestions": "off",
+  "vim.useSystemClipboard": true,
+  "vim.highlightedyank.enable": true,
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": ["leader", "v"],
+      "commands": [":vsplit"]
+    },
+    {
+      "before": ["<leader>", "c", "a"],
+      "commands": ["editor.action.quickFix"]
+    },
+    // Findfiles fuzzily
+    {
+      "before": ["leader", "f"],
+      "commands": ["workbench.action.quickOpen"]
+    },
+    {
+      "before": ["leader", "["],
+      "commands": [":bprev"]
+    },
+    {
+      "before": ["leader", "]"],
+      "commands": [":bnext"]
+    },
+    {
+      "before": ["K"],
+      "commands": ["editor.action.showHover"]
+    }
+  ],
+  "vim.visualModeKeyBindings": [
+    // Moves highlighted blocks
+    { "before": ["J"], "commands": ["editor.action.moveLinesDownAction"] },
+    { "before": ["K"], "commands": ["editor.action.moveLinesUpAction"] }
+  ],
+
   "editor.fontFamily": "'Iosevka Term'",
   "editor.fontLigatures": false,
   "editor.fontSize": 16.5,
-  "extensions.experimental.affinity": {
-    "asvetliakov.vscode-neovim": 1
-  },
   "editor.formatOnSave": true,
   "editor.fontVariations": false,
-  "editor.semanticHighlighting.enabled": true,
   "terminal.integrated.minimumContrastRatio": 1,
+  "editor.semanticHighlighting.enabled": true,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "typescript.updateImportsOnFileMove.enabled": "always",
   "window.titleBarStyle": "custom",
-  "catppuccin.accentColor": "blue",
-  "catppuccin.colorOverrides": {
-    "frappe": {
-      "base": "#1f2028"
-    }
+  "editor.cursorStyle": "block",
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "catppuccin.bracketMode": "neovim",
-  "catppuccin.italicKeywords": false,
+  "window.customTitleBarVisibility": "auto",
+  "workbench.colorTheme": "GrunBoxTheme",
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "explorer.confirmDragAndDrop": false,
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }

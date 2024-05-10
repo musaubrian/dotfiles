@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-
 ROOT_DIR="$HOME/personal/dotfiles"
 HOME_DIR="$ROOT_DIR/home/"
 KEYS_DIR="$ROOT_DIR/keys"
@@ -30,6 +29,7 @@ cp -rv ~/.config/alacritty $CONFIG_DIR
 cp -rv ~/.config/nvim $CONFIG_DIR
 cp -rv ~/.config/nvim_packer $CONFIG_DIR
 cp -rv ~/.config/Code/User/settings.json $CONFIG_DIR/Code/User/settings.json
+cp -rv ~/.config/Code/User/keybindings.json $CONFIG_DIR/Code/User/keybindings.json
 cp -v ~/.config/starship.toml $CONFIG_DIR
 
 cp -rv ~/scripts $HOME_DIR
