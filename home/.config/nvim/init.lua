@@ -195,37 +195,18 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- NOTE: Here is where you install your plugins.
---  You can configure plugins using the `config` key.
---
---  You can also configure plugins after the setup call,
---    as they will be available in your neovim runtime.
 require("lazy").setup({
-  -- NOTE: First, some plugins that don't require any configuration
-
-  -- Git related plugins
   "tpope/vim-fugitive",
   "tjdevries/colorbuddy.nvim",
-  -- wakatime
   "wakatime/vim-wakatime",
   "junegunn/vim-easy-align",
   "norcalli/nvim-colorizer.lua",
-
-  -- Detect tabstop and shiftwidth automatically
   "tpope/vim-sleuth",
-
-  {
-    "numToStr/Comment.nvim",
-    event = "VimEnter",
-    opts = {},
-  },
+  "musaubrian/scratch.nvim",
   {
     "j-hui/fidget.nvim",
     opts = {},
   },
-
-  { "musaubrian/scratch.nvim" },
-
   {
     "musaubrian/jade.nvim",
     lazy = false,
@@ -239,8 +220,6 @@ require("lazy").setup({
     opts = {},
   },
 
-  -- NOTE: This is where your plugins related to LSP can be installed.
-  --  The configuration is done below. Search for lspconfig to find it below.
   {
     -- LSP Configuration & Plugins
     "neovim/nvim-lspconfig",
@@ -265,11 +244,9 @@ require("lazy").setup({
   },
 
   {
-    -- Autocompletion
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
     dependencies = {
-      -- Snippet Engine & its associated nvim-cmp source
       {
         "L3MON4D3/LuaSnip",
         config = function()
@@ -277,11 +254,7 @@ require("lazy").setup({
         end,
       },
       "saadparwaiz1/cmp_luasnip",
-
-      -- Adds LSP completion capabilities
       "hrsh7th/cmp-nvim-lsp",
-
-      -- Adds a number of user-friendly snippets
       "rafamadriz/friendly-snippets",
     },
   },
@@ -323,13 +296,9 @@ require("lazy").setup({
     branch = "0.1.x",
     dependencies = {
       "nvim-lua/plenary.nvim",
-      { -- If encountering errors, see telescope-fzf-native README for install instructions
+      {
         "nvim-telescope/telescope-fzf-native.nvim",
-        -- `build` is used to run some command when the plugin is installed/updated.
-        -- This is only run then, not every time Neovim starts up.
         build = "make",
-        -- `cond` is a condition used to determine whether this plugin should be
-        -- installed and loaded.
         cond = function()
           return vim.fn.executable("make") == 1
         end,
@@ -338,7 +307,6 @@ require("lazy").setup({
   },
 
   {
-    -- Highlight, edit, and navigate code
     "nvim-treesitter/nvim-treesitter",
     dependencies = {
       "nvim-treesitter/nvim-treesitter-textobjects",
@@ -346,12 +314,10 @@ require("lazy").setup({
     build = ":TSUpdate",
   },
 
-  -- NOTE: The import below automatically adds your own plugins, configuration, etc from `lua/custom/*.lua`
-  --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
-  --    up-to-date with whatever is in the kickstart repo.
-  --
-  --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
   { import = "custom" },
+}, {
+  change_detection = {
+    notify = false }
 })
 
 -- [[ Configure Telescope ]]
@@ -489,7 +455,6 @@ require("nvim-treesitter.configs").setup({
     "templ",
   },
 
-  -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = false,
 
   highlight = { enable = true },
@@ -589,12 +554,10 @@ local on_attach = function(_, bufnr)
   nmap("gI", vim.lsp.buf.implementation, "[G]oto [I]mplementation")
   nmap("<leader>D", vim.lsp.buf.type_definition, "Type [D]efinition")
   -- nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
-  nmap("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
+  -- nmap("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
   nmap("<leader>rn", vim.lsp.buf.rename)
   nmap("<leader>ca", vim.lsp.buf.code_action)
   vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, { desc = "Signature Documentation" })
-
-  -- See `:help K` for why this keymap
   nmap("K", vim.lsp.buf.hover, "Hover Documentation")
 
   -- Create a command `:Format` local to the LSP buffer
@@ -603,11 +566,6 @@ local on_attach = function(_, bufnr)
   end, { desc = "Format current buffer with LSP" })
 end
 
--- Enable the following language servers
---  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
---
---  Add any additional override configuration in the following tables. They will be passed to
---  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
   gopls = {},
   tsserver = {},
@@ -731,7 +689,10 @@ cmp.setup({
     { name = "nvim_lsp" },
     { name = "luasnip" },
     { name = "path" },
+    { name = "buffer" },
+    { name = "vim-dadbod-completion" },
   },
+
 })
 
 vim.filetype.add({

@@ -14,37 +14,80 @@
   "vim.highlightedyank.enable": true,
   "vim.normalModeKeyBindingsNonRecursive": [
     {
-      "before": ["leader", "v"],
-      "commands": [":vsplit"]
+      "before": [
+        "leader",
+        "v"
+      ],
+      "commands": [
+        ":vsplit"
+      ]
     },
     {
-      "before": ["<leader>", "c", "a"],
-      "commands": ["editor.action.quickFix"]
+      "before": [
+        "<leader>",
+        "c",
+        "a"
+      ],
+      "commands": [
+        "editor.action.quickFix"
+      ]
     },
     // Findfiles fuzzily
     {
-      "before": ["leader", "f"],
-      "commands": ["workbench.action.quickOpen"]
+      "before": [
+        "leader",
+        "f"
+      ],
+      "commands": [
+        "workbench.action.quickOpen"
+      ]
     },
     {
-      "before": ["leader", "["],
-      "commands": [":bprev"]
+      "before": [
+        "leader",
+        "["
+      ],
+      "commands": [
+        ":bprev"
+      ]
     },
     {
-      "before": ["leader", "]"],
-      "commands": [":bnext"]
+      "before": [
+        "leader",
+        "]"
+      ],
+      "commands": [
+        ":bnext"
+      ]
     },
     {
-      "before": ["K"],
-      "commands": ["editor.action.showHover"]
-    }
+      "before": [
+        "K"
+      ],
+      "commands": [
+        "editor.action.showHover"
+      ]
+    },
   ],
   "vim.visualModeKeyBindings": [
     // Moves highlighted blocks
-    { "before": ["J"], "commands": ["editor.action.moveLinesDownAction"] },
-    { "before": ["K"], "commands": ["editor.action.moveLinesUpAction"] }
+    {
+      "before": [
+        "J"
+      ],
+      "commands": [
+        "editor.action.moveLinesDownAction"
+      ]
+    },
+    {
+      "before": [
+        "K"
+      ],
+      "commands": [
+        "editor.action.moveLinesUpAction"
+      ]
+    }
   ],
-
   "editor.fontFamily": "'Iosevka Term'",
   "editor.fontLigatures": false,
   "editor.fontSize": 16.5,
@@ -56,19 +99,15 @@
   "typescript.updateImportsOnFileMove.enabled": "always",
   "window.titleBarStyle": "custom",
   "editor.cursorStyle": "block",
-  "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
   "window.customTitleBarVisibility": "auto",
   "workbench.colorTheme": "GrunBoxTheme",
-  "[vue]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
   "explorer.confirmDragAndDrop": false,
-  "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  "workbench.editor.empty.hint": "hidden",
+  "workbench.startupEditor": "none",
+  "[typescript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
 }

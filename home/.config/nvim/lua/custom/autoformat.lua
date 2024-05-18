@@ -1,8 +1,3 @@
--- autoformat.lua
---
--- Use your language server to automatically format your code on save.
--- Adds additional commands as well to manage the behavior
-
 return {
 	{
 		"stevearc/conform.nvim",
@@ -19,7 +14,7 @@ return {
 				}
 			end,
 			formatters_by_ft = {
-				-- lua = { "stylua" },
+				lua = { "stylua" },
 				-- Conform can also run multiple formatters sequentially
 				-- python = { "isort", "black" },
 				--
