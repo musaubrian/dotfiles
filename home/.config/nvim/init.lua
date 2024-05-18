@@ -20,6 +20,11 @@ vim.keymap.set("n", "<leader>tt", "<cmd>Term<CR>", {})
 vim.keymap.set("n", "<leader>ft", "<cmd>FTerm<CR>", {})
 vim.keymap.set("n", "<leader>gs", "<cmd>Git<CR>", {})
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
+-- Split size manipulation
+vim.keymap.set('n', '<A-<>', '<Cmd>vertical resize +5<CR>', {})
+vim.keymap.set('n', '<A->>', '<Cmd>vertical resize -5<CR>', {})
+vim.keymap.set('n', '<A-l>', '<Cmd>resize +5<CR>', {})
+vim.keymap.set('n', '<A-;>', '<Cmd>resize -5<CR>', {})
 
 -- Force me-self to use home row
 vim.keymap.set("n", "<right>", function()
@@ -41,7 +46,6 @@ vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
---
 -- make cursor a block at all times
 vim.opt.guicursor = ""
 --move highlighted blocks
@@ -132,10 +136,11 @@ vim.api.nvim_create_autocmd({ "TermClose" }, {
   group = me_group,
   pattern = "*",
   callback = function()
-    vim.cmd("leftabove")
+    -- reset splitbelow
+    vim.opt.splitbelow = false
   end,
 })
-
+---
 ---@param directory string
 local function scandir(directory)
   local i, t, popen = 0, {}, io.popen
@@ -296,7 +301,7 @@ require("lazy").setup({
     branch = "0.1.x",
     dependencies = {
       "nvim-lua/plenary.nvim",
-      {
+      { -- If encountering errors, see telescope-fzf-native README for install instructions
         "nvim-telescope/telescope-fzf-native.nvim",
         build = "make",
         cond = function()

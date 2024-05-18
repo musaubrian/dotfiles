@@ -52,7 +52,3 @@ sudo ln -s /squashfs-root/AppRun /usr/bin/nvim
 if type rg &> /dev/null; then
     export FZF_DEFAULT_COMMAND='rg --files --hidden'
 fi
-
-# setup dotfiles
-cd ~/.home || exit
-stow .
