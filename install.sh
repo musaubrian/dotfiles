@@ -1,54 +1,84 @@
 #!/usr/bin/env bash
 
-cp -rv ./home ~/.home
+install_packages() {
+    sudo apt install curl wget tmux ansible alacritty zsh ripgrep python3-launchpadlib python3-venv vlc -y
+    wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+}
 
-# For tinygo
-mkdir -p ~/.db
-# If for some reason there is no .ssh directory
-mkdir -p ~/.ssh
+setup_shell_environment() {
+    echo 'if [ -f ~/.aliases ]; then
+       . ~/.aliases
+    fi' >> ~/.bashrc
 
-# install packages, just to be safe
-sudo apt install curl wget tmux ansible alacritty zsh ripgrep python3-launchpadlib python3-venv stow -y
+    curl -sS https://starship.rs/install.sh | sh
+    echo 'eval "$(starship init bash)"' >> ~/.bashrc
+}
 
-# load aliases in .bashrc
-echo 'if [ -f ~/.aliases ]; then
-   . ~/.aliases
-fi'>> ~/.bashrc
+setup_fzf() {
+    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+    ~/.fzf/install
 
-# Install starship prompt
-curl -sS https://starship.rs/install.sh | sh
-# setup bash to use starship
-echo 'eval "$(starship init bash)"' >> ~/.bashrc
+    if type rg &> /dev/null; then
+        export FZF_DEFAULT_COMMAND='rg --files --hidden'
+    fi
+}
 
-# Install Fuzzy Finder (fzf)
-git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-~/.fzf/install
+manage_ssh_keys() {
+    mkdir -p ~/.ssh
+    ansible-vault decrypt ./keys/*
+    cp -rv ./keys/* ~/.ssh/
+}
 
+manage_stash_repo() {
+    mkdir -p ~/.db
+    git clone git@github.com:musaubrian/stash
+    ansible-vault decrypt ./stash/db/* ./stash/wakatime/*
+    cp ./stash/db/* ~/.db/ -v
+    cp ./stash/wakatime/wakatime.cfg ~/.wakatime.cfg -v
+    ansible-vault encrypt ./stash/db/* ./keys/* ./stash/wakatime/*
+}
 
-#decrypt ssh keys first
-ansible-vault decrypt ./keys/*
+copy_dotfiles() {
+    dirs_to_home=("./home/.fonts" "./home/.local" "./home/scripts" "./home/.aliases")
+    files_to_home=("./home/.bash_completions" "./home/.bashrc" "./home/.gitconfig" "./home/.profile" "./home/.tmux.conf" "./home/.zshrc")
+    dirs_to_config=("./home/.config/Code" "./home/.config/alacritty" "./home/nvim" "./home/nvim_packer")
+    files_to_config=("./home/.config/starship.toml")
 
-cp -rv ./keys/* ~/.ssh/
+    for dir in "${dirs_to_home[@]}"; do
+        cp -rv "$dir" ~/
+    done
 
-git clone git@github.com:musaubrian/stash
+    for file in "${files_to_home[@]}"; do
+        cp -r "$file" ~/
+    done
 
-ansible-vault decrypt ./stash/db/* ./stash/wakatime/*
-cp ./stash/db/* ~/.db/ -v
-cp ./stash/wakatime/wakatime.cfg ~/.wakatime.cfg -v
+    for dir in "${dirs_to_config[@]}"; do
+        cp -rv "$dir" ~/.config/
+    done
 
-# Re-enrypt everything
-ansible-vault encrypt ./stash/db/* ./keys/* ./stash/wakatime/*
+    for file in "${files_to_config[@]}"; do
+        cp -v "$file" ~/.config/
+    done
+}
 
-# install neovim
-curl -sLO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
-chmod u+x nvim.appimage
-./nvim.appimage --appimage-extract
-./squashfs-root/AppRun --version
-# Optional: exposing nvim globally.
-sudo mv squashfs-root /
-sudo ln -s /squashfs-root/AppRun /usr/bin/nvim
+setup_neovim() {
+    curl -sLO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
+    chmod u+x nvim.appimage
+    ./nvim.appimage --appimage-extract
+    ./squashfs-root/AppRun --version
+    sudo mv squashfs-root /
+    sudo ln -s /squashfs-root/AppRun /usr/bin/nvim
+}
 
-# make fzf use ripgrep
-if type rg &> /dev/null; then
-    export FZF_DEFAULT_COMMAND='rg --files --hidden'
-fi
+main() {
+    install_packages
+    setup_shell_environment
+    setup_fzf
+    manage_ssh_keys
+    manage_stash_repo
+    copy_dotfiles
+    setup_neovim
+}
+
+main
+
