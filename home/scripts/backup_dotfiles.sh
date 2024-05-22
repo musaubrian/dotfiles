@@ -21,18 +21,21 @@ cp ~/.bashrc $HOME_DIR
 cp ~/.bash_completions $HOME_DIR
 cp ~/.gitconfig $HOME_DIR
 cp ~/.tmux.conf $HOME_DIR
-cp -rv ~/.fonts $HOME_DIR
-cp -rv ~/.local/bin "$HOME_DIR/.local/"
-echo "COPIED .P/A/B/G/T TO $HOME_DIR"
+cp -r ~/.fonts $HOME_DIR
+cp -r ~/.local/bin "$HOME_DIR/.local/"
+echo "COPIED .<files> TO $HOME_DIR"
 
-cp -rv ~/.config/alacritty $CONFIG_DIR
-cp -rv ~/.config/nvim $CONFIG_DIR
-cp -rv ~/.config/nvim_packer $CONFIG_DIR
-cp -rv ~/.config/Code/User/settings.json $CONFIG_DIR/Code/User/settings.json
-cp -rv ~/.config/Code/User/keybindings.json $CONFIG_DIR/Code/User/keybindings.json
+cp -r ~/.config/alacritty $CONFIG_DIR
+cp -r ~/.config/nvim $CONFIG_DIR
+cp -r ~/.config/nvim_packer $CONFIG_DIR
+cp -r ~/.config/Code/User/settings.json $CONFIG_DIR/Code/User/settings.json
+cp -r ~/.config/Code/User/keybindings.json $CONFIG_DIR/Code/User/keybindings.json
 cp -v ~/.config/starship.toml $CONFIG_DIR
 
-cp -rv ~/scripts $HOME_DIR
+echo "COPIED TO $CONFIG_DIR"
+
+cp -r ~/scripts $HOME_DIR
+echo "COPIED scripts/"
 
 cd "$ROOT_DIR" || exit
 ansible-vault encrypt ./keys/* $STASH_DIR/db/* $STASH_DIR/wakatime/*
