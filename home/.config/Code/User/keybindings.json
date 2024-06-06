@@ -7,5 +7,14 @@
   {
     "key": "ctrl+b",
     "command": "workbench.action.toggleSidebarVisibility"
+  },
+  // switch splits
+  {
+    "key": "ctrl+a h",
+    "command": "workbench.action.focusLeftGroup"
+  },
+  {
+    "key": "ctrl+a l",
+    "command": "workbench.action.focusRightGroup"
   }
 ]

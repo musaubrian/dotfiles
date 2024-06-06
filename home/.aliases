@@ -31,3 +31,4 @@ alias md='mkdir -p'
 alias nx='pnpm dlx'
 alias reload='source ~/.profile && clear'
 alias f="~/scripts/fzf.sh"
+alias sik="~/personal/sik/sik.py"

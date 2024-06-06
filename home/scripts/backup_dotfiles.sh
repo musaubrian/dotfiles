@@ -8,6 +8,8 @@ STASH_DIR="$ROOT_DIR/stash"
 TO_DB="$STASH_DIR/db"
 WAKA_KEY="$STASH_DIR/wakatime/wakatime.cfg"
 
+
+
 cp ~/.ssh/* $KEYS_DIR
 echo "COPIED TO $KEYS_DIR"
 

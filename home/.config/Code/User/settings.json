@@ -32,6 +32,16 @@
         "editor.action.quickFix"
       ]
     },
+    {
+      "before": [
+        "<leader>",
+        "r",
+        "n"
+      ],
+      "commands": [
+        "editor.action.rename"
+      ]
+    },
     // Findfiles fuzzily
     {
       "before": [
@@ -93,6 +103,7 @@
   "editor.fontSize": 16.5,
   "editor.formatOnSave": true,
   "editor.fontVariations": false,
+  "extensions.ignoreRecommendation": true,
   "terminal.integrated.minimumContrastRatio": 1,
   "editor.semanticHighlighting.enabled": true,
   "javascript.updateImportsOnFileMove.enabled": "always",
@@ -110,4 +121,6 @@
   "[vue]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
+  "gitlens.mode.active": "review",
+  "git.openRepositoryInParentFolders": "never",
 }

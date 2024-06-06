@@ -1,0 +1,41 @@
+-- Step 1: Ensure Lazy.nvim is installed
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+
+-- Step 2: Add Lazy.nvim to runtime path
+vim.opt.rtp:prepend(lazypath)
+
+-- Step 3: Debugging: Check if Lazy.nvim is loaded
+print("Lazy.nvim path: ", lazypath)
+print("Is Lazy.nvim installed? ", vim.loop.fs_stat(lazypath) ~= nil)
+
+-- Step 4: Require and configure Lazy.nvim
+local ok, lazy = pcall(require, "lazy")
+if not ok then
+  print("Error loading Lazy.nvim")
+  return
+end
+
+-- Step 5: Setup Lazy.nvim with a minimal plugin list
+lazy.setup({
+  -- Example plugin: Telescope
+  {
+    'nvim-telescope/telescope.nvim',
+    requires = { 'nvim-lua/plenary.nvim' },
+    config = function()
+      require('telescope').setup{
+      }
+    end
+  },
+})
+
+
