@@ -41,7 +41,7 @@ manage_stash_repo() {
 copy_dotfiles() {
     dirs_to_home=("./home/.fonts" "./home/.local" "./home/scripts" "./home/.aliases")
     files_to_home=("./home/.bash_completions" "./home/.bashrc" "./home/.gitconfig" "./home/.profile" "./home/.tmux.conf" "./home/.zshrc")
-    dirs_to_config=("./home/.config/Code" "./home/.config/alacritty" "./home/nvim" "./home/nvim_packer")
+    dirs_to_config=("./home/.config/Code" "./home/.config/alacritty" "./home/.config/nvim" "./home/.config/nvim_packer")
     files_to_config=("./home/.config/starship.toml")
 
     for dir in "${dirs_to_home[@]}"; do

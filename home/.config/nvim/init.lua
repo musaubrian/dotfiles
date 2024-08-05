@@ -14,7 +14,7 @@ vim.g.maplocalleader = " "
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 vim.keymap.set("n", "<leader>tt", "<cmd>Term<CR>", {})
-vim.keymap.set("n", "<leader>ft", "<cmd>FTerm<CR>", {})
+vim.keymap.set("n", "<leader>st", "<cmd>vs | FTerm<CR>", {})
 vim.keymap.set("n", "<leader>gs", "<cmd>Git<CR>", {})
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 -- Split size manipulation
@@ -114,38 +114,6 @@ vim.api.nvim_create_autocmd({ "TermClose" }, {
 		vim.opt.splitbelow = false
 	end,
 })
----
----@param directory string
-local function scandir(directory)
-	local i, t, popen = 0, {}, io.popen
-	local pfile = popen('ls -a "' .. directory .. '"')
-	if pfile == nil then
-		return {}
-	end
-	for filename in pfile:lines() do
-		if filename:match("%.lua$") then -- Check if filename ends with .lua
-			i = i + 1
-			t[i] = filename
-		end
-	end
-	pfile:close()
-	return t
-end
-
-local base_path = os.getenv("HOME") .. "/.config/nvim/snippets/"
-
--- -- There's probably an easier way to do this.
-vim.api.nvim_create_autocmd("BufEnter", {
-	pattern = "*",
-	group = me_group,
-	callback = function()
-		local snip_files = scandir(base_path)
-		for _, file in pairs(snip_files) do
-			local c = "so " .. base_path .. file
-			vim.cmd(c)
-		end
-	end,
-})
 
 -- Open terminal in split view at the bottom
 vim.api.nvim_create_user_command("Term", function()
@@ -156,7 +124,6 @@ end, { desc = "Open terminal in split mode at the bottom" })
 vim.api.nvim_create_user_command("FTerm", function()
 	vim.cmd("term")
 end, { desc = "Open terminal in full screen mode" })
--------------------------------------------
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -179,14 +146,14 @@ require("lazy").setup({
 	"norcalli/nvim-colorizer.lua",
 	"tpope/vim-sleuth",
 	"musaubrian/scratch.nvim",
-	{
-		"musaubrian/jade.nvim",
-		lazy = false,
-		dependencies = "tjdevries/colorbuddy.nvim",
-		config = function()
-			require("jade")
-		end,
-	},
+	-- {
+	-- 	"musaubrian/jade.nvim",
+	-- 	lazy = false,
+	-- 	dependencies = "tjdevries/colorbuddy.nvim",
+	-- 	config = function()
+	-- 		require("jade")
+	-- 	end,
+	-- },
 	{
 		"stevearc/dressing.nvim",
 		opts = {},
@@ -200,14 +167,6 @@ require("lazy").setup({
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
 			"folke/neodev.nvim",
 		},
-	},
-	{
-		"iamcco/markdown-preview.nvim",
-		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-		ft = { "markdown" },
-		build = function()
-			vim.fn["mkdp#util#install"]()
-		end,
 	},
 	{
 		"folke/trouble.nvim",
@@ -228,12 +187,7 @@ require("lazy").setup({
 		},
 		config = function()
 			vim.keymap.set("n", "<leader>t", require("trouble").toggle, {})
-			vim.keymap.set("n", "<leader>tn", function()
-				require("trouble").next({ jump = true, skip_groups = true })
-			end, {})
-			vim.keymap.set("n", "<leader>tp", function()
-				require("trouble").previous({ jump = true, skip_groups = true })
-			end, {})
+			-- Just use [d ]d
 		end,
 	},
 	{
@@ -388,6 +342,7 @@ require("nvim-treesitter.configs").setup({
 		"lua",
 		"python",
 		"vimdoc",
+		"luadoc",
 		"javascript",
 		"typescript",
 		"bash",

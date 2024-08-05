@@ -24,7 +24,11 @@ cp ~/.bash_completions $HOME_DIR
 cp ~/.gitconfig $HOME_DIR
 cp ~/.tmux.conf $HOME_DIR
 cp -r ~/.fonts $HOME_DIR
-cp -r ~/.local/bin "$HOME_DIR/.local/"
+
+cp -r ~/.local/bin/yt-dlp "$HOME_DIR/.local/bin/"
+cp -r ~/.local/bin/name "$HOME_DIR/.local/bin/"
+cp -r ~/.local/bin/httpie.appimage "$HOME_DIR/.local/bin/"
+
 echo "COPIED .<files> TO $HOME_DIR"
 
 cp -r ~/.config/alacritty $CONFIG_DIR

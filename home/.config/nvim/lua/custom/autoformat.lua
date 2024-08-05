@@ -12,8 +12,9 @@ return {
 			end,
 			formatters_by_ft = {
 				lua = { "stylua" },
-				-- python = { "black" },
+				-- python = { "ruff" },
 				javascript = { "prettierd" },
+				typescript = { "prettierd" },
 				vue = { "prettierd" },
 			},
 		},

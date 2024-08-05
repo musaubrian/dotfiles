@@ -1,5 +1,6 @@
 # Get editor completions based on the config schema
-#"$schema" = 'https://starship.rs/config-schema.json'
+"$schema" = 'https://starship.rs/config-schema.json'
+
 format = """
 $directory\
         $vcsh\
@@ -10,18 +11,19 @@ $directory\
         $git_metrics\
         $git_status\
         $sudo\
-        $line_break\
         $python\
+        $line_break\
         $character"""
 
-# Inserts a blank line between shell prompts
 add_newline = true
-command_timeout = 1000
 
-# Replace the '❯' symbol in the prompt with '➜'
-[character] # The name of the module we are configuring is 'character'
-success_symbol = '[➜](bold green)' # The 'success_symbol' segment is being set to '➜' with the color 'bold green'
+[character]
+success_symbol = '[➜](bold green)'
 error_symbol = '[➜](bold red)'
+
+[git_branch]
+format = "[$branch]($style) "
+style = "bright-black"
 
 [git_status]
 ahead = '⇡${count}'
@@ -29,5 +31,4 @@ diverged = '⇕⇡${ahead_count}⇣${behind_count}'
 behind = '⇣${count}'
 
 [python]
-# format = '(|($virtualenv)|($style))'
-format = '\[venv [(\($virtualenv\))]($style)\]'
+format = '[(\($virtualenv\))](bold bright-black)'

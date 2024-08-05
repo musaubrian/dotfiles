@@ -30,12 +30,7 @@ export GOPATH=$HOME/go
 export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 export VISUAL=nvim
 export EDITOR="$VISUAL"
-# bun
-#export BUN_INSTALL="$HOME/.bun"
-#export PATH=$BUN_INSTALL/bin:$PATH
 
-# Turso
-#export PATH="$HOME/.turso:$PATH"
 # pnpm
 export PNPM_HOME="$HOME/.local/share/pnpm"
 case ":$PATH:" in
@@ -43,8 +38,9 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm.
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
 
 # Added by Toolbox App
@@ -52,5 +48,5 @@ export PATH="$PATH:/home/musaubrian/.local/share/JetBrains/Toolbox/scripts"
 export XDG_DATA_DIRS="$XDG_DATA_DIRS:/var/lib/snapd/desktop/"
 
 . "$HOME/.cargo/env"
-# export PATH=/snap/bin:$PATH
-# PATH=/sbin/:$PATH
+
+export NODE_OPTIONS=--max-old-space-size=4096
