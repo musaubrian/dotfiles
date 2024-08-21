@@ -10,7 +10,7 @@ return {
 				color = "error",
 				alt = { "FIXME", "BUG", "FIXIT", "ISSUE" },
 			},
-			TODO = { color = "info" },
+			TODO = { color = "warning" },
 			HACK = { color = "warning", alt = { "RE" } },
 			WARN = { color = "warning", alt = { "WARNING", "XXX" } },
 			NOTE = { color = "hint", alt = { "INFO" } },

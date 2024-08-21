@@ -123,7 +123,7 @@ end, { desc = "Open terminal in split mode at the bottom" })
 
 vim.api.nvim_create_user_command("FTerm", function()
 	vim.cmd("term")
-end, { desc = "Open terminal in full screen mode" })
+end, { desc = "Open terminal in *full screen mode" })
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -167,28 +167,6 @@ require("lazy").setup({
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
 			"folke/neodev.nvim",
 		},
-	},
-	{
-		"folke/trouble.nvim",
-		event = "VimEnter",
-		opts = {
-			icons = false,
-			fold_open = "v",
-			fold_closed = ">",
-			indent_lines = false,
-			signs = {
-				error = "error",
-				warning = "warn",
-				hint = "hint",
-				information = "info",
-			},
-			use_diagnostic_signs = false,
-			auto_close = false,
-		},
-		config = function()
-			vim.keymap.set("n", "<leader>t", require("trouble").toggle, {})
-			-- Just use [d ]d
-		end,
 	},
 	{
 		"mbbill/undotree",

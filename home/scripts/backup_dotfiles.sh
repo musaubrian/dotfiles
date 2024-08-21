@@ -23,11 +23,12 @@ cp ~/.bashrc $HOME_DIR
 cp ~/.bash_completions $HOME_DIR
 cp ~/.gitconfig $HOME_DIR
 cp ~/.tmux.conf $HOME_DIR
+cp ~/.wezterm.lua $HOME_DIR
 cp -r ~/.fonts $HOME_DIR
 
-cp -r ~/.local/bin/yt-dlp "$HOME_DIR/.local/bin/"
-cp -r ~/.local/bin/name "$HOME_DIR/.local/bin/"
-cp -r ~/.local/bin/httpie.appimage "$HOME_DIR/.local/bin/"
+cp -v ~/.local/bin/yt-dlp "$HOME_DIR/.local/bin/"
+cp -v ~/.local/bin/name "$HOME_DIR/.local/bin/"
+cp -v ~/.local/bin/httpie.appimage "$HOME_DIR/.local/bin/"
 
 echo "COPIED .<files> TO $HOME_DIR"
 

@@ -9,6 +9,19 @@ local i = ls.insert_node
 
 ls.add_snippets("go", {
 	s(
+		"gof",
+		fmta(
+			[[
+go func() {
+<body>
+}()
+	]],
+			{
+				body = i(1),
+			}
+		)
+	),
+	s(
 		"ei",
 		fmta(
 			[[
