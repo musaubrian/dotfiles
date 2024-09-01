@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 install_packages() {
-    sudo apt install curl wget tmux ansible alacritty zsh ripgrep python3-launchpadlib python3-venv vlc -y
+    sudo apt install curl wget tmux ansible kitty ripgrep python3-launchpadlib python3-venv vlc -y
     wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 }
 
@@ -41,7 +41,7 @@ manage_stash_repo() {
 copy_dotfiles() {
     dirs_to_home=("./home/.fonts" "./home/.local" "./home/scripts" "./home/.aliases")
     files_to_home=("./home/.bash_completions" "./home/.bashrc" "./home/.gitconfig" "./home/.profile" "./home/.tmux.conf" "./home/.zshrc", "./home/.wezterm.lua")
-    dirs_to_config=("./home/.config/Code" "./home/.config/alacritty" "./home/.config/nvim" "./home/.config/nvim_packer")
+    dirs_to_config=("./home/.config/Code" "./home/.config/alacritty" "./home/.config/nvim" "./home/.config/nvim_packer", "./home/kitty")
     files_to_config=("./home/.config/starship.toml")
 
     for dir in "${dirs_to_home[@]}"; do
@@ -70,6 +70,10 @@ setup_neovim() {
     sudo ln -s /squashfs-root/AppRun /usr/bin/nvim
 }
 
+clean_up() {
+    rm -v nvim.appimage*
+}
+
 
 main() {
     install_packages
@@ -79,6 +83,7 @@ main() {
     manage_stash_repo
     copy_dotfiles
     setup_neovim
+    clean_up
 }
 
 main

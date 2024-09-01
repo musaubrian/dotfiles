@@ -41,9 +41,8 @@ status: <status>
 		fmta(
 			[[
 ---
-title: '<title>'
-description: '<desc>'
-summary: '<summary>'
+title: "<title>"
+description: "<desc>"
 date: <date>
 tags: ["<tag>"]
 showTags: true
@@ -53,9 +52,8 @@ readTime: true
 			{
 				title = i(1, "post title"),
 				desc = i(2, "post description"),
-				summary = i(3, "brief summary"),
 				date = createDateString(),
-				tag = i(4, "code"),
+				tag = i(3, ""),
 			}
 		)
 	),
