@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 install_packages() {
+    sudo apt update -y && sudo apt upgrade -y
     sudo apt install curl wget tmux ansible kitty ripgrep python3-launchpadlib python3-venv vlc -y
     wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 }
@@ -40,8 +41,8 @@ manage_stash_repo() {
 
 copy_dotfiles() {
     dirs_to_home=("./home/.fonts" "./home/.local" "./home/scripts" "./home/.aliases")
-    files_to_home=("./home/.bash_completions" "./home/.bashrc" "./home/.gitconfig" "./home/.profile" "./home/.tmux.conf" "./home/.zshrc", "./home/.wezterm.lua")
-    dirs_to_config=("./home/.config/Code" "./home/.config/alacritty" "./home/.config/nvim" "./home/.config/nvim_packer", "./home/kitty")
+    files_to_home=("./home/.bash_completions" "./home/.bashrc" "./home/.gitconfig" "./home/.profile" "./home/.tmux.conf" "./home/.zshrc")
+    dirs_to_config=("./home/.config/Code" "./home/.config/alacritty" "./home/.config/nvim", "./home/kitty")
     files_to_config=("./home/.config/starship.toml")
 
     for dir in "${dirs_to_home[@]}"; do
@@ -73,6 +74,23 @@ setup_neovim() {
 clean_up() {
     rm -v nvim.appimage*
 }
+setup_docker() {
+    # Add Docker's official GPG key:
+    sudo apt-get install ca-certificates curl
+    sudo install -m 0755 -d /etc/apt/keyrings
+    sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+    sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+# Add the repository to Apt sources:
+    echo \
+        "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+        $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+    sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    sudo apt-get update -y
+
+    sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+    sudo usermod -aG docker $USER
+}
 
 
 main() {
@@ -83,6 +101,7 @@ main() {
     manage_stash_repo
     copy_dotfiles
     setup_neovim
+    setup_docker
     clean_up
 }
 

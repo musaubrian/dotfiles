@@ -33,7 +33,6 @@ echo "COPIED .<files> TO $HOME_DIR"
 
 cp -r ~/.config/alacritty $CONFIG_DIR
 cp -r ~/.config/nvim $CONFIG_DIR
-cp -r ~/.config/nvim_packer $CONFIG_DIR
 cp -r ~/.config/kitty $CONFIG_DIR
 cp -r ~/.config/Code/User/settings.json $CONFIG_DIR/Code/User/settings.json
 cp -r ~/.config/Code/User/keybindings.json $CONFIG_DIR/Code/User/keybindings.json

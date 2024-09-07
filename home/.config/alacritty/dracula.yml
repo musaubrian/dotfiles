@@ -9,10 +9,7 @@
 
 colors:
   primary:
-    # background: '#282a36'
-    # background: '#171421'
     background: '#181818'
-    # foreground: '#f8f8f2'
     foreground: '#D0CFCC'
     bright_foreground: '#ffffff'
   cursor:
@@ -24,7 +21,7 @@ colors:
   search:
     matches:
       foreground: '#44475a'
-      background: '#50fa7b'
+      background: '#51fa7b'
     focused_match:
       foreground: '#44475a'
       background: '#ffb86c'
