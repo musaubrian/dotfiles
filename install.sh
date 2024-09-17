@@ -2,7 +2,7 @@
 
 install_packages() {
     sudo apt update -y && sudo apt upgrade -y
-    sudo apt install curl wget tmux ansible kitty ripgrep python3-launchpadlib python3-venv vlc -y
+    sudo apt install curl wget tmux ansible i3 kitty ripgrep python3-launchpadlib python3-venv vlc -y
     wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 }
 
@@ -62,6 +62,11 @@ copy_dotfiles() {
     done
 }
 
+setup_trackpad() {
+    mkdir -p /etc/X11/xorg.conf.d/
+    sudo cp -v ./home/90-touchpad.conf /etc/X11/xorg.conf.d/
+}
+
 setup_neovim() {
     curl -sLO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
     chmod u+x nvim.appimage
@@ -100,6 +105,7 @@ main() {
     manage_ssh_keys
     manage_stash_repo
     copy_dotfiles
+    setup_trackpad
     setup_neovim
     setup_docker
     clean_up

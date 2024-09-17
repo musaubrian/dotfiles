@@ -44,7 +44,7 @@ return {
 
 		local servers = {
 			gopls = {},
-			tsserver = {},
+			ts_ls = {},
 			templ = {},
 			pylsp = {},
 			marksman = {},
@@ -78,7 +78,6 @@ return {
 		local ensure_installed = vim.tbl_keys(servers or {})
 		vim.list_extend(ensure_installed, {
 			"stylua",
-			"black",
 			"prettierd",
 		})
 		require("mason-tool-installer").setup({ ensure_installed = ensure_installed })

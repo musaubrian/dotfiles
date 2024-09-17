@@ -24,6 +24,7 @@ cp ~/.bash_completions $HOME_DIR
 cp ~/.gitconfig $HOME_DIR
 cp ~/.tmux.conf $HOME_DIR
 cp -r ~/.fonts $HOME_DIR
+cp -v /etc/X11/xorg.conf.d/90-touchpad.conf $HOME_DIR
 
 cp -v ~/.local/bin/yt-dlp "$HOME_DIR/.local/bin/"
 cp -v ~/.local/bin/name "$HOME_DIR/.local/bin/"
@@ -34,6 +35,7 @@ echo "COPIED .<files> TO $HOME_DIR"
 cp -r ~/.config/alacritty $CONFIG_DIR
 cp -r ~/.config/nvim $CONFIG_DIR
 cp -r ~/.config/kitty $CONFIG_DIR
+cp -r ~/.config/i3 $CONFIG_DIR
 cp -r ~/.config/Code/User/settings.json $CONFIG_DIR/Code/User/settings.json
 cp -r ~/.config/Code/User/keybindings.json $CONFIG_DIR/Code/User/keybindings.json
 cp -v ~/.config/starship.toml $CONFIG_DIR
