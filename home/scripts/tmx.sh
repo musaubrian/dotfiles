@@ -19,35 +19,26 @@ switch_or_attach(){
 if [ "$OPTIONS" == "d" ]; then
     tmux detach-client
 
-elif [ "$OPTIONS" == "p" ]; then
-    SESSION_NAME=`ls $PERSONAL | fzf`
-    cd $PERSONAL$SESSION_NAME
+elif [ "$OPTIONS" == "" ]; then
+    PERSONAL_DIRS=$(ls $PERSONAL | tr -s "\n" | sed "s/^/personal\//")
+    WORK_DIRS=$(ls $WORK | tr -s "\n" | sed "s/^/work\//")
+
+    ALL_DIRS=$(echo -e "${PERSONAL_DIRS}\n${WORK_DIRS}")
+
+    SESSION_NAME=$(echo "$ALL_DIRS"  | fzf)
+
 
     if [[ -z "$SESSION_NAME" ]]; then
-        SESSION_NAME="personal"
-    fi
-
-    if [[ $SESSION_NAME == *"."* ]]; then
-        SESH=$(echo "$SESSION_NAME" | tr '.' '_')
-        echo "$SESH"
-        tmux new-session -d -s "$SESH"
-        switch_or_attach "$SESH"
+        SESSION_NAME="general"
     else
-        tmux new-session -d -s "$SESSION_NAME"
-        switch_or_attach "$SESSION_NAME"
+        cd "$HOME/$SESSION_NAME"
     fi
 
-elif [ "$OPTIONS" == "w" ]; then
-    SESSION_NAME=`ls $WORK | fzf`
-    cd $WORK$SESSION_NAME
-
-    if [[ -z "$SESSION_NAME" ]]; then
-        SESSION_NAME="work"
-    fi
+    # remove the prefixed personal/work
+    SESSION_NAME=$(echo "$SESSION_NAME" | sed "s/personal\///;s/work\///")
 
     if [[ $SESSION_NAME == *"."* ]]; then
         SESH=$(echo "$SESSION_NAME" | tr '.' '_')
-        echo "$SESH"
         tmux new-session -d -s "$SESH"
         switch_or_attach "$SESH"
     else
@@ -63,7 +54,8 @@ elif [ "$OPTIONS" == "a" ]; then
     else
         echo "[ERROR]: NO SESSION TO ATTACH TO"
     fi
+
 else
     echo "Usage:
-    tmx [p|w|a|d]"
+    tmx [a|d]"
 fi
