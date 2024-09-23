@@ -42,18 +42,18 @@ for file in ~/Downloads/*; do
     # Check if it's an image file
     if [[ " ${image_ext[@]} " =~ " ${ext} " ]]; then
         mv "$file" ~/Pictures
-        printf "moved [$file] -> [~/Pictures/]\n\n"
+        printf "moved [$file] -> [~/Pictures/]\n"
         # Check if it's a video file
     elif [[ " ${video_ext[@]} " =~ " ${ext} " ]]; then
         mv "$file" ~/Videos
-        printf "moved [$file] -> [~/Videos/]\n\n"
+        printf "moved [$file] -> [~/Videos/]\n"
         # Check if it's a document file
     elif [[ " ${document_ext[@]} " =~ " ${ext} " ]]; then
         mv "$file" ~/Documents
-        printf "moved [$file] -> [~/Documents/]\n\n"
+        printf "moved [$file] -> [~/Documents/]\n"
     elif [[ " ${zips[@]}" =~ " ${ext} " ]]; then
         mv "$file" ~/Downloads/zip/
-        printf "moved $file -> [~/Downloads/zip/]\n\n"
+        printf "moved $file -> [~/Downloads/zip/]\n"
     elif [[ " ${images[@]} " =~ " ${ext} " ]]; then
         mv "$file" ~/Downloads/images/
         printf "moved $file -> [~/Downloads/images/]\n"

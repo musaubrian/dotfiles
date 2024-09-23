@@ -2,17 +2,17 @@
 
 install_packages() {
     sudo apt update -y && sudo apt upgrade -y
-    sudo apt install curl wget tmux ansible i3 kitty ripgrep python3-launchpadlib python3-venv vlc -y
+    sudo apt install curl wget tmux ansible i3 kitty ripgrep python3-launchpadlib python3-venv vlc pavucontrol -y
     wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 }
 
 setup_shell_environment() {
-    echo 'if [ -f ~/.aliases ]; then
-       . ~/.aliases
-    fi' >> ~/.bashrc
+    # echo 'if [ -f ~/.aliases ]; then
+    #    . ~/.aliases
+    # fi' >> ~/.bashrc
 
     curl -sS https://starship.rs/install.sh | sh
-    echo 'eval "$(starship init bash)"' >> ~/.bashrc
+    # echo 'eval "$(starship init bash)"' >> ~/.bashrc
 }
 
 setup_fzf() {
@@ -42,7 +42,7 @@ manage_stash_repo() {
 copy_dotfiles() {
     dirs_to_home=("./home/.fonts" "./home/.local" "./home/scripts" "./home/.aliases")
     files_to_home=("./home/.bash_completions" "./home/.bashrc" "./home/.gitconfig" "./home/.profile" "./home/.tmux.conf" "./home/.zshrc")
-    dirs_to_config=("./home/.config/Code" "./home/.config/alacritty" "./home/.config/nvim", "./home/kitty")
+    dirs_to_config=("./home/.config/Code" "./home/.config/alacritty" "./home/.config/nvim", "./home/kitty", "./home/.config/i3")
     files_to_config=("./home/.config/starship.toml")
 
     for dir in "${dirs_to_home[@]}"; do
@@ -79,6 +79,7 @@ setup_neovim() {
 clean_up() {
     rm -v nvim.appimage*
 }
+
 setup_docker() {
     # Add Docker's official GPG key:
     sudo apt-get install ca-certificates curl

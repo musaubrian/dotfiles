@@ -16,6 +16,7 @@ return {
 				typescript = { "prettierd" },
 				vue = { "prettierd" },
 				html = { "prettierd" },
+				python = { "black" },
 			},
 		},
 	},
