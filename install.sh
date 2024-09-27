@@ -2,7 +2,8 @@
 
 install_packages() {
     sudo apt update -y && sudo apt upgrade -y
-    sudo apt install curl wget tmux ansible i3 kitty ripgrep python3-launchpadlib python3-venv vlc pavucontrol brightnessctl -y
+    sudo apt install curl wget tmux ansible i3 kitty ripgrep \
+        python3-launchpadlib python3-venv vlc pavucontrol brightnessctl -y
     wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 
     sudo chmod +s $(which brightnessctl)

@@ -16,6 +16,8 @@ local function createDateString()
 	return date_str
 end
 
+local right = ">"
+
 ls.add_snippets(snippet_name, {
 	s(
 		"nm",
@@ -57,6 +59,24 @@ readTime: true
 			}
 		)
 	),
+
+	s(
+		"note",
+		fmta(
+			[[
+      <right_angle> [!NOTE]
+      <right_angle_1>
+      <right_angle_2> <note>
+      ]],
+			{
+				note = i(0),
+				right_angle = right,
+				right_angle_1 = right,
+				right_angle_2 = right,
+			}
+		)
+	),
+
 	s("fn", fmt("[^{}]", { i(0) })),
 	s("fnr", fmt("[^{}]: {}", { i(0), i(1) })),
 })

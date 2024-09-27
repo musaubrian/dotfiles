@@ -44,7 +44,11 @@ return {
 
 		local servers = {
 			gopls = {},
-			ts_ls = {},
+			ts_ls = {
+				server_capabilities = {
+					documentFormattingProvider = false,
+				},
+			},
 			templ = {},
 			pylsp = {},
 			marksman = {},

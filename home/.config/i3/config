@@ -34,7 +34,7 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 
-bindsym $mod+x exec i3lock --nofork --color=171717
+bindsym $mod+x exec i3lock --nofork --color=#171717
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -44,8 +44,8 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ to
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 # brightness
-bindsym XF86MonBrightnessDown exec brightnessctl s -5%
-bindsym XF86MonBrightnessUp exec brightnessctl s +10%
+bindsym XF86MonBrightnessDown exec brightnessctl s 1-%
+bindsym XF86MonBrightnessUp exec brightnessctl s +1%
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 

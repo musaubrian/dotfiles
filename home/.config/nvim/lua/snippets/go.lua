@@ -25,10 +25,10 @@ go func() {
 		"ei",
 		fmta(
 			[[
-      if err != nil {
-          <handle>
-      }
-        ]],
+	if err != nil {
+		<handle>
+	}
+	]],
 			{
 				handle = i(1),
 			}

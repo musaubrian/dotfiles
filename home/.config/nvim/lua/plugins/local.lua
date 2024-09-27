@@ -8,4 +8,10 @@ return {
 			require("jade")
 		end,
 	},
+	{
+		dir = "~/personal/pye.nvim",
+		config = function()
+			require("pye")
+		end,
+	},
 }
