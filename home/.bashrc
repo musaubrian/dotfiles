@@ -76,7 +76,7 @@ esac
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
+    alias dir='dir --color=auto'
     #alias vdir='vdir --color=auto'
 
     #alias grep='grep --color=auto'
@@ -122,20 +122,40 @@ eval "$(starship init bash)"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-. "$HOME/.cargo/env"
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
+export GOPATH=$HOME/go
+export PATH="$PATH:/usr/local/go/bin:$GOPATH/bin"
+export VISUAL=nvim
+export EDITOR="$VISUAL"
 
 # pnpm
-export PNPM_HOME="/home/musaubrian/.local/share/pnpm"
+export PNPM_HOME="/home/ulong/.local/share/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-export NODE_OPTIONS=--max-old-space-size=4096
-
-# Turso
 export PATH="$PATH:/home/musaubrian/.turso"
+export PATH="$PATH:/snap"
+
+. "$HOME/.cargo/env"
+
+navigate() {
+   source ~/scripts/f.sh
+}
+bind -x '"\ef":navigate'
+
+# Added by Toolbox App
+export PATH="$PATH:/home/ulong/.local/share/JetBrains/Toolbox/scripts"

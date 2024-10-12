@@ -34,12 +34,12 @@ vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous dia
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
 vim.keymap.set("n", "<leader>gl", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
 
-vim.diagnostic.config({
-	virtual_text = true,
-})
+--Markdown
+vim.keymap.set("n", "<localleader>s", 'viwc~~<c-r>"~~<esc>')
+vim.keymap.set("n", "<localleader>b", 'viwc**<c-r>"**<esc>')
+vim.keymap.set("n", "<localleader>i", 'viwc_<c-r>"_<esc>')
+vim.keymap.set("n", "<localleader>l", 'viwc[<c-r>"]()<left>')
+vim.keymap.set("n", "<localleader>`", 'viwc`<c-r>"`<esc>')
 
-vim.filetype.add({
-	extension = {
-		templ = "templ",
-	},
-})
+--Compile-Mode
+vim.keymap.set("n", "<leader>cm", "<cmd>below Compile<CR>", {})

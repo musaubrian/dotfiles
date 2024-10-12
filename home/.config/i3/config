@@ -13,7 +13,7 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:Iosevka Term Medium 10
+font pango:Iosevka Medium 10
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -46,6 +46,8 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 # brightness
 bindsym XF86MonBrightnessDown exec brightnessctl s 1-%
 bindsym XF86MonBrightnessUp exec brightnessctl s +1%
+
+bindsym Print exec flameshot gui
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
@@ -154,6 +156,7 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 
 for_window [class="kitty"] move to workspace $ws1
 for_window [class="Chromium"] move to workspace $ws2
+workspace 5 output HDMI-1
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -161,6 +164,11 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+#Multiple monitors and stuff
+bindsym $mod+Shift+d exec xrandr --output HDMI-1 --auto --right-of eDP-1
+#reset
+bindsym $mod+Shift+x exec xrandr --auto
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -194,4 +202,6 @@ bindsym $mod+r mode "resize"
 bar {
         status_command i3status -c ~/.config/i3/i3status.conf
 }
-# exec --no-startup-id feh --bg-scale ~/personal/dotfiles/wall.jpg
+
+exec --no-startup-id xsetroot -solid "#222222"
+exec --no-startup-id  setxkbmap -option caps:escape

@@ -1,13 +1,3 @@
---[[
-                                  __       _
-        __ _  __ _____ ___ ___ __/ /  ____(_)__ ____
-       /  ' \/ // (_-</ _ `/ // / _ \/ __/ / _ `/ _ \
-      /_/_/_/\_,_/___/\_,_/\_,_/_.__/_/ /_/\_,_/_//_/
-
--- Config taken from kickstart.nvim
-https://github.com/nvim-lua/kickstart.nvim
-]]
-
 require("custom.user")
 require("custom.opts")
 require("custom.keys")
@@ -33,25 +23,23 @@ require("lazy").setup({ { import = "plugins" } }, {
 	change_detection = {
 		notify = false,
 	},
+	ui = {
+		-- If you are using a Nerd Font: set icons to an empty table which will use the
+		-- default lazy.nvim defined Nerd Font icons, otherwise define a unicode icons table
+		icons = vim.g.have_nerd_font and {} or {
+			cmd = "⌘",
+			config = "🛠",
+			event = "📅",
+			ft = "📂",
+			init = "⚙",
+			keys = "🗝",
+			plugin = "🔌",
+			runtime = "💻",
+			require = "🌙",
+			source = "📄",
+			start = "🚀",
+			task = "📌",
+			lazy = "💤 ",
+		},
+	},
 })
-
--- local client = vim.lsp.start_client({
--- 	name = "envlsp",
--- 	cmd = { "/home/musaubrian/personal/lsp/env_lsp" },
--- 	-- cmd = { "/home/musaubrian/go/bin/env_lsp" },
--- })
---
--- if not client then
--- 	vim.notify("env_lsp not found")
--- 	return
--- end
---
--- vim.api.nvim_create_autocmd("FileType", {
--- 	pattern = { "go", "javascript" },
--- 	callback = function()
--- 		vim.lsp.buf_attach_client(0, client)
--- 	end,
--- })
-
--- The line beneath this is called `modeline`. See `:help modeline`
--- vim: ts=2 sts=2 sw=2 et

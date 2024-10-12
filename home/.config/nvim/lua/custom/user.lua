@@ -27,6 +27,7 @@ vim.api.nvim_create_autocmd({ "TermOpen" }, {
 		vim.cmd.setlocal("norelativenumber")
 		vim.cmd.setlocal("signcolumn=no")
 		vim.cmd.setlocal("nocursorline")
+		vim.cmd("tnoremap <buffer> <Esc> <C-\\><C-n>")
 		vim.cmd("startinsert")
 		vim.cmd("nnoremap <buffer> <C-c> i<C-c>")
 		vim.cmd("nnoremap <buffer> <C-d> iexit<CR>")
@@ -51,3 +52,16 @@ end, { desc = "Open terminal in split mode at the bottom" })
 vim.api.nvim_create_user_command("FTerm", function()
 	vim.cmd("term")
 end, { desc = "Open terminal in *full screen mode" })
+
+vim.diagnostic.config({
+	virtual_text = true,
+})
+
+vim.filetype.add({
+	extension = {
+		templ = "templ",
+		jinja = "jinja",
+		jinja2 = "jinja",
+		j2 = "jinja",
+	},
+})

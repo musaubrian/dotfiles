@@ -52,26 +52,33 @@ return {
 			templ = {},
 			pylsp = {},
 			marksman = {},
+			volar = {
+				init_options = {
+					vue = {
+						hybridMode = false,
+					},
+				},
+				filetypes = {
+					"typescript",
+					"javascript",
+					"javascriptreact",
+					"typescriptreact",
+					"vue",
+					"json",
+				},
+			},
 			lua_ls = {
 				workspace = {
 					checkThirdParty = false,
 					library = {
 						vim.env.VIMRUNTIME,
-						-- Depending on the usage, you might want to add additional paths here.
-						-- "${3rd}/luv/library"
-						-- "${3rd}/busted/library",
 					},
 				},
-				-- cmd = {...},
-				-- filetypes = { ...},
-				-- capabilities = {},
 				settings = {
 					Lua = {
 						completion = {
 							callSnippet = "Replace",
 						},
-						-- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-						-- diagnostics = { disable = { 'missing-fields' } },
 					},
 				},
 			},
@@ -94,15 +101,6 @@ return {
 					server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
 					require("lspconfig")[server_name].setup(server)
 				end,
-			},
-		})
-
-		local lspconfig = require("lspconfig")
-		lspconfig.volar.setup({
-			init_options = {
-				vue = {
-					hybridMode = false,
-				},
 			},
 		})
 	end,
