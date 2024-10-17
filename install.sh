@@ -6,7 +6,7 @@ install_packages() {
         python3-launchpadlib python3-venv vlc pavucontrol brightnessctl -y
     wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 
-    sudo chmod +s $(which brightnessctl)
+    sudo chmod +s "$(which brightnessctl)"
 }
 
 setup_shell_environment() {
@@ -103,6 +103,9 @@ setup_docker() {
 
 
 main() {
+    git clone http://github.com/musaubrian/dotfiles
+    cd ./dotfiles || exit
+
     install_packages
     setup_shell_environment
     setup_fzf
@@ -111,7 +114,7 @@ main() {
     copy_dotfiles
     setup_trackpad
     setup_neovim
-    setup_docker
+    # setup_docker
     clean_up
 }
 
