@@ -1,11 +1,19 @@
 [user]
 	name=musaubrian
 	email=musaubrian15@gmail.com
+
 [init]
 	defaultBranch=main
+
 [core]
 	editor=nvim
+
 [alias]
-	shove=push --force-with-lease
+	lg = "!. ~/.githelpers && pretty_git_log"
+	lga = "!git lg --all"
+	rem = !git branch --set-upstream-to=origin/`git symbolic-ref --short HEAD`
+
+	conflicts = !git ls-files -u | cut -f 2 | sort -u
+
 [push]
 	autoSetupRemote = true
