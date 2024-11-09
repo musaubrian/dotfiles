@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+
+if [ $# -eq 0 ]; then
+    echo "Error: Please provide an input directory"
+    echo "Usage: $0 /path/to/input/directory"
+    exit 1
+fi
+
+input_dir=$1
+
+# Verify input is a directory
+if [ ! -d "$input_dir" ]; then
+    echo "Error: '$input_dir' is not a valid directory"
+    exit 1
+fi
+
+for file in "$input_dir"/*; do
+    # Check if the file is a video file
+    if [[ $file == *.mkv || $file == *.avi || $file == *.mp4 || $file == *.mov ]]; then
+        video_info=$(ffprobe -v error -select_streams v:0 -show_entries stream=codec_name,pix_fmt -of default=noprint_wrappers=1 "$file")
+        if echo "$video_info" | grep -q "codec_name=h264" && echo "$video_info" | grep -q "pix_fmt=yuv420p"; then
+            echo "File $(basename "$file") already in H.264 8-bit format. Skipping."
+            continue
+        fi
+
+        # Temporary output filename with a unique extension
+        temp_output_file="${file%.*}.temp.mp4"
+        output_file="${file%.*}.mp4"
+
+        # Transcode to MP4 and only replace original on success
+        if ffmpeg -i "$file" \
+            -preset fast \
+            -c:v libx264 \
+            -crf 24 \
+            -c:a aac \
+            -b:a 128k \
+            -ar 44100 \
+            -pix_fmt yuv420p \
+            -movflags +faststart \
+            "$temp_output_file"; then
+            mv "$temp_output_file" "$output_file"
+            rm "$file"  # Optional: Remove original file if transcoding was successful
+            echo "Transcoded $(basename "$file") to H.264 8-bit MP4 format."
+        else
+            echo "Error transcoding $(basename "$file")"
+            rm "$temp_output_file"  # Cleanup temp file on failure
+        fi
+    fi
+done

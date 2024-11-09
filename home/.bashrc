@@ -150,6 +150,10 @@ esac
 export PATH="$PATH:/home/musaubrian/.turso"
 export PATH="$PATH:/snap"
 
+#For rn
+export ANDROID_HOME="$HOME/Android/Sdk/"
+
+
 . "$HOME/.cargo/env"
 
 navigate() {

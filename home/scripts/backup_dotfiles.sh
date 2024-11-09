@@ -38,6 +38,7 @@ cp -r ~/.config/kitty $CONFIG_DIR
 cp -r ~/.config/i3 $CONFIG_DIR
 cp -r ~/.config/Code/User/settings.json $CONFIG_DIR/Code/User/settings.json
 cp -r ~/.config/Code/User/keybindings.json $CONFIG_DIR/Code/User/keybindings.json
+cp -r ~/.config/wezterm $CONFIG_DIR
 cp -v ~/.config/starship.toml $CONFIG_DIR
 
 echo "COPIED TO $CONFIG_DIR"

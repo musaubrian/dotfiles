@@ -2,20 +2,16 @@
 
 install_packages() {
     sudo apt update -y && sudo apt upgrade -y
-    sudo apt install curl wget tmux ansible i3 kitty ripgrep \
+    sudo apt install curl wget tmux ansible i3 ripgrep feh \
         python3-launchpadlib python3-venv vlc pavucontrol brightnessctl -y
+
     wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 
     sudo chmod +s "$(which brightnessctl)"
 }
 
 setup_shell_environment() {
-    # echo 'if [ -f ~/.aliases ]; then
-    #    . ~/.aliases
-    # fi' >> ~/.bashrc
-
     curl -sS https://starship.rs/install.sh | sh
-    # echo 'eval "$(starship init bash)"' >> ~/.bashrc
 }
 
 setup_fzf() {
@@ -31,6 +27,7 @@ manage_ssh_keys() {
     mkdir -p ~/.ssh
     ansible-vault decrypt ./keys/*
     cp -rv ./keys/* ~/.ssh/
+    ansible-vault encrypt ./keys/*
 }
 
 manage_stash_repo() {
@@ -39,35 +36,73 @@ manage_stash_repo() {
     ansible-vault decrypt ./stash/db/* ./stash/wakatime/*
     cp ./stash/db/* ~/.db/ -v
     cp ./stash/wakatime/wakatime.cfg ~/.wakatime.cfg -v
-    ansible-vault encrypt ./stash/db/* ./keys/* ./stash/wakatime/*
+    ansible-vault encrypt ./stash/db/* ./stash/wakatime/*
 }
 
-copy_dotfiles() {
-    dirs_to_home=("./home/.fonts" "./home/.local" "./home/scripts" "./home/.aliases")
-    files_to_home=("./home/.bash_completions" "./home/.bashrc" "./home/.gitconfig" "./home/.profile" "./home/.tmux.conf" "./home/.zshrc")
-    dirs_to_config=("./home/.config/Code" "./home/.config/alacritty" "./home/.config/nvim", "./home/kitty", "./home/.config/i3")
-    files_to_config=("./home/.config/starship.toml")
+create_symlinks() {
+    create_symlink() {
+        local src="$(realpath "$1")"
+        local dest="$2"
 
-    for dir in "${dirs_to_home[@]}"; do
-        cp -rv "$dir" ~/
+        if [ -e "$dest" ] || [ -L "$dest" ]; then
+            echo "Backing up $dest to ${dest}.backup"
+            mv "$dest" "${dest}.backup"
+        fi
+
+        mkdir -p "$(dirname "$dest")"
+        ln -sf "$src" "$dest"
+        echo "Created symlink: $dest -> $src"
+    }
+
+    local home_files=(
+        "./home/.bash_completions"
+        "./home/.bashrc"
+        "./home/.gitconfig"
+        "./home/.profile"
+        "./home/.tmux.conf"
+        "./home/.zshrc"
+        "./home/.aliases"
+    )
+
+    local home_dirs=(
+        "./home/.fonts"
+        "./home/.local"
+        "./home/scripts"
+    )
+
+    local config_dirs=(
+        "./home/.config/Code"
+        "./home/.config/alacritty"
+        "./home/.config/nvim"
+        "./home/.config/kitty"
+        "./home/.config/i3"
+    )
+
+    local config_files=(
+        "./home/.config/starship.toml"
+    )
+
+    for file in "${home_files[@]}"; do
+        create_symlink "$file" "$HOME/$(basename "$file")"
     done
 
-    for file in "${files_to_home[@]}"; do
-        cp -r "$file" ~/
+    for dir in "${home_dirs[@]}"; do
+        create_symlink "$dir" "$HOME/$(basename "$dir")"
     done
 
-    for dir in "${dirs_to_config[@]}"; do
-        cp -rv "$dir" ~/.config/
+    mkdir -p "$HOME/.config"
+    for dir in "${config_dirs[@]}"; do
+        create_symlink "$dir" "$HOME/.config/$(basename "$dir")"
     done
 
-    for file in "${files_to_config[@]}"; do
-        cp -v "$file" ~/.config/
+    for file in "${config_files[@]}"; do
+        create_symlink "$file" "$HOME/.config/$(basename "$file")"
     done
 }
 
 setup_trackpad() {
-    mkdir -p /etc/X11/xorg.conf.d/
-    sudo cp -v ./home/90-touchpad.conf /etc/X11/xorg.conf.d/
+    sudo mkdir -p /etc/X11/xorg.conf.d/
+    sudo ln -sf "$(realpath ./home/90-touchpad.conf)" "/etc/X11/xorg.conf.d/90-touchpad.conf"
 }
 
 setup_neovim() {
@@ -83,24 +118,12 @@ clean_up() {
     rm -v nvim.appimage*
 }
 
-setup_docker() {
-    # Add Docker's official GPG key:
-    sudo apt-get install ca-certificates curl
-    sudo install -m 0755 -d /etc/apt/keyrings
-    sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
-    sudo chmod a+r /etc/apt/keyrings/docker.asc
-
-# Add the repository to Apt sources:
-    echo \
-        "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
-        $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
-    sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-    sudo apt-get update -y
-
-    sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-    sudo usermod -aG docker $USER
+setup_wezterm() {
+    curl -fsSL https://apt.fury.io/wez/gpg.key | sudo gpg --yes --dearmor -o /etc/apt/keyrings/wezterm-fury.gpg
+    echo 'deb [signed-by=/etc/apt/keyrings/wezterm-fury.gpg] https://apt.fury.io/wez/ * *' | sudo tee /etc/apt/sources.list.d/wezterm.list
+    sudo apt update -y
+    sudo apt install wezterm -y
 }
-
 
 main() {
     git clone http://github.com/musaubrian/dotfiles
@@ -109,12 +132,12 @@ main() {
     install_packages
     setup_shell_environment
     setup_fzf
+    setup_wezterm
     manage_ssh_keys
     manage_stash_repo
-    copy_dotfiles
+    create_symlinks
     setup_trackpad
     setup_neovim
-    # setup_docker
     clean_up
 }
 

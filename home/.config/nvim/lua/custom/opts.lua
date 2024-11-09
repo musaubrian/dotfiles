@@ -1,4 +1,4 @@
-vim.opt.guicursor = ""
+-- vim.opt.guicursor = ""
 vim.opt.splitright = true
 vim.opt.splitbelow = false
 vim.opt.inccommand = "split"

@@ -16,5 +16,10 @@
   {
     "key": "ctrl+a l",
     "command": "workbench.action.focusRightGroup"
+  },
+  {
+    "key": "alt+enter",
+    "command": "acceptSelectedSuggestion",
+    "when": "suggestWidgetVisible && textInputFocus"
   }
 ]
