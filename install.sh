@@ -44,11 +44,6 @@ create_symlinks() {
         local src="$(realpath "$1")"
         local dest="$2"
 
-        if [ -e "$dest" ] || [ -L "$dest" ]; then
-            echo "Backing up $dest to ${dest}.backup"
-            mv "$dest" "${dest}.backup"
-        fi
-
         mkdir -p "$(dirname "$dest")"
         ln -sf "$src" "$dest"
         echo "Created symlink: $dest -> $src"
@@ -58,6 +53,7 @@ create_symlinks() {
         "./home/.bash_completions"
         "./home/.bashrc"
         "./home/.gitconfig"
+        "./home/.githelpers"
         "./home/.profile"
         "./home/.tmux.conf"
         "./home/.zshrc"
@@ -117,9 +113,10 @@ setup_neovim() {
 
 clean_up() {
     rm -v nvim.appimage*
+    rm -rv squashfs-root/
     # Nice QoL
-    git remote remove origin main
-    git remode add origin main git@github.com:musaubrian/dotfiles
+    git remote remove origin
+    git remote add origin git@github.com:musaubrian/dotfiles
 }
 
 setup_wezterm() {
