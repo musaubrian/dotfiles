@@ -75,6 +75,7 @@ create_symlinks() {
         "./home/.config/alacritty"
         "./home/.config/nvim"
         "./home/.config/kitty"
+        "./home/.config/wezterm"
         "./home/.config/i3"
     )
 
@@ -116,6 +117,9 @@ setup_neovim() {
 
 clean_up() {
     rm -v nvim.appimage*
+    # Nice QoL
+    git remote remove origin main
+    git remode add origin main git@github.com:musaubrian/dotfiles
 }
 
 setup_wezterm() {
@@ -126,7 +130,8 @@ setup_wezterm() {
 }
 
 main() {
-    git clone http://github.com/musaubrian/dotfiles
+    mkdir -p "$HOME/personal" "$HOME/work"
+    git clone http://github.com/musaubrian/dotfiles "$HOME/personal"
     cd ./dotfiles || exit
 
     install_packages
