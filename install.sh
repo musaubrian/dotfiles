@@ -131,8 +131,8 @@ setup_wezterm() {
 
 main() {
     mkdir -p "$HOME/personal" "$HOME/work"
-    git clone http://github.com/musaubrian/dotfiles "$HOME/personal"
-    cd ./dotfiles || exit
+    git clone http://github.com/musaubrian/dotfiles "$HOME/personal/dotfiles"
+    cd "$HOME/personal/dotfiles || exit
 
     install_packages
     setup_shell_environment
