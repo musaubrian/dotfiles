@@ -1,15 +1,31 @@
 {
+  "keyboard.dispatch": "keyCode",
   "editor.minimap.enabled": false,
   "breadcrumbs.enabled": false,
   "editor.lineNumbers": "relative",
   "vim.leader": "<Space>",
   "vim.hlsearch": true,
-  "workbench.activityBar.location": "top",
+  "workbench.activityBar.location": "hidden",
   "editor.autoClosingBrackets": "never",
   "editor.tokenColorCustomizations": {
     "keywords": "#ff0000da" //mute the red abit
   },
   "editor.wordBasedSuggestions": "off",
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/*.code-search": true,
+    "**/composer.lock": true,
+    "**/package-lock.json": true,
+    "**/public/{[^i],?[^n]}*": true,
+    "**/vendor/*": true,
+  },
+  "search.quickOpen.includeHistory": false,
+  "search.showLineNumbers": true,
+  "editor.accessibilitySupport": "off",
+  "vscode_custom_css.imports": [
+    "file:///home/ulong/personal/dotfiles/home/code.css"
+  ],
   "vim.useSystemClipboard": true,
   "vim.highlightedyank.enable": true,
   "vim.normalModeKeyBindingsNonRecursive": [
@@ -29,7 +45,7 @@
         "a"
       ],
       "commands": [
-        "editor.action.quickFix"
+        "editor.action.codeActions"
       ]
     },
     {
@@ -98,29 +114,28 @@
       ]
     }
   ],
-  "editor.fontFamily": "'Iosevka Term'",
+  "editor.fontFamily": "'Iosevka Medium'",
   "editor.fontLigatures": false,
-  "editor.fontSize": 16.5,
+  "editor.fontSize": 17,
   "editor.formatOnSave": true,
   "editor.fontVariations": false,
-  "extensions.ignoreRecommendation": true,
+  "extensions.ignoreRecommendations": true,
   "terminal.integrated.minimumContrastRatio": 1,
   "editor.semanticHighlighting.enabled": true,
   "javascript.updateImportsOnFileMove.enabled": "always",
   "typescript.updateImportsOnFileMove.enabled": "always",
   "window.titleBarStyle": "custom",
-  "editor.cursorStyle": "block",
+  "editor.cursorStyle": "line",
   "window.customTitleBarVisibility": "auto",
-  "workbench.colorTheme": "GrunBoxTheme",
+  "workbench.colorTheme": "Gruvbox Dark Hard",
   "explorer.confirmDragAndDrop": false,
   "workbench.editor.empty.hint": "hidden",
   "workbench.startupEditor": "none",
-  "[typescript]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
-  },
-  "[vue]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
-  },
-  "gitlens.mode.active": "review",
   "git.openRepositoryInParentFolders": "never",
+  "window.commandCenter": false,
+  "workbench.layoutControl.enabled": false,
+  "window.menuBarVisibility": "compact",
+  "workbench.editor.enablePreview": false,
+  "workbench.editor.limit.value": 5,
+  "telemetry.telemetryLevel": "off",
 }
