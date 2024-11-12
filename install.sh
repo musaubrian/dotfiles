@@ -40,11 +40,15 @@ manage_stash_repo() {
 }
 
 create_symlinks() {
-    create_symlink() {
+     create_symlink() {
         local src="$(realpath "$1")"
         local dest="$2"
 
-        mkdir -p "$(dirname "$dest")"
+        # Remove existing destination
+        rm -rf "$dest"
+
+        # mkdir -p "$(dirname "$dest")"
+
         ln -sf "$src" "$dest"
         echo "Created symlink: $dest -> $src"
     }
@@ -56,18 +60,15 @@ create_symlinks() {
         "./home/.githelpers"
         "./home/.profile"
         "./home/.tmux.conf"
-        "./home/.zshrc"
         "./home/.aliases"
     )
 
     local home_dirs=(
         "./home/.fonts"
-        "./home/.local"
         "./home/scripts"
     )
 
     local config_dirs=(
-        "./home/.config/Code"
         "./home/.config/alacritty"
         "./home/.config/nvim"
         "./home/.config/kitty"
@@ -78,6 +79,12 @@ create_symlinks() {
     local config_files=(
         "./home/.config/starship.toml"
     )
+
+    mkdir -p "$HOME/.local" "$HOME/.config/Code/User"
+
+    create_symlink "$(realpath ./home/.local/bin)" "$HOME/.local/bin"
+    create_symlink "$(realpath ./home/.config/Code/User/settings.json)" "$HOME/.config/Code/User/settings.json"
+    create_symlink "$(realpath ./home/.config/Code/User/keybinds.json)" "$HOME/.config/Code/User/keybindings.json"
 
     for file in "${home_files[@]}"; do
         create_symlink "$file" "$HOME/$(basename "$file")"
@@ -127,20 +134,22 @@ setup_wezterm() {
 }
 
 main() {
-    mkdir -p "$HOME/personal" "$HOME/work"
-    git clone http://github.com/musaubrian/dotfiles "$HOME/personal/dotfiles"
-    cd "$HOME/personal/dotfiles" || exit
+    # mkdir -p "$HOME/personal" "$HOME/work"
+    # git clone http://github.com/musaubrian/dotfiles "$HOME/personal/dotfiles"
+    # cd "$HOME/personal/dotfiles" || exit
 
-    install_packages
-    setup_shell_environment
-    setup_fzf
-    setup_wezterm
-    manage_ssh_keys
-    manage_stash_repo
+    # install_packages
+    # setup_shell_environment
+    # setup_fzf
+    # setup_wezterm
+    # manage_ssh_keys
+    # manage_stash_repo
+    # create_symlinks
+    # setup_trackpad
+    # setup_neovim
+    # clean_up
+
     create_symlinks
-    setup_trackpad
-    setup_neovim
-    clean_up
 }
 
 main
