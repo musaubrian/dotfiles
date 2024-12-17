@@ -12,6 +12,7 @@ $directory\
         $git_status\
         $sudo\
         $python\
+        $cmd_duration\
         $line_break\
         $character"""
 

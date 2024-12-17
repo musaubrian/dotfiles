@@ -29,9 +29,6 @@ vim.keymap.set("n", "<down>", function()
   vim.notify("Use j to move", vim.log.levels.WARN)
 end)
 
--- Diagnostic keymaps
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
 vim.keymap.set("n", "<leader>gl", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
 
 --Markdown
@@ -40,9 +37,11 @@ vim.keymap.set("n", "<localleader>i", 'viwc_<c-r>"_<esc>', { desc = "Italicize t
 vim.keymap.set("n", "<localleader>l", 'viwc[<c-r>"]()<left>', { desc = "Convert text on cursor to md link" })
 vim.keymap.set("n", "<localleader>`", 'viwc`<c-r>"`<esc>', { desc = "Wrap with backticks" })
 
-vim.keymap.set("n", "<leader>rl", "<cmd>luafile %<CR>", {})
+vim.keymap.set("n", "<space>rl", "<cmd>luafile %<CR>", {})
+vim.keymap.set("v", "<space>rl", ":lua<CR>", {})
+
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, {})
---Compile-Mode
-vim.keymap.set("n", "<leader>cm", "<cmd>below Compile<CR>", {})
+vim.keymap.set("n", "<leader>cm", "<cmd>below Compile<CR>", {}) -- Compile mode
+
 vim.keymap.set("n", "<leader>tp", "<cmd>tabnext<CR>", {})
 vim.keymap.set("n", "<leader>tn", "<cmd>tabnext<CR>", {})

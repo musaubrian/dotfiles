@@ -18,14 +18,11 @@
     "**/composer.lock": true,
     "**/package-lock.json": true,
     "**/public/{[^i],?[^n]}*": true,
-    "**/vendor/*": true,
+    "**/vendor/*": true
   },
   "search.quickOpen.includeHistory": false,
   "search.showLineNumbers": true,
   "editor.accessibilitySupport": "off",
-  "vscode_custom_css.imports": [
-    "file:///home/ulong/personal/dotfiles/home/code.css"
-  ],
   "vim.useSystemClipboard": true,
   "vim.highlightedyank.enable": true,
   "vim.normalModeKeyBindingsNonRecursive": [
@@ -93,7 +90,7 @@
       "commands": [
         "editor.action.showHover"
       ]
-    },
+    }
   ],
   "vim.visualModeKeyBindings": [
     // Moves highlighted blocks
@@ -114,13 +111,12 @@
       ]
     }
   ],
-  "editor.fontFamily": "'Iosevka Medium'",
+  "editor.fontFamily": "'Zed Mono Medium'",
   "editor.fontLigatures": false,
   "editor.fontSize": 17,
   "editor.formatOnSave": true,
   "editor.fontVariations": false,
   "extensions.ignoreRecommendations": true,
-  "terminal.integrated.minimumContrastRatio": 1,
   "editor.semanticHighlighting.enabled": true,
   "javascript.updateImportsOnFileMove.enabled": "always",
   "typescript.updateImportsOnFileMove.enabled": "always",
@@ -138,4 +134,9 @@
   "workbench.editor.enablePreview": false,
   "workbench.editor.limit.value": 5,
   "telemetry.telemetryLevel": "off",
+  "editor.minimap.renderCharacters": false,
+  "workbench.editor.autoLockGroups": {
+    "mainThreadWebview-simpleBrowser.view": false,
+    "mainThreadWebview-browserPreview": false
+  }
 }

@@ -8,9 +8,9 @@ return {
       sync_install = false,
       ignore_install = {},
       modules = {},
-      ensure_installed = {},
+      ensure_installed = { "c", "lua", "vim", "vimdoc", "markdown", "markdown_inline", "query" },
       auto_install = true,
-      highlight = { enable = true },
+      highlight = { enable = true, additional_vim_regex_highlighting = true },
       indent = { enable = true },
       incremental_selection = {
         enable = true,

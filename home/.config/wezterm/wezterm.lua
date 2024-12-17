@@ -2,16 +2,26 @@ local wezterm = require("wezterm")
 
 local config = {}
 
-config.window_decorations = "NONE"
+-- config.window_decorations = "RESIZE"
 config.enable_tab_bar = true
 config.use_fancy_tab_bar = false
 config.tab_bar_at_bottom = true
-config.bold_brightens_ansi_colors = false
+config.bold_brightens_ansi_colors = true
+config.hide_tab_bar_if_only_one_tab = true
+config.scrollback_lines = 5000
 
-config.scrollback_lines = 10000
-
-config.font = wezterm.font("Iosevka Medium")
-config.font_size = 12
+config.font = wezterm.font("Zed Mono")
+config.font_size = 12.5
+config.freetype_load_flags = "NO_HINTING"
+config.freetype_load_target = "Normal"
+config.front_end = "OpenGL"
+config.line_height = 1.06
+config.window_padding = {
+	left = 3,
+	right = 3,
+	top = 5,
+	bottom = 5,
+}
 
 config.colors = {
 	foreground = "#D0CFCC",
@@ -112,27 +122,15 @@ config.keys = {
 		mods = "LEADER",
 		action = wezterm.action.ActivatePaneDirection("Right"),
 	},
-	-- Convenient Tab switching
-	{
-		key = "1",
-		mods = "LEADER",
-		action = wezterm.action.ActivateTab(0),
-	},
-	{
-		key = "2",
-		mods = "LEADER",
-		action = wezterm.action.ActivateTab(1),
-	},
-	{
-		key = "3",
-		mods = "LEADER",
-		action = wezterm.action.ActivateTab(2),
-	},
-	{
-		key = "4",
-		mods = "LEADER",
-		action = wezterm.action.ActivateTab(3),
-	},
 }
+
+-- Convenient Tab switching
+for i = 1, 4 do
+	table.insert(config.keys, {
+		key = tostring(i),
+		mods = "LEADER",
+		action = wezterm.action.ActivateTab(i - 1),
+	})
+end
 
 return config

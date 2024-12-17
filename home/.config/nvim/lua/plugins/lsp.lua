@@ -1,16 +1,21 @@
 return {
   "neovim/nvim-lspconfig",
-  event = "InsertEnter",
   dependencies = {
-    "williamboman/mason-lspconfig.nvim",
-    "WhoIsSethDaniel/mason-tool-installer.nvim",
+    {
+      "folke/lazydev.nvim",
+      ft = "lua",
+      opts = {
+        library = {
+          { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+        },
+      },
+    },
     { "williamboman/mason.nvim", config = true },
-    { "folke/neodev.nvim", opts = {} },
     { "j-hui/fidget.nvim", event = "BufEnter", opts = {} },
   },
   config = function()
     vim.api.nvim_create_autocmd("LspAttach", {
-      group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
+      group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
       callback = function(event)
         local nmap = function(keys, func, desc)
           if desc then
@@ -20,88 +25,29 @@ return {
         end
 
         nmap("gd", vim.lsp.buf.definition, "[G]o to [D]efinition")
-        nmap("gr", function()
-          require("telescope.builtin").lsp_references {
-            Base_opts,
-            layout_config = {
-              prompt_position = "top",
-            },
-          }
-        end, "[G]o to [R]eference")
+        nmap("gr", require("telescope.builtin").lsp_references, "[G]o to [R]eference")
         nmap("gI", vim.lsp.buf.implementation, "[G]oto [I]mplementation")
-        nmap("<leader>D", vim.lsp.buf.type_definition, "Type [D]efinition")
+        nmap("<leader>gD", vim.lsp.buf.type_definition, "Type [D]efinition")
         nmap("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
         nmap("<leader>rn", vim.lsp.buf.rename)
         nmap("<leader>ca", vim.lsp.buf.code_action)
         nmap("K", vim.lsp.buf.hover, "Hover Documentation")
-
-        vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, { desc = "Signature Documentation" })
       end,
     })
 
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
-
-    local servers = {
-      gopls = {},
-      ts_ls = {
-        server_capabilities = {
-          documentFormattingProvider = false,
-        },
-      },
-      templ = {},
-      pylsp = {},
-      marksman = {},
-      volar = {
-        init_options = {
-          vue = {
-            hybridMode = false,
-          },
-        },
-        filetypes = {
-          "typescript",
-          "javascript",
-          -- "javascriptreact",
-          -- "typescriptreact",
-          "vue",
-          "json",
-        },
-      },
-      lua_ls = {
-        workspace = {
-          checkThirdParty = false,
-          library = {
-            vim.env.VIMRUNTIME,
-          },
-        },
-        settings = {
-          Lua = {
-            completion = {
-              callSnippet = "Replace",
-            },
-          },
-        },
-      },
-    }
-
-    require("mason").setup()
-
-    local ensure_installed = vim.tbl_keys(servers or {})
-    vim.list_extend(ensure_installed, {
-      "stylua",
-      "prettierd",
-      "black",
-    })
-    require("mason-tool-installer").setup { ensure_installed = ensure_installed }
-
-    require("mason-lspconfig").setup {
-      handlers = {
-        function(server_name)
-          local server = servers[server_name] or {}
-          server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-          require("lspconfig")[server_name].setup(server)
-        end,
+    require("lspconfig").lua_ls.setup {}
+    require("lspconfig").gopls.setup {}
+    require("lspconfig").pylsp.setup {}
+    require("lspconfig").marksman.setup {}
+    require("lspconfig").templ.setup {}
+    require("lspconfig").phpactor.setup {}
+    require("lspconfig").tailwindcss.setup {}
+    require("lspconfig").rust_analyzer.setup {}
+    require("lspconfig").ts_ls.setup {
+      server_capabilities = {
+        documentFormattingProvider = false,
       },
     }
   end,
 }
+--   volar = { init_options = { vue = { hybridMode = false, }, }, filetypes = { "typescript", "javascript", -- "javascriptreact", -- "typescriptreact", "vue", "json", }, },

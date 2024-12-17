@@ -7,6 +7,7 @@
 
 [core]
 	editor=nvim
+	pager = delta
 
 [alias]
 	lg = "!. ~/.githelpers && pretty_git_log"
@@ -15,9 +16,20 @@
 
 	conflicts = !git ls-files -u | cut -f 2 | sort -u
 
+[pull]
+	rebase = true
 [push]
 	autoSetupRemote = true
 
 [diff]
-	colormoved = "default"
+	colorMoved = default
 	colormovedws = "allow-indentation-change"
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true    # use n and N to move between diff sections
+
+[merge]
+    conflictstyle = diff3

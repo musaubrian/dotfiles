@@ -1,18 +1,22 @@
 return {
   {
-    dir = "~/personal/pye.nvim",
-    opts = {
-      base_venv = "~/personal/.base_venv",
-    },
+    "minline.nvim",
+    dir = "~/personal/minline.nvim/",
+    opts = {},
+    -- config = function()
+    --   require("minline").setup()
+    -- end,
   },
-  { dir = "~/personal/php" },
   -- {
-  -- 	dir = "~/personal/jade.nvim",
-  -- 	priority = 1000,
-  -- 	lazy = false,
-  -- 	dependencies = "tjdevries/colorbuddy.nvim",
-  -- 	config = function()
-  -- 		require("jade")
-  -- 	end,
+  --   dir = "~/personal/pye.nvim",
+  --   opts = {
+  --     base_venv = "~/personal/.base_venv",
+  --   },
   -- },
+  {
+    dir = "~/personal/jade.nvim",
+    lazy = false,
+    dependencies = "tjdevries/colorbuddy.nvim",
+    opts = {},
+  },
 }

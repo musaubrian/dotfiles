@@ -151,8 +151,9 @@ export PATH="$PATH:/home/musaubrian/.turso"
 export PATH="$PATH:/snap"
 
 #For rn
-export ANDROID_HOME="$HOME/Android/Sdk/"
-
+export ANDROID_HOME=$HOME/Android/Sdk
+export PATH="$PATH:$ANDROID_HOME/emulator"
+export PATH="$PATH:$ANDROID_HOME/platform-tools"
 
 . "$HOME/.cargo/env"
 
@@ -163,3 +164,8 @@ bind -x '"\ef":navigate'
 
 # Added by Toolbox App
 export PATH="$PATH:/home/ulong/.local/share/JetBrains/Toolbox/scripts"
+export PATH="/home/ulong/.config/herd-lite/bin:$PATH"
+export PHP_INI_SCAN_DIR="/home/ulong/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
+export PATH="$PATH:$HOME/.config/composer/vendor/bin"
+
+python3 ~/scripts/gg.py -lst

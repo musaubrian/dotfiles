@@ -9,7 +9,7 @@ return {
     keywords = {
       FIX = {
         color = "error",
-        alt = { "FIXME", "BUG", "FIXIT", "ISSUE" },
+        alt = { "FIXME", "BUG", "FIXIT", "ISSUE", "IMPORTANT" },
       },
       TODO = { color = "warning" },
       HACK = { color = "warning", alt = { "RE" } },

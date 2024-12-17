@@ -12,14 +12,15 @@ Date: $readable_date
 
 Period:
 
-Trades | Profits | Losses | amount |
----    | ---     | ---    | ---    |
+| Trades | Profits | Losses | amount |
+| ---    | ---     | ---    | ---    |
 
 Mistakes
--
+---
 
 Learnings:
--
+---
+
 """
 
 TODAY_JOURNAL="$HOME/personal/notes/trading/journal/$today.md"

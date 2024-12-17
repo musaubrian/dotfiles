@@ -15,7 +15,6 @@ SELECTED_DIR=$(echo "$ALL_DIRS" | fzf --height 60% \
 
 if [[ -n "$SELECTED_DIR" ]]; then
     builtin cd "$HOME/$SELECTED_DIR"
-    nvim .
 else
     echo "[ERROR]: No directory selected"
 fi
