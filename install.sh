@@ -134,22 +134,20 @@ setup_wezterm() {
 }
 
 main() {
-    # mkdir -p "$HOME/personal" "$HOME/work"
-    # git clone http://github.com/musaubrian/dotfiles "$HOME/personal/dotfiles"
-    # cd "$HOME/personal/dotfiles" || exit
+    mkdir -p "$HOME/personal" "$HOME/work"
+    git clone http://github.com/musaubrian/dotfiles "$HOME/personal/dotfiles"
+    cd "$HOME/personal/dotfiles" || exit
 
-    # install_packages
-    # setup_shell_environment
-    # setup_fzf
-    # setup_wezterm
-    # manage_ssh_keys
-    # manage_stash_repo
-    # create_symlinks
-    # setup_trackpad
-    # setup_neovim
-    # clean_up
-
+    install_packages
+    setup_shell_environment
+    setup_fzf
+    setup_wezterm
+    manage_ssh_keys
+    manage_stash_repo
     create_symlinks
+    setup_trackpad
+    setup_neovim
+    clean_up
 }
 
 main
