@@ -67,6 +67,26 @@ vim.api.nvim_create_user_command("Idea", function()
   vim.fn.system(string.format("python3 ~/scripts/gg.py -id '%s'", query))
 end, {})
 
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
+  callback = function(event)
+    local nmap = function(keys, func, desc)
+      if desc then
+        desc = "LSP: " .. desc
+      end
+      vim.keymap.set("n", keys, func, { buffer = event.buf, desc = desc })
+    end
+
+    nmap("gd", vim.lsp.buf.definition, "[G]o to [D]efinition")
+    nmap("gr", require("telescope.builtin").lsp_references, "[G]o to [R]eference")
+    nmap("gI", vim.lsp.buf.implementation, "[G]oto [I]mplementation")
+    nmap("<leader>gD", vim.lsp.buf.type_definition, "Type [D]efinition")
+    nmap("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
+    nmap("<leader>rn", vim.lsp.buf.rename)
+    nmap("<leader>ca", vim.lsp.buf.code_action)
+  end,
+})
+
 vim.filetype.add {
   extension = {
     templ = "templ",
