@@ -35,10 +35,16 @@ return {
     sources = {
       default = { "lsp", "path", "luasnip", "buffer", "snippets" },
     },
-    signature = { enabled = true },
-
+    -- signature = { enabled = true, trigger= },
     completion = {
       menu = {
+        auto_show = function()
+          -- Dont show on command mode
+          if vim.fn.mode() == "c" or vim.fn.mode() == "i" then
+            return false
+          end
+          return true
+        end,
         draw = {
           columns = { { "label", "label_description", gap = 1 }, { "kind" } },
         },
