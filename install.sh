@@ -1,9 +1,23 @@
 #!/usr/bin/env bash
 
 install_packages() {
-    sudo apt update -y && sudo apt upgrade -y
-    sudo apt install curl wget tmux ansible i3 ripgrep feh \
-        python3-launchpadlib python3-venv vlc pavucontrol brightnessctl -y
+    if command -v pacman &> /dev/null; then
+        echo "Arch-based system detected, using pacman"
+        sudo pacman -Syu
+        # Install packages (adjust package names as needed for Arch)
+        sudo pacman -S curl wget tmux ansible i3 ripgrep feh \
+            python python-pip vlc pavucontrol brightnessctl
+
+    elif command -v apt &> /dev/null; then
+        echo "Debian-based system detected, using apt"
+        sudo apt update -y && sudo apt upgrade -y
+        sudo apt install curl wget tmux ansible i3 ripgrep feh \
+            python3-launchpadlib python3-venv vlc pavucontrol brightnessctl -y
+
+    else
+        echo "Unsupported package manager"
+        exit 1
+    fi
 
     wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 
@@ -40,7 +54,7 @@ manage_stash_repo() {
 }
 
 create_symlinks() {
-     create_symlink() {
+    create_symlink() {
         local src="$(realpath "$1")"
         local dest="$2"
 
@@ -49,59 +63,60 @@ create_symlinks() {
 
         # mkdir -p "$(dirname "$dest")"
 
-        ln -sf "$src" "$dest"
-        echo "Created symlink: $dest -> $src"
+        ln -sfv "$src" "$dest"
     }
 
     local home_files=(
-        "./home/.bash_completions"
-        "./home/.bashrc"
-        "./home/.gitconfig"
-        "./home/.githelpers"
-        "./home/.profile"
-        "./home/.tmux.conf"
-        "./home/.aliases"
-    )
+    "./home/.bash_completions"
+    "./home/.bashrc"
+    "./home/.gitconfig"
+    "./home/.githelpers"
+    "./home/.profile"
+    "./home/.tmux.conf"
+    "./home/.aliases"
+)
 
-    local home_dirs=(
-        "./home/.fonts"
-        "./home/scripts"
-    )
+local home_dirs=(
+"./home/.fonts"
+"./home/scripts"
+)
 
-    local config_dirs=(
-        "./home/.config/alacritty"
-        "./home/.config/nvim"
-        "./home/.config/kitty"
-        "./home/.config/wezterm"
-        "./home/.config/i3"
-    )
+local config_dirs=(
+"./home/.config/alacritty"
+"./home/.config/nvim"
+"./home/.config/kitty"
+"./home/.config/wezterm"
+"./home/.config/i3"
+"./home/.config/ghostty"
+"./home/.config/rofi"
+)
 
-    local config_files=(
-        "./home/.config/starship.toml"
-    )
+local config_files=(
+"./home/.config/starship.toml"
+)
 
-    mkdir -p "$HOME/.local" "$HOME/.config/Code/User"
+mkdir -p "$HOME/.local" "$HOME/.config/Code/User"
 
-    create_symlink "$(realpath ./home/.local/bin)" "$HOME/.local/bin"
-    create_symlink "$(realpath ./home/.config/Code/User/settings.json)" "$HOME/.config/Code/User/settings.json"
-    create_symlink "$(realpath ./home/.config/Code/User/keybinds.json)" "$HOME/.config/Code/User/keybindings.json"
+create_symlink "$(realpath ./home/.local/bin)" "$HOME/.local/bin"
+create_symlink "$(realpath ./home/.config/Code/User/settings.json)" "$HOME/.config/Code/User/settings.json"
+create_symlink "$(realpath ./home/.config/Code/User/keybinds.json)" "$HOME/.config/Code/User/keybindings.json"
 
-    for file in "${home_files[@]}"; do
-        create_symlink "$file" "$HOME/$(basename "$file")"
-    done
+for file in "${home_files[@]}"; do
+    create_symlink "$file" "$HOME/$(basename "$file")"
+done
 
-    for dir in "${home_dirs[@]}"; do
-        create_symlink "$dir" "$HOME/$(basename "$dir")"
-    done
+for dir in "${home_dirs[@]}"; do
+    create_symlink "$dir" "$HOME/$(basename "$dir")"
+done
 
-    mkdir -p "$HOME/.config"
-    for dir in "${config_dirs[@]}"; do
-        create_symlink "$dir" "$HOME/.config/$(basename "$dir")"
-    done
+mkdir -p "$HOME/.config"
+for dir in "${config_dirs[@]}"; do
+    create_symlink "$dir" "$HOME/.config/$(basename "$dir")"
+done
 
-    for file in "${config_files[@]}"; do
-        create_symlink "$file" "$HOME/.config/$(basename "$file")"
-    done
+for file in "${config_files[@]}"; do
+    create_symlink "$file" "$HOME/.config/$(basename "$file")"
+done
 }
 
 setup_trackpad() {
@@ -115,7 +130,7 @@ setup_neovim() {
     ./nvim.appimage --appimage-extract
     ./squashfs-root/AppRun --version
     sudo mv squashfs-root /
-    sudo ln -s /squashfs-root/AppRun /usr/bin/nvim
+    sudo ln -sv /squashfs-root/AppRun /usr/bin/nvim
 }
 
 clean_up() {
@@ -134,7 +149,7 @@ setup_wezterm() {
 }
 
 main() {
-    mkdir -p "$HOME/personal" "$HOME/work"
+    mkdir -p "$HOME/personal" "$HOME/work" "$HOME/thirdparty"
     git clone http://github.com/musaubrian/dotfiles "$HOME/personal/dotfiles"
     cd "$HOME/personal/dotfiles" || exit
 
@@ -149,5 +164,4 @@ main() {
     setup_neovim
     clean_up
 }
-
 main

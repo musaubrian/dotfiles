@@ -1,27 +1,30 @@
 #!/usr/bin/env bash
 
-PERSONAL_OR_WORK="$1"
-GIT_HUB_OR_LAB="$2"
+CLONE_DIR="$1"
+GITHUB="$2"
 URL="$3"
 CLONE_AS="$4"
-DEPTH="$5"
+EXTRA="$5"
 USAGE_INSTRUCTION="Usage:
-clone [p/w] [l(gitlab)/h(github)] username/repo clone_as"
+clone [p|w|t] [username/repo | full_url_if_not_gh] clone_as <any_other_flags>"
 
-if [ "$GIT_HUB_OR_LAB" == "l" ]  || [ "$GIT_HUB_OR_LAB" == "lab" ]; then
-    GIT_URL="git@gitlab.com:$URL $CLONE_AS $DEPTH"
-elif [ "$GIT_HUB_OR_LAB" == "h" ]  || [ "$GIT_HUB_OR_LAB" == "hub" ]; then
-    GIT_URL="git@github.com:$URL $CLONE_AS $DEPTH"
+if [ "$GITHUB" == "h" ]; then
+    GIT_OPTS="git@github.com:$URL $CLONE_AS $EXTRA"
+elif ["$GITHUB" == "" ]; then
+    GIT_OPTS="$URL $CLONE_AS $EXTRA"
 else
     echo "$USAGE_INSTRUCTION"
 fi
 
 
 
-if [ "$PERSONAL_OR_WORK" == "p" ]; then
+if [ "$CLONE_DIR" == "p" ]; then
     echo "Switched to personal"
-    cd ~/personal/ && `git clone $GIT_URL`
-elif [ "$PERSONAL_OR_WORK" == "w" ]; then
+    cd ~/personal/ && `git clone $GIT_OPTS`
+elif [ "$CLONE_DIR" == "w" ]; then
     echo "Switched to work"
-    cd ~/work/ && `git clone $GIT_URL`
+    cd ~/work/ && `git clone $GIT_OPTS`
+elif [ "$CLONE_DIR" == "t" ]; then
+    echo "Switched to thirdparty"
+    cd ~/thirdparty/ && `git clone $GIT_OPTS`
 fi

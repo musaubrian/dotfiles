@@ -32,4 +32,4 @@ diverged = '⇕⇡${ahead_count}⇣${behind_count}'
 behind = '⇣${count}'
 
 [python]
-format = '[(\($virtualenv\))](bold bright-black)'
+format = '[(\($virtualenv\))](bold white dimmed)'

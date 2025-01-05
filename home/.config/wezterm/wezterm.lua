@@ -2,7 +2,7 @@ local wezterm = require("wezterm")
 
 local config = {}
 
--- config.window_decorations = "RESIZE"
+config.window_decorations = "RESIZE"
 config.enable_tab_bar = true
 config.use_fancy_tab_bar = false
 config.tab_bar_at_bottom = true

@@ -1,7 +1,7 @@
 return {
   {
     "minline.nvim",
-    dir = "~/personal/minline.nvim/",
+    dir = "~/personal/minline.nvim",
     opts = {},
     -- config = function()
     --   require("minline").setup()
@@ -17,6 +17,6 @@ return {
     dir = "~/personal/jade.nvim",
     lazy = false,
     dependencies = "tjdevries/colorbuddy.nvim",
-    opts = {},
+    opts = { no_bg = true },
   },
 }

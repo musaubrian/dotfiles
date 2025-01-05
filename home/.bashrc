@@ -164,8 +164,8 @@ bind -x '"\ef":navigate'
 
 # Added by Toolbox App
 export PATH="$PATH:/home/ulong/.local/share/JetBrains/Toolbox/scripts"
-export PATH="/home/ulong/.config/herd-lite/bin:$PATH"
-export PHP_INI_SCAN_DIR="/home/ulong/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
 export PATH="$PATH:$HOME/.config/composer/vendor/bin"
+export PATH="$PATH:$HOME/thirdparty/zig"
+export PATH="$PATH:$HOME/thirdparty/ghostty/zig-out/share"
 
 python3 ~/scripts/gg.py -lst

@@ -40,7 +40,7 @@ return {
       menu = {
         auto_show = function()
           -- Dont show on command mode
-          if vim.fn.mode() == "c" or vim.fn.mode() == "i" then
+          if vim.fn.mode() == "c" then
             return false
           end
           return true

@@ -1,0 +1,29 @@
+font-family         = "Zed Mono Medium"
+font-size           = 12.3
+theme               = "Hybrid"
+font-thicken        = true
+freetype-load-flags = no-hinting
+cursor-style-blink  = false
+window-decoration   = false
+# gtk-adwaita=false
+gtk-tabs-location   = bottom
+gtk-wide-tabs       = false
+window-padding-x    = 5
+window-padding-y    = 5
+
+keybind             = "all:unconsumed:ctrl+shift+r=reload_config"
+keybind             = "ctrl+a>c=new_tab"
+keybind             = "ctrl+a>-=new_split:down"
+keybind             = "ctrl+a>shift+\=new_split:right"
+
+
+# keybind="ctrl+a>Left=goto_split:left"
+# keybind="ctrl+a>right=goto_split:right"
+# keybind="ctrl+a>up=goto_split:up"
+# keybind="ctrl+a>down=goto_split:down"
+
+keybind             = "ctrl+a>1=goto_tab:1"
+keybind             = "ctrl+a>2=goto_tab:2"
+keybind             = "ctrl+a>3=goto_tab:3"
+keybind             = "ctrl+a>4=goto_tab:4"
+

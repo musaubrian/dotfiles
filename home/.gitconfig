@@ -7,7 +7,7 @@
 
 [core]
 	editor=nvim
-	pager = delta
+	pager=delta
 
 [alias]
 	lg = "!. ~/.githelpers && pretty_git_log"
