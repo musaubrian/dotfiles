@@ -57,12 +57,9 @@ create_symlinks() {
     create_symlink() {
         local src="$(realpath "$1")"
         local dest="$2"
-
         # Remove existing destination
         rm -rf "$dest"
-
         # mkdir -p "$(dirname "$dest")"
-
         ln -sfv "$src" "$dest"
     }
 
@@ -125,12 +122,15 @@ setup_trackpad() {
 }
 
 setup_neovim() {
-    curl -sLO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
-    chmod u+x nvim.appimage
-    ./nvim.appimage --appimage-extract
-    ./squashfs-root/AppRun --version
-    sudo mv squashfs-root /
-    sudo ln -sv /squashfs-root/AppRun /usr/bin/nvim
+
+    if command -v apt &> /dev/null; then
+        curl -sLO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
+        chmod u+x nvim.appimage
+        ./nvim.appimage --appimage-extract
+        ./squashfs-root/AppRun --version
+        sudo mv squashfs-root /
+        sudo ln -sv /squashfs-root/AppRun /usr/bin/nvim
+    fi
 }
 
 clean_up() {
@@ -142,10 +142,12 @@ clean_up() {
 }
 
 setup_wezterm() {
-    curl -fsSL https://apt.fury.io/wez/gpg.key | sudo gpg --yes --dearmor -o /etc/apt/keyrings/wezterm-fury.gpg
-    echo 'deb [signed-by=/etc/apt/keyrings/wezterm-fury.gpg] https://apt.fury.io/wez/ * *' | sudo tee /etc/apt/sources.list.d/wezterm.list
-    sudo apt update -y
-    sudo apt install wezterm -y
+    if command -v apt &> /dev/null; then
+        curl -fsSL https://apt.fury.io/wez/gpg.key | sudo gpg --yes --dearmor -o /etc/apt/keyrings/wezterm-fury.gpg
+        echo 'deb [signed-by=/etc/apt/keyrings/wezterm-fury.gpg] https://apt.fury.io/wez/ * *' | sudo tee /etc/apt/sources.list.d/wezterm.list
+        sudo apt update -y
+        sudo apt install wezterm -y
+    fi
 }
 
 main() {
