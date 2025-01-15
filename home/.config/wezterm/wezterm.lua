@@ -10,7 +10,7 @@ config.bold_brightens_ansi_colors = true
 config.hide_tab_bar_if_only_one_tab = true
 config.scrollback_lines = 5000
 
-config.font = wezterm.font("Zed Mono")
+config.font = wezterm.font("Iosevka Medium")
 config.font_size = 12.5
 config.freetype_load_flags = "NO_HINTING"
 config.freetype_load_target = "Normal"

@@ -30,6 +30,15 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- "i3lock --nofork --color=
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 
+#default_border pixel 1
+# class                 border  backgr. text    indicator child_border
+client.focused          #1d2021 #3c3836 #fbf1c7 #d65d0e   #3c3836
+client.focused_inactive #1d2021 #282828 #a89984 #928374   #282828
+client.unfocused        #1d2021 #282828 #928374 #3c3836   #282828
+client.urgent           #1d2021 #cc241d #fbf1c7 #cc241d   #cc241d
+client.placeholder      #1d2021 #1d2021 #a89984 #1d2021   #1d2021
+
+client.background       #1d2021
 bindsym $mod+x exec i3lock --nofork --color=#171717
 
 
@@ -193,13 +202,22 @@ mode "resize" {
 }
 
 bindsym $mod+r mode "resize"
-
+# exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
+ colors {
+        background #1d2021
+        statusline #fbf1c7
+        separator  #928374
+
+        focused_workspace  #3c3836 #3c3836 #fbf1c7
+        active_workspace   #282828 #282828 #a89984
+        inactive_workspace #282828 #282828 #928374
+        urgent_workspace   #cc241d #cc241d #fbf1c7
+    }
         status_command i3status -c ~/.config/i3/i3status.conf
 }
 
 exec --no-startup-id xsetroot -solid "#222222"
-
 exec_always feh --bg-fill ~/personal/dotfiles/wall.jpg

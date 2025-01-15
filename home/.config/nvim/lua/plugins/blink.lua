@@ -35,12 +35,12 @@ return {
     sources = {
       default = { "lsp", "path", "luasnip", "buffer", "snippets" },
     },
-    -- signature = { enabled = true, trigger= },
+    signature = { enabled = false },
     completion = {
       menu = {
         auto_show = function()
           -- Dont show on command mode
-          if vim.fn.mode() == "c" then
+          if vim.fn.mode() == "c" or vim.fn.mode() == "i" then
             return false
           end
           return true

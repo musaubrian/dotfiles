@@ -6,12 +6,16 @@ return {
   "tpope/vim-sleuth",
   "mbbill/undotree",
   "musaubrian/scratch.nvim",
-  -- {
-  --   "musaubrian/jade.nvim",
-  --   dependencies = "tjdevries/colorbuddy.nvim",
-  --   lazy = false,
-  --   opts = {},
-  -- },
+  {
+    "musaubrian/jade.nvim",
+    lazy = false,
+    dependencies = "tjdevries/colorbuddy.nvim",
+    opts = { no_bg = true },
+  },
+  {
+    "musaubrian/minline.nvim",
+    opts = {},
+  },
   {
     "musaubrian/pye.nvim",
     event = "BufEnter",

@@ -19,7 +19,7 @@ return {
         scroll_strategy = "cycle",
         layout_config = {
           prompt_position = "top",
-          height = 0.7,
+          height = 0.8,
         },
         mappings = {
           i = {

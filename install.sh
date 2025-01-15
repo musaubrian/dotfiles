@@ -3,10 +3,9 @@
 install_packages() {
     if command -v pacman &> /dev/null; then
         echo "Arch-based system detected, using pacman"
-        sudo pacman -Syu
         # Install packages (adjust package names as needed for Arch)
-        sudo pacman -S curl wget tmux ansible i3 ripgrep feh \
-            python python-pip vlc pavucontrol brightnessctl
+        sudo pacman -Syu curl wget tmux ansible  ripgrep feh \
+            python python-pip pavucontrol brightnessctl polybar mpv
 
     elif command -v apt &> /dev/null; then
         echo "Debian-based system detected, using apt"
@@ -67,7 +66,6 @@ create_symlinks() {
     "./home/.bash_completions"
     "./home/.bashrc"
     "./home/.gitconfig"
-    "./home/.githelpers"
     "./home/.profile"
     "./home/.tmux.conf"
     "./home/.aliases"
@@ -79,13 +77,13 @@ local home_dirs=(
 )
 
 local config_dirs=(
-"./home/.config/alacritty"
 "./home/.config/nvim"
 "./home/.config/kitty"
 "./home/.config/wezterm"
 "./home/.config/i3"
 "./home/.config/ghostty"
 "./home/.config/rofi"
+"./home/.config/polybar"
 )
 
 local config_files=(
@@ -152,11 +150,11 @@ setup_wezterm() {
 
 main() {
     mkdir -p "$HOME/personal" "$HOME/work" "$HOME/thirdparty"
-    git clone http://github.com/musaubrian/dotfiles "$HOME/personal/dotfiles"
+    #git clone http://github.com/musaubrian/dotfiles "$HOME/personal/dotfiles"
     cd "$HOME/personal/dotfiles" || exit
 
     install_packages
-    setup_shell_environment
+    #setup_shell_environment
     setup_fzf
     setup_wezterm
     manage_ssh_keys
