@@ -5,7 +5,8 @@ install_packages() {
         echo "Arch-based system detected, using pacman"
         # Install packages (adjust package names as needed for Arch)
         sudo pacman -Syu curl wget tmux ansible  ripgrep feh \
-            python python-pip pavucontrol brightnessctl polybar mpv
+            python python-pip pavucontrol brightnessctl timeshift mpv \
+            bluez bluez-utils thunar kitty
 
     elif command -v apt &> /dev/null; then
         echo "Debian-based system detected, using apt"
@@ -83,7 +84,6 @@ local config_dirs=(
 "./home/.config/i3"
 "./home/.config/ghostty"
 "./home/.config/rofi"
-"./home/.config/polybar"
 )
 
 local config_files=(
@@ -132,8 +132,11 @@ setup_neovim() {
 }
 
 clean_up() {
-    rm -v nvim.appimage*
-    rm -rv squashfs-root/
+
+    if command -v apt &> /dev/null; then
+        rm -v nvim.appimage*
+        rm -rv squashfs-root/
+    fi
     # Nice QoL
     git remote remove origin
     git remote add origin git@github.com:musaubrian/dotfiles
@@ -150,11 +153,11 @@ setup_wezterm() {
 
 main() {
     mkdir -p "$HOME/personal" "$HOME/work" "$HOME/thirdparty"
-    #git clone http://github.com/musaubrian/dotfiles "$HOME/personal/dotfiles"
+    git clone http://github.com/musaubrian/dotfiles "$HOME/personal/dotfiles"
     cd "$HOME/personal/dotfiles" || exit
 
     install_packages
-    #setup_shell_environment
+    setup_shell_environment
     setup_fzf
     setup_wezterm
     manage_ssh_keys

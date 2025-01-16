@@ -1,6 +1,6 @@
 set $mod Mod4
 
-font pango:Iosevka Medium 10
+font pango:Iosevka Medium 11
 
 exec --no-startup-id $(which gnome-keyring-daemon) --start --components=pkcs11,secrets,ssh
 exec --no-startup-id  setxkbmap -option caps:escape
@@ -30,7 +30,7 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- "i3lock --nofork --color=
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 
-#default_border pixel 1
+default_border pixel 0
 # class                 border  backgr. text    indicator child_border
 client.focused          #1d2021 #3c3836 #fbf1c7 #d65d0e   #3c3836
 client.focused_inactive #1d2021 #282828 #a89984 #928374   #282828
