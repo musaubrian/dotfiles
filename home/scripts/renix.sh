@@ -29,10 +29,12 @@ gen=$(nixos-rebuild list-generations | grep current)
 
 git add .
 git commit -m "$gen"
+git push origin main
 
 pushd "$ROOT_DIR/stash"
 git add .
 git commit -m "follow $gen"
+git push origin main
 popd
 
 popd

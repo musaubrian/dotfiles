@@ -77,7 +77,11 @@ setup_trackpad() {
 main() {
     mkdir -p "$HOME/personal" "$HOME/work" "$HOME/thirdparty"
     sudo ln -sfv  "$(realpath ./home/configuration.nix)" /etc/nixos/configuration.nix
-    sudo nixos-rebuild switch
+
+    echo "Building NixOS..."
+    sudo nixos-rebuild switch &>/tmp/nixos-switch.log || \
+        (cat /tmp/nixos-switch.log | grep error && false)
+
     manage_keys
     manage_stash
     create_symlinks
