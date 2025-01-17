@@ -21,6 +21,7 @@ alias ls='ls --color=tty'
 alias lsa='ls -lah'
 alias md='mkdir -p'
 alias nx='pnpm dlx'
+alias nex="nvim $HOME/personal/dotfiles/home/configuration.nix"
 alias reload='source ~/.profile && clear'
 alias f="~/scripts/f.sh"
 alias wget="~/scripts/wget.sh"

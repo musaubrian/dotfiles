@@ -108,39 +108,44 @@
     #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
     git
-    xclip
-    xsel
-    vim
-    chromium
-    mpv
-    xfce.thunar
-    feh
-    neovim
-    python313
-    go
-    rustup
-    php
-    nodejs_22
-    pavucontrol
     libgcc
     gcc
     gnumake
     sqlite
     pkgs.sshfs
+    xclip
+    xsel
+    unzip
+    tree
+    cronie
+
+    neovim
+    feh
+    pavucontrol
     brightnessctl
-    networkmanagerapplet
-    ansible
     fzf
     ripgrep
     starship
     wezterm
-    tree
-    unzip
     fastfetch
     btop
     delta
     yt-dlp
     alejandra
+
+    #lang related
+    python313
+    go
+    rustup
+    php
+    nodejs_22
+
+    #applications
+    xfce.thunar
+    chromium
+    mpv
+    networkmanagerapplet
+    ansible
     flameshot
     telegram-desktop
   ];
