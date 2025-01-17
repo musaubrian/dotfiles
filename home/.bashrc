@@ -120,52 +120,32 @@ if [ -f ~/.bash_completions ]; then
 fi
 eval "$(starship init bash)"
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+if command -v fzf-share >/dev/null; then
+  source "$(fzf-share)/key-bindings.bash"
+  source "$(fzf-share)/completion.bash"
+fi
 
 
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
 export GOPATH=$HOME/go
 export PATH="$PATH:/usr/local/go/bin:$GOPATH/bin"
 export VISUAL=nvim
 export EDITOR="$VISUAL"
 
-# pnpm
-export PNPM_HOME="/home/ulong/.local/share/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
-export PATH="$PATH:/home/musaubrian/.turso"
-export PATH="$PATH:/snap"
-
 #For rn
 export ANDROID_HOME=$HOME/Android/Sdk
 export PATH="$PATH:$ANDROID_HOME/emulator"
 export PATH="$PATH:$ANDROID_HOME/platform-tools"
 
-. "$HOME/.cargo/env"
 
 navigate() {
    source ~/scripts/f.sh
 }
 bind -x '"\ef":navigate'
 
-# Added by Toolbox App
-export PATH="$PATH:/home/ulong/.local/share/JetBrains/Toolbox/scripts"
-export PATH="$PATH:$HOME/.config/composer/vendor/bin"
-export PATH="$PATH:$HOME/thirdparty/zig"
-export PATH="$PATH:$HOME/thirdparty/ghostty/zig-out/share"
 
 python3 ~/scripts/gg.py -lst

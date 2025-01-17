@@ -10,4 +10,4 @@ configuration {
 	sorting-method:    "name";
     }
 }
-@theme "/usr/share/rofi/themes/gruvbox-dark-hard.rasi"
+@theme "/nix/store/frw0hrn5gl0l87badrfgrz77i2idbmzn-rofi-1.7.5/share/rofi/themes/gruvbox-dark-hard.rasi"
