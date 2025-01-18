@@ -132,12 +132,28 @@
     yt-dlp
     alejandra
     hugo
+    uv #python stuff
+
+    #neovim tools, basically yeet mason
+    nil
+    gopls
+    lua-language-server
+    marksman
+    python312Packages.python-lsp-server
+    typescript-language-server
+    tailwindcss-language-server
+
+    prettierd
+    stylua
+    phpactor
+    goimports-reviser
 
     #lang related
-    python313
+    python312
     go
     rustup
-    php
+    php83
+    php83Packages.composer
     nodejs_22
 
     #applications
