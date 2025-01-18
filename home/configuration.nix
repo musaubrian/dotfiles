@@ -169,8 +169,12 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   networking.firewall.allowedTCPPortRanges = [
     {
+      from = 1000;
+      to = 1500;
+    }
+    {
       from = 3000;
-      to = 3050;
+      to = 3500;
     }
     {
       from = 8000;
