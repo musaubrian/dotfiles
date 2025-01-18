@@ -25,7 +25,7 @@ echo "Rebuilding NixOS..."
 sudo nixos-rebuild switch &>/tmp/nixos-switch.log || \
     (cat /tmp/nixos-switch.log | grep error && false)
 
-gen=$(nixos-rebuild list-generations | grep current)
+gen=$(nixos-rebuild list-generations | grep current | awk '{print "build(" $1 ") NixOS vers: " $5 " Kernel: " $6}')
 
 git add .
 git commit -m "$gen"

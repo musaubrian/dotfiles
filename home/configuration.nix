@@ -105,7 +105,6 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
     git
     libgcc
@@ -132,6 +131,7 @@
     delta
     yt-dlp
     alejandra
+    hugo
 
     #lang related
     python313
@@ -148,6 +148,7 @@
     ansible
     flameshot
     telegram-desktop
+    android-studio
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -163,11 +164,19 @@
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
 
+  networking.firewall.enable = true;
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+  networking.firewall.allowedTCPPortRanges = [
+    {
+      from = 3000;
+      to = 3050;
+    }
+    {
+      from = 8000;
+      to = 9000;
+    }
+  ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

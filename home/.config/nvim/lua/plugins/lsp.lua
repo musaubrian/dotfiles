@@ -24,6 +24,7 @@ return {
       phpactor = {},
       tailwindcss = {},
       rust_analyzer = {},
+      nil_ls = {},
       ts_ls = {
         server_capabilities = {
           documentFormattingProvider = false,
