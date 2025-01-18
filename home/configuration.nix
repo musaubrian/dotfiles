@@ -147,6 +147,7 @@
     stylua
     phpactor
     goimports-reviser
+    ruff
 
     #lang related
     python312
