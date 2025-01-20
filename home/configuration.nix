@@ -146,7 +146,6 @@
     prettierd
     stylua
     phpactor
-    goimports-reviser
     ruff
 
     #lang related

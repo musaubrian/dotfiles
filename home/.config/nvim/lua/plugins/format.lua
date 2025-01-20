@@ -10,6 +10,7 @@ return {
         timeout_ms = 500,
         lsp_format = "fallback",
       },
+
       formatters_by_ft = {
         lua = { "stylua" },
         javascript = { "prettierd" },
@@ -19,9 +20,9 @@ return {
         vue = { "prettierd" },
         html = { "prettierd" },
         css = { "prettierd" },
-        python = { "ruff" },
-        go = { "goimports-reviser" },
-        nix = {"alejandra"},
+        go = { "goimports" },
+        nix = { "alejandra" },
+        python = { "ruff_format" },
         -- blade = { "blade-formatter" },
         -- php = { "pint" },
       },
