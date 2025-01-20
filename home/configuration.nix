@@ -158,7 +158,7 @@
 
     #applications
     xfce.thunar
-    chromium
+    firefox
     mpv
     networkmanagerapplet
     ansible
