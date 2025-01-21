@@ -111,7 +111,7 @@
     gcc
     gnumake
     sqlite
-    pkgs.sshfs
+    sshfs
     xclip
     xsel
     unzip
@@ -165,6 +165,7 @@
     flameshot
     telegram-desktop
     android-studio
+    zathura
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
