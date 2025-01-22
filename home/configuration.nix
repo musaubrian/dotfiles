@@ -166,6 +166,7 @@
     telegram-desktop
     android-studio
     zathura
+    libreoffice
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
