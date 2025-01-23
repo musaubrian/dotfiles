@@ -6,7 +6,7 @@ URL="$3"
 CLONE_AS="$4"
 EXTRA="$5"
 USAGE_INSTRUCTION="Usage:
-clone [p|w|t] [h|r] [username/repo | full_url_if_not_gh] clone_as <any_other_flags>"
+    clone [p|w|t] [h|r] [username/repo | full_url_if_not_gh] clone_as <any_other_flags>"
 
 if [ "$SOURCE" == "h" ]; then
     GIT_OPTS="git@github.com:$URL $CLONE_AS $EXTRA"
@@ -14,6 +14,7 @@ elif [ "$SOURCE" == "r" ]; then
     GIT_OPTS="$URL $CLONE_AS $EXTRA"
 else
     echo "$USAGE_INSTRUCTION"
+    exit 1
 fi
 
 

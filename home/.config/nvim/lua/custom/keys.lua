@@ -41,7 +41,6 @@ vim.keymap.set("n", "<space>rl", "<cmd>luafile %<CR>", {})
 vim.keymap.set("v", "<space>rl", ":lua<CR>", {})
 
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, {})
-vim.keymap.set("n", "<leader>cm", "<cmd>below Compile<CR>", {}) -- Compile mode
 
 vim.keymap.set("n", "<leader>tp", "<cmd>tabnext<CR>", {})
 vim.keymap.set("n", "<leader>tn", "<cmd>tabnext<CR>", {})

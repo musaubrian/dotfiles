@@ -33,12 +33,14 @@ exec --no-startup-id nm-applet
 tiling_drag modifier titlebar
 
 # class                 border  backgr. text    indicator child_border
-client.focused          #1d2021 #3c3836 #fbf1c7 #d65d0e   #3c3836
+
+# client.focused          #1d2021 #3c3836 #fbf1c7 #d65d0e   #3c3836
+client.focused          #1d2021 #3c3836 #fbf1c7           #3c3836
 client.focused_inactive #1d2021 #282828 #a89984 #928374   #282828
 client.unfocused        #1d2021 #282828 #928374 #3c3836   #282828
 client.urgent           #1d2021 #cc241d #fbf1c7 #cc241d   #cc241d
 client.placeholder      #1d2021 #1d2021 #a89984 #1d2021   #1d2021
-
+#
 client.background       #1d2021
 bindsym $mod+x exec i3lock --nofork --color=#171717
 
@@ -47,9 +49,10 @@ bindsym $mod+x exec i3lock --nofork --color=#171717
 set $refresh_i3status killall -SIGUSR1 i3status
 bindsym XF86AudioRaiseVolume exec --no-startup-id wpctl set-volume @DEFAULT_SINK@ .1+ && $refresh_i3status
 bindsym XF86AudioLowerVolume exec --no-startup-id wpctl set-volume @DEFAULT_SINK@ .1- && $refresh_i3status
-bindsym XF86AudioMute exec --no-startup-id wpctl set-volume @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id wpctl set-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 # haven't found a match for muting mic
 # bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+bindsym  XF86AudioMicMute exec --no-startup-id wpctl set-mute @DEFAULT_SOURCE@ toggle && $refresh_i3_status
 
 # brightness
 bindsym XF86MonBrightnessDown exec brightnessctl s 1-%
