@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-cd ~/Downloads/
+pushd ~/Downloads/
 
 wget "$1"
 
-cd - >> /dev/null
+popd

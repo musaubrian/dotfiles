@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# DEPRECATED: Replaced with f.sh
 
 OPTIONS=$1
 PERSONAL=~/personal/

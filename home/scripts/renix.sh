@@ -22,7 +22,7 @@ ansible-vault encrypt ./keys/* $STASH_DIR/db/* $STASH_DIR/wakatime/*
 alejandra "$NIX_CONFIG" &>/dev/null
 
 echo "Rebuilding NixOS..."
-sudo nixos-rebuild switch &>/tmp/nixos-switch.log || \
+sudo nixos-rebuild switch --upgrade &>/tmp/nixos-switch.log || \
     (cat /tmp/nixos-switch.log | grep error && false)
 
 gen=$(nixos-rebuild list-generations | grep current | awk '{print "build(" $1 ") NixOS vers: " $5 " Kernel: " $6}')
