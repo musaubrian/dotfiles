@@ -116,7 +116,6 @@
     xsel
     unzip
     tree
-    pkg-config
 
     neovim
     feh
@@ -128,7 +127,7 @@
     wezterm
     fastfetch
     btop
-    difftastic
+    delta
     yt-dlp
     alejandra
     hugo

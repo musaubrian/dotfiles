@@ -7,7 +7,13 @@
 
 [core]
 	editor=nvim
-	pager=difft
+	pager = delta
+[delta]
+	side-by-side = true
+	navigate = true
+
+[interactive]
+	diffFilter = delta --color-only --diff-so-fancy
 
 [alias]
 	lg = log --oneline --graph --decorate
@@ -17,11 +23,9 @@
 
 [pull]
 	rebase = true
-
 [push]
 	autoSetupRemote = true
 
 [diff]
-	external = difft
 	colormoved = "default"
 	colormovedws = "allow-indentation-change"
