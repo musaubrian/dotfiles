@@ -132,6 +132,7 @@
     alejandra
     hugo
     uv #python stuff
+    glow
 
     #neovim tools, basically yeet mason
     nil
