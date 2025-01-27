@@ -51,28 +51,38 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  programs.hyprland.enable = true;
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
   #i3setup
   environment.pathsToLink = ["/libexec"];
 
-  services.displayManager.defaultSession = "none+i3";
+  # services.displayManager.defaultSession = "none+i3";
+  services.displayManager.defaultSession = "hyprland";
+  services.xserver.enable = true;
+  services.displayManager.sddm.enable = true;
+  services.displayManager.sddm.wayland.enable = true;
+  # services.xserver.displayManager.sddm.theme = "where_is_my_sddm_theme";
 
-  services.xserver = {
-    enable = true;
-
-    desktopManager = {
-      xterm.enable = true;
-    };
-
-    windowManager.i3 = {
-      enable = true;
-      extraPackages = with pkgs; [
-        dmenu
-        i3status
-        rofi
-        i3lock
-      ];
-    };
-  };
+  # services.xserver = {
+  #   enable = true;
+  #   desktopManager = {
+  #     xterm.enable = true;
+  #   };
+  #
+  #   windowManager.i3 = {
+  #     enable = true;
+  #     extraPackages = with pkgs; [
+  #       dmenu
+  #       i3status
+  #       rofi
+  #       i3lock
+  #       xfce.thunar
+  # xclip
+  # xsel
+  #     ];
+  #   };
+  # };
 
   services.gvfs.enable = true; # Mount, trash, and other functionalities
   services.tumbler.enable = true; # Thumbnail support for images
@@ -105,15 +115,32 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    #hyprland needs
+    waybar
+    swaynotificationcenter
+    libnotify
+    libsForQt5.qt5.qtwayland #v5
+    kdePackages.qtwayland #v6
+    kdePackages.sddm
+    kdePackages.qtsvg
+    kdePackages.breeze-icons
+    hyprlock
+    wl-clipboard
+
+    hyprpaper
+    wofi
+    grim
+    slurp
+    pywal16
+    nwg-look
+
+    #core
     wget
     git
-    libgcc
     gcc
     gnumake
     sqlite
     sshfs
-    xclip
-    xsel
     unzip
     tree
 
@@ -124,7 +151,10 @@
     fzf
     ripgrep
     starship
-    wezterm
+    foot
+    tmux
+    kitty
+
     fastfetch
     btop
     delta
@@ -157,7 +187,6 @@
     nodejs_22
 
     #applications
-    xfce.thunar
     firefox
     mpv
     networkmanagerapplet

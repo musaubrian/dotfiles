@@ -16,12 +16,12 @@ config.freetype_load_flags = "NO_HINTING"
 config.freetype_load_target = "Normal"
 config.front_end = "OpenGL"
 config.line_height = 1.06
-config.window_padding = {
-	left = 3,
-	right = 3,
-	top = 5,
-	bottom = 5,
-}
+-- config.window_padding = {
+-- 	left = 3,
+-- 	right = 3,
+-- 	top = 5,
+-- 	bottom = 5,
+-- }
 config.color_scheme = "Hybrid"
 
 config.leader = { key = "a", mods = "CTRL" }

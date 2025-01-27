@@ -37,19 +37,18 @@ create_symlinks() {
 local home_dirs=("./home/scripts")
 local config_dirs=(
 "./home/.config/nvim"
-"./home/.config/wezterm"
-"./home/.config/i3"
-"./home/.config/ghostty"
-"./home/.config/rofi"
+"./home/.config/foot"
+"./home/.config/hypr"
+"./home/.config/waybar"
 )
 local config_files=(
 "./home/.config/starship.toml"
 )
 
-mkdir -p "$HOME/.local" "$HOME/.config/Code/User"
-
-create_symlink "$(realpath ./home/.config/Code/User/settings.json)" "$HOME/.config/Code/User/settings.json"
-create_symlink "$(realpath ./home/.config/Code/User/keybinds.json)" "$HOME/.config/Code/User/keybindings.json"
+# mkdir -p "$HOME/.local" "$HOME/.config/Code/User"
+#
+# create_symlink "$(realpath ./home/.config/Code/User/settings.json)" "$HOME/.config/Code/User/settings.json"
+# create_symlink "$(realpath ./home/.config/Code/User/keybinds.json)" "$HOME/.config/Code/User/keybindings.json"
 
 for file in "${home_files[@]}"; do
     create_symlink "$file" "$HOME/$(basename "$file")"
@@ -85,7 +84,7 @@ main() {
     manage_keys
     manage_stash
     create_symlinks
-    setup_trackpad
+    # setup_trackpad
 
     # clean up
     git remote remove origin

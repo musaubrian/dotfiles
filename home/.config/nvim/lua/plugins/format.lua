@@ -17,6 +17,7 @@ return {
         typescript = { "prettierd" },
         typescriptreact = { "prettierd" },
         json = { "prettierd" },
+        jsonc = { "prettierd" },
         vue = { "prettierd" },
         html = { "prettierd" },
         css = { "prettierd" },

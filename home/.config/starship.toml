@@ -16,7 +16,7 @@ $directory\
         $line_break\
         $character"""
 
-add_newline = true
+add_newline = false
 
 [character]
 success_symbol = '[\$](bold green)'

@@ -145,7 +145,12 @@ export PATH="$PATH:$ANDROID_HOME/platform-tools"
 navigate() {
    source ~/scripts/f.sh
 }
+sessions() {
+    source ~/scripts/detached.sh
+}
+
 bind -x '"\ef":navigate'
+bind -x '"\ed":sessions'
 
 
 python3 ~/scripts/gg.py -lst
