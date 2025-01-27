@@ -153,7 +153,7 @@
     starship
     foot
     tmux
-    kitty
+    ffmpeg
 
     fastfetch
     btop
