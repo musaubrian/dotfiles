@@ -34,9 +34,11 @@ tooltip {
 #clock,
 #workspaces,
 #network,
-#battery {
+#battery,
+#pulseaudio {
   padding: 0px 6px;
   color: @color7;
+  font-weight: 700;
   transition: all 0.1s ease;
 }
 

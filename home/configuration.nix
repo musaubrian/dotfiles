@@ -57,13 +57,13 @@
   #i3setup
   environment.pathsToLink = ["/libexec"];
 
-  # services.displayManager.defaultSession = "none+i3";
   services.displayManager.defaultSession = "hyprland";
   services.xserver.enable = true;
   services.displayManager.sddm.enable = true;
   services.displayManager.sddm.wayland.enable = true;
   # services.xserver.displayManager.sddm.theme = "where_is_my_sddm_theme";
 
+  # services.displayManager.defaultSession = "none+i3";
   # services.xserver = {
   #   enable = true;
   #   desktopManager = {
@@ -125,6 +125,7 @@
     kdePackages.qtsvg
     kdePackages.breeze-icons
     hyprlock
+    hypridle
     wl-clipboard
 
     hyprpaper
@@ -196,6 +197,7 @@
     android-studio
     zathura
     libreoffice
+    httpie-desktop
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

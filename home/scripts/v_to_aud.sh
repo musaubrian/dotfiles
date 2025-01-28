@@ -15,4 +15,4 @@ if [ -z "$out" ]; then
 fi
 
 # Convert the file to MP3
-ffmpeg -i "$source" -vn -acodec libmp3lame -q:a 2 "$out"
+ffmpeg -i "$source" -vn -acodec libmp3lame "$out"
