@@ -153,7 +153,6 @@
     brightnessctl
     fzf
     ripgrep
-    starship
     foot
     tmux
     ffmpeg
