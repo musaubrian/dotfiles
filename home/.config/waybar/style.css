@@ -58,8 +58,7 @@ tooltip {
 }
 
 #workspaces button.urgent {
-  background: #f53c3c;
-  color: @color8;
+  color: #f53c3c;
   animation-name: blink;
   animation-duration: 0.2s;
   animation-timing-function: linear;

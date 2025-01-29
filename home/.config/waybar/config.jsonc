@@ -48,7 +48,7 @@
   "network": {
     //"format-wifi": "wifi {bandwidthDownBits}",
     "format-wifi": "W: {essid} |",
-    "format-ethernet": "<i>E: {essid}</i> |",
+    "format-ethernet": "<i>E: {ifname}</i> |",
     "format-disconnected": "<i>offline</i> |",
     "interval": 1,
     "tooltip": false,

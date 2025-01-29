@@ -52,17 +52,20 @@
   nixpkgs.config.allowUnfree = true;
 
   programs.hyprland.enable = true;
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+  };
+  xdg.portal.enable = true;
+  xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk];
 
-  #i3setup
-  environment.pathsToLink = ["/libexec"];
-
-  services.displayManager.defaultSession = "hyprland";
   services.xserver.enable = true;
-  services.displayManager.sddm.enable = true;
-  services.displayManager.sddm.wayland.enable = true;
+  # services.displayManager.defaultSession = "hyprland";
+  # services.displayManager.sddm.enable = true;
+  # services.displayManager.sddm.wayland.enable = true;
   # services.xserver.displayManager.sddm.theme = "where_is_my_sddm_theme";
 
+  #i3setup
+  # environment.pathsToLink = ["/libexec"];
   # services.displayManager.defaultSession = "none+i3";
   # services.xserver = {
   #   enable = true;
@@ -112,8 +115,7 @@
     iosevka
   ];
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
+  # List packages installed in system profile.
   environment.systemPackages = with pkgs; [
     #hyprland needs
     waybar
@@ -121,8 +123,8 @@
     libnotify
     libsForQt5.qt5.qtwayland #v5
     kdePackages.qtwayland #v6
-    kdePackages.sddm
-    kdePackages.qtsvg
+    # kdePackages.sddm
+    # kdePackages.qtsvg
     kdePackages.breeze-icons
     hyprlock
     hypridle
@@ -188,16 +190,16 @@
     nodejs_22
 
     #applications
-    firefox
+    chromium
     mpv
     networkmanagerapplet
     ansible
-    flameshot
     telegram-desktop
     android-studio
     zathura
     libreoffice
     httpie-desktop
+    # kdePackages.kdenlive
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
